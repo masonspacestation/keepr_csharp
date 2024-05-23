@@ -1,5 +1,24 @@
 <script setup>
+import { computed, onMounted } from "vue";
+import Pop from "../utils/Pop.js";
+import { logger } from "../utils/Logger.js";
+import { keepsService } from "../services/KeepsService.js";
+import { AppState } from "../AppState.js";
 
+const keeps = computed(() => AppState.keeps)
+
+async function getAllKeeps() {
+  try {
+    await keepsService.getAllKeeps()
+  } catch (error) {
+    Pop.toast('Could not get keeps', 'error')
+    logger.error('Could not get keeps', error)
+  }
+}
+
+onMounted(() =>
+  getAllKeeps()
+)
 </script>
 
 <template>
@@ -10,6 +29,10 @@
       <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
         Hiya 👋
       </h1>
+      <div v-for="keep in keeps" :key="keep.id">
+        <p>{{ keep.name }}</p>
+        <img :src="keep.img" alt="">
+      </div>
     </div>
   </div>
 </template>
