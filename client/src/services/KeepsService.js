@@ -29,4 +29,4 @@ async setActiveKeep(keepId){
 }
 
 
-export const keepsService = new KeepsService;
+export const keepsService = new KeepsService()

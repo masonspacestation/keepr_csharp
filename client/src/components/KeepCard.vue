@@ -5,6 +5,7 @@ import { Keep } from "../models/Keep.js";
 import { keepsService } from "../services/KeepsService.js";
 import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
+import RoundProfilePhoto from "../components/RoundProfilePhoto.vue";
 
 // const keep = computed(() => AppState.activeKeep)
 // const keeps = computed(() => AppState.keeps)
@@ -28,13 +29,18 @@ async function getKeepById(keepId) {
 
 
 <template>
-  <!-- FIXME the p tag is getting the background set, and the image is above that, so it looks like 2 images stacked on top of each other. If I take aay the data-bound image, and just rely in the background property for the image, the card shrinks to the height of the p tag -->
-  <div class="mb-3 keep-card rounded rounded-2 shadow" @click="getKeepById(keep.id)">
-    <img :src="keep.img" alt="">
-    <div>
-      <h4>{{ keep.name }}</h4>
-      <p>{{ keep.creatorId }}</p>
+  <!-- FIXME the p tag is getting the background set, and the image is above that, so it looks like 2 images stacked on top of each other. If I take aay the data-bound image, and just rely in the background property for the image, the card shrinks to the height of the p tag — hacky way it's working is that the image is there, but set to hidden -->
+  <div class="container mb-4 keep-card rounded rounded-2 shadow" @click="getKeepById(keep.id)">
+    <div class="row justify-content-between align-items-center p-3">
+      <img class="bg-size" :src="keep.img" :alt="`Image of ${keep.name}`">
+      <div class="col-9">
+        <h4 class="my-0 text-light">{{ keep.name }}</h4>
+      </div>
+      <div class="col-3">
+        <RoundProfilePhoto :profile="keep.creator" />
+      </div>
     </div>
+    <!-- <img :src="keep.creator.picture" :alt="`Image of ${keep.creator.name}`"> -->
   </div>
 </template>
 
@@ -45,9 +51,12 @@ img {
 }
 
 .keep-card {
-  // background-image: v-bind(bgStyle);
-  // background-size: cover;
-  // background-position: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.2)), v-bind(bgStyle);
+  background-size: cover;
+  background-position: center;
 
+  .bg-size {
+    visibility: hidden;
+  }
 }
 </style>

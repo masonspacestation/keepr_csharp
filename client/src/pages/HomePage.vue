@@ -4,6 +4,7 @@ import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
 import { keepsService } from "../services/KeepsService.js";
 import { AppState } from "../AppState.js";
+import RoundProfilePhoto from "../components/RoundProfilePhoto.vue";
 
 const keeps = computed(() => AppState.keeps)
 
@@ -24,32 +25,21 @@ onMounted(() =>
 <template>
   <div class="container">
 
+    <div v-for="keep in keeps" :key="keep.id">
+      <!-- <RoundProfilePhoto :profile="keep.creator" /> -->
+      <KeepModal :keep="keep" />
+    </div>
     <div class="row">
       <div class="masonry col-12">
-        <div v-for="keep in keeps" :key="keep.id">
+        <div class="p-2" v-for="keep in keeps" :key="keep.id">
           <KeepCard :keep="keep" />
         </div>
       </div>
     </div>
 
-    <!-- <section class="row my-4">
-      <div class="col-12 masonry">
-        <div v-for="art in artworks" :key="art.id">
-          <ArtworkCard :artWork="art" />
-        </div>
-      </div>
-    </section> -->
 
+    <!-- <div class="home-card p-5 card align-items-center shadow rounded elevation-3"> -->
 
-    <!-- <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-      <div class="home-card p-5 card align-items-center shadow rounded elevation-3">
-        <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo"
-        class="rounded-circle">
-        <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-          Hiya 👋
-        </h1>
-      </div>
-    </div> -->
   </div>
 </template>
 
