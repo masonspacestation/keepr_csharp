@@ -1,5 +1,6 @@
 
 
+
 namespace keepr_csharp.Services;
 
 
@@ -24,6 +25,16 @@ public class KeepsService
   {
     List<Keep> keeps = _repository.GetAll();
     return keeps;
+  }
+
+  internal Keep GetKeepById(int keepId)
+  {
+    Keep keep = _repository.GetById(keepId);
+    if (keep == null)
+    {
+      throw new Exception($"Invalid ID: {keepId}");
+    }
+    return keep;
   }
 }
 

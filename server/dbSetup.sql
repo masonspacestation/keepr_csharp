@@ -25,4 +25,10 @@ CREATE TABLE keeps (
 
 SELECT * FROM keeps;
 
+SELECT keeps.*, accounts.*
+FROM keeps
+    JOIN accounts ON accounts.id = keeps.creatorId
+WHERE
+    keeps.id = 2;
+
 -- DROP TABLE keeps;
