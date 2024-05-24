@@ -28,7 +28,7 @@ async function getKeepById(keepId) {
 
 
 <template>
-  <!-- FIXME the p tag is getting the background set, and the image is abover that, so it looks like 2 images stacked on top of each other. If I take aay the data-bound image, and just rely in the background property for the image, the card shrinks to the height of the p tag -->
+  <!-- FIXME the p tag is getting the background set, and the image is above that, so it looks like 2 images stacked on top of each other. If I take aay the data-bound image, and just rely in the background property for the image, the card shrinks to the height of the p tag -->
   <div class="mb-3 keep-card rounded rounded-2 shadow" @click="getKeepById(keep.id)">
     <img :src="keep.img" alt="">
     <div>

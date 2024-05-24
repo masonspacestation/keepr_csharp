@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS accounts (
 
 SELECT * FROM accounts;
 
+-- #SECTION 🖼️ keeps -
 CREATE TABLE keeps (
     id INT NOT NULL AUTO_INCREMENT primary key,
     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
@@ -32,3 +33,25 @@ WHERE
     keeps.id = 2;
 
 -- DROP TABLE keeps;
+
+-- #SECTION 📦 vaults
+CREATE TABLE vaults (
+    id INT NOT NULL AUTO_INCREMENT primary key,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+    name varchar(255) NOT NULL,
+    description varchar(1000) NOT NULL,
+    img varchar(1000) NOT NULL,
+    isPrivate BOOLEAN NOT NULL DEFAULT false,
+    creatorId varchar(255) NOT NULL,
+    FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
+);
+
+SELECT * FROM vaults;
+
+SELECT vaults.*, accounts.*
+    JOIN accounts ON vaults.creatorId = accounts.id
+WHERE
+    vaults.id = 2;
+
+-- DROP TABLE vaults;
