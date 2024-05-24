@@ -4,7 +4,7 @@ import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
 import { keepsService } from "../services/KeepsService.js";
 import { AppState } from "../AppState.js";
-import RoundProfilePhoto from "../components/RoundProfilePhoto.vue";
+import { accountService } from "../services/AccountService.js";
 
 const keeps = computed(() => AppState.keeps)
 
@@ -16,9 +16,17 @@ async function getAllKeeps() {
     logger.error('Could not get keeps', error)
   }
 }
+// async function getMyVaults() {
+//   try {
+//     await accountService.getMyVaults()
+//   } catch (error) {
+//     Pop.error(error)
+//   }
+// }
 
 onMounted(() =>
-  getAllKeeps()
+  getAllKeeps(),
+  // getMyVaults()
 )
 </script>
 

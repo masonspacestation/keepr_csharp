@@ -4,6 +4,8 @@ import { audience, clientId, domain } from '../env'
 import { accountService } from './AccountService'
 import { api } from './AxiosService'
 import { socketService } from './SocketService'
+import Pop from "../utils/Pop.js"
+import { vaultsService } from "./VaultsService.js"
 
 
 export const AuthService = initialize({
@@ -21,6 +23,11 @@ AuthService.on(AUTH_EVENTS.AUTHENTICATED, async function() {
   AppState.identity = AuthService.identity
   await accountService.getAccount()
   socketService.authenticate(AuthService.bearer)
+  // try {
+  //   await vaultsService.getMyVaults()
+  // } catch (error) {
+  //   Pop.error(error)
+  // }
   // NOTE if there is something you want to do once the user is authenticated, place that here
 })
 

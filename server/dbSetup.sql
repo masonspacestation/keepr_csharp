@@ -56,3 +56,28 @@ WHERE
     vaults.id = 2;
 
 -- DROP TABLE vaults;
+
+-- #SECTION 🔗 vaultKeeps
+CREATE TABLE vaultKeeps (
+    id INT NOT NULL AUTO_INCREMENT primary key,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+    keepId int NOT NULL,
+    vaultId int NOT NULL,
+    creatorId varchar(255) NOT NULL,
+    FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE,
+    FOREIGN KEY (vaultId) REFERENCES vaults (id) ON DELETE CASCADE
+);
+
+SELECT * FROM vaultKeeps;
+
+SELECT vaultKeeps.*, keeps.*, vaults.*, accounts.*
+FROM
+    vaultKeeps
+    JOIN keeps ON vaultKeeps.keepId = keeps.id
+    JOIN vaults ON vaultKeeps.vaultId = vaults.id
+    JOIN accounts ON vaultKeeps.creatorId = accounts.id
+WHERE
+    vaultKeeps.id = 1
+
+DROP TABLE vaultKeeps;

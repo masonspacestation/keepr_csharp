@@ -8,6 +8,9 @@ import { api } from "./AxiosService.js"
 
 
 class VaultsService{
+  async getMyVaults() {
+  const response = await api.get('api/vaults')
+}
 async getVaultById(vaultId){
     const response = await api.get(`api/vaults/${vaultId}`)
     console.log('looking for vault', response.data);
