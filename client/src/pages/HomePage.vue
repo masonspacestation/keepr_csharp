@@ -22,18 +22,34 @@ onMounted(() =>
 </script>
 
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 card align-items-center shadow rounded elevation-3">
-      <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo"
-        class="rounded-circle">
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Hiya 👋
-      </h1>
-      <div v-for="keep in keeps" :key="keep.id">
-        <p>{{ keep.name }}</p>
-        <img :src="keep.img" alt="">
+  <div class="container">
+
+    <div class="row">
+      <div class="masonry col-12">
+        <div v-for="keep in keeps" :key="keep.id">
+          <KeepCard :keep="keep" />
+        </div>
       </div>
     </div>
+
+    <!-- <section class="row my-4">
+      <div class="col-12 masonry">
+        <div v-for="art in artworks" :key="art.id">
+          <ArtworkCard :artWork="art" />
+        </div>
+      </div>
+    </section> -->
+
+
+    <!-- <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
+      <div class="home-card p-5 card align-items-center shadow rounded elevation-3">
+        <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo"
+        class="rounded-circle">
+        <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
+          Hiya 👋
+        </h1>
+      </div>
+    </div> -->
   </div>
 </template>
 
@@ -56,5 +72,11 @@ onMounted(() =>
       object-position: center;
     }
   }
+
+}
+
+.masonry {
+  columns: 300px;
+  column-gap: 1rem;
 }
 </style>
