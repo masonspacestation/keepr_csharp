@@ -27,6 +27,7 @@ public class KeepsRepository : IRepository<Keep>
     keeps.*,
     accounts.*
     FROM keeps
+    
     JOIN accounts ON accounts.id = keeps.creatorId
     WHERE keeps.id = LAST_INSERT_ID()
     ;";

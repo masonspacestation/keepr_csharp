@@ -50,6 +50,7 @@ CREATE TABLE vaults (
 SELECT * FROM vaults;
 
 SELECT vaults.*, accounts.*
+FROM vaults
     JOIN accounts ON vaults.creatorId = accounts.id
 WHERE
     vaults.id = 2;
