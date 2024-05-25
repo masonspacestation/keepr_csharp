@@ -35,15 +35,9 @@ onMounted(() =>
 
     <div v-for="keep in keeps" :key="keep.id">
       <!-- <RoundProfilePhoto :profile="keep.creator" /> -->
-      <KeepModal :keep="keep" />
+      <!-- <KeepModal :keep="keep" /> -->
     </div>
-    <div class="row">
-      <div class="masonry col-12">
-        <div class="p-2" v-for="keep in keeps" :key="keep.id">
-          <!-- <KeepCard :keep="keep" /> -->
-        </div>
-      </div>
-    </div>
+    <KeepWall />
 
 
     <!-- <div class="home-card p-5 card align-items-center shadow rounded elevation-3"> -->
@@ -73,8 +67,7 @@ onMounted(() =>
 
 }
 
-.masonry {
-  columns: 300px;
-  column-gap: 1rem;
-}
-</style>
+// .masonry {
+//   columns: 300px;
+//   column-gap: 1rem;
+// }</style>
