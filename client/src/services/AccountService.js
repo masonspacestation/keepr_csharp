@@ -1,12 +1,17 @@
 import { AppState } from '../AppState'
 import { Account } from '../models/Account.js'
+import { Vault } from "../models/Vault.js"
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
 class AccountService {
-  // getMyVaults() {
-  //   throw new Error("Method not implemented.")
-  // }
+  async getMyVaults() {
+    const response = await api.get(`account/vaults`)
+    console.log('My vaults', response.data);
+    const myVaults = response.data.map(vaultData => new Vault(vaultData))
+    AppState.myVaults = myVaults
+  }
+
   async getAccount() {
     try {
       const res = await api.get('/account')

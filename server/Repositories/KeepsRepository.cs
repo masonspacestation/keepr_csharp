@@ -76,4 +76,36 @@ public class KeepsRepository : IRepository<Keep>
   {
     throw new NotImplementedException();
   }
+
+  internal List<Keep> GetKeepsByVaultId(int vaultId, string userId)
+  {
+    //     string sql = @"
+    //        SELECT keeps.*, vaults.*, vaultKeeps.*, accounts.*
+    // FROM
+    //     keeps
+    //     JOIN vaultKeeps ON vaultKeeps.keepId = keeps.id
+    //     JOIN vaults ON vaultKeeps.vaultId = vaults.id
+    //     JOIN accounts ON vaultKeeps.creatorId = accounts.id
+    // WHERE
+    //     vaults.id = @vaultId;";
+
+    string sql = @"
+       SELECT keeps.*, vaults.*, vaultKeeps.*, accounts.*
+FROM
+    keeps
+    JOIN vaultKeeps ON vaultKeeps.keepId = keeps.id
+    JOIN vaults ON vaultKeeps.vaultId = vaults.id
+    JOIN accounts ON vaultKeeps.creatorId = accounts.id
+WHERE
+    vaults.id = @vaultId;";
+
+    List<Keep> keeps = _db.Query<Keep, Vault, VaultKeep, Profile, Keep>(sql, (keep, vault, vk, profile) =>
+    {
+      keep.VaultKeepId = vk.Id;
+      keep.Creator = profile;
+      return keep;
+    }, new { vaultId }).ToList();
+    return keeps;
+
+  }
 }

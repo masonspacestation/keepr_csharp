@@ -21,7 +21,9 @@ CREATE TABLE keeps (
     views int NOT NULL DEFAULT 0,
     kept int NOT NULL DEFAULT 0,
     creatorId varchar(255) NOT NULL,
-    FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
+    FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE,
+    vaultKeepId int NOT NULL DEFAULT 0
+    -- FOREIGN KEY (vaultKeepId) REFERENCES vaultKeeps (id) ON DELETE CASCADE
 );
 
 SELECT * FROM keeps;
@@ -31,6 +33,15 @@ FROM keeps
     JOIN accounts ON accounts.id = keeps.creatorId
 WHERE
     keeps.id = 2;
+
+SELECT keeps.*, vaults.*, vaultKeeps.*, accounts.*
+FROM
+    keeps
+    JOIN vaultKeeps ON vaultKeeps.keepId = keeps.id
+    JOIN vaults ON vaultKeeps.vaultId = vaults.id
+    JOIN accounts ON vaultKeeps.creatorId = accounts.id
+WHERE
+    vaults.id = 2;
 
 -- DROP TABLE keeps;
 
@@ -54,6 +65,12 @@ FROM vaults
     JOIN accounts ON vaults.creatorId = accounts.id
 WHERE
     vaults.id = 2;
+
+SELECT vaults.*, accounts.*
+FROM vaults
+    JOIN accounts ON vaults.creatorId = accounts.id
+WHERE
+    vaults.creatorId = "662818ab0bd0398d8bf3cd62";
 
 -- DROP TABLE vaults;
 

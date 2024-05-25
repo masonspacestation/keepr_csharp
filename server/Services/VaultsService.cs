@@ -22,4 +22,10 @@ public class VaultsService
     Vault vault = _repository.GetById(vaultId);
     return vault;
   }
+
+  internal List<Vault> GetMyVaults(string userId)
+  {
+    List<Vault> myVaults = _repository.GetMyVaults(userId);
+    return myVaults;
+  }
 }

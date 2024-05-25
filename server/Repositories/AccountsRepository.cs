@@ -1,3 +1,4 @@
+
 namespace keepr_csharp.Repositories;
 
 public class AccountsRepository
@@ -43,5 +44,25 @@ public class AccountsRepository
     _db.Execute(sql, update);
     return update;
   }
+
+  // internal List<Vault> GetMyVaults(string userId)
+  // {
+  //   string sql = @"
+  //   SELECT
+  //   vaults.*,
+  //   accounts.*
+  //   FROM vaults
+
+  //   JOIN accounts ON accounts.id = vaults.creatorId
+  //   WHERE vaults.creatorId = @userId
+  //   ;";
+
+  //   List<Vault> myVaults = _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
+  //   {
+  //     vault.Creator = profile;
+  //     return vault;
+  //   }, userId).ToList();
+  //   return myVaults;
+  // }
 }
 

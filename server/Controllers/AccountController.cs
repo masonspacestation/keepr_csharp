@@ -5,12 +5,15 @@ namespace keepr_csharp.Controllers;
 public class AccountController : ControllerBase
 {
   private readonly AccountService _accountService;
+  private readonly VaultsService _vaultsService;
   private readonly Auth0Provider _auth0Provider;
 
-  public AccountController(AccountService accountService, Auth0Provider auth0Provider)
+  public AccountController(AccountService accountService, Auth0Provider auth0Provider, VaultsService vaultsService)
   {
     _accountService = accountService;
+    _accountService = accountService;
     _auth0Provider = auth0Provider;
+    _vaultsService = vaultsService;
   }
 
   [HttpGet]
@@ -27,4 +30,42 @@ public class AccountController : ControllerBase
       return BadRequest(e.Message);
     }
   }
+
+  [Authorize]
+  [HttpGet("vaults")]
+  public async Task<ActionResult<List<Vault>>> GetMyVaults()
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      List<Vault> myVaults = _vaultsService.GetMyVaults(userInfo.Id);
+      return Ok(myVaults);
+    }
+    catch (Exception error)
+    {
+      return BadRequest(error.Message);
+    }
+  }
 }
+
+
+/** 
+page
+async function getCultistsByCultId() {
+  try {
+    await cultMembersService.getCultistsByCultId(route.params.cultId)
+  } catch (error) {
+    Pop.error(error)
+  }
+}
+
+
+svc
+  async getCultistsByCultId(cultId) {
+    AppState.cultists.length = 0 // empties array, same as: AppState.cultists = []
+    const res = await api.get(`api/cults/${cultId}/cultMembers`)
+    logger.log('GOT CULTISTS 🧙‍♂️🧙', res.data)
+    AppState.cultists = res.data.map(pojo => new Cultist(pojo))
+  }
+
+*/

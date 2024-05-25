@@ -9,6 +9,6 @@ export class Vault extends DBItem{
     this.img = data.img
     this.isPrivate = data.isPrivate
     this.creatorId = data.creatorId
-    this.creator = new Profile(data.profile)
+    this.creator = new Profile(data.creator)
   }
 }

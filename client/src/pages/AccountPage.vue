@@ -1,8 +1,27 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
+import Pop from "../utils/Pop.js";
+import { logger } from "../utils/Logger.js";
+import { accountService } from "../services/AccountService.js";
 
 const account = computed(() => AppState.account)
+
+async function getMyVaults() {
+  try {
+    AppState.myVaults = null
+    await accountService.getMyVaults()
+  } catch (error) {
+    Pop.toast('Could not get your vaults', 'error')
+    logger.error('Error getting your vaults', error)
+
+  }
+}
+
+
+onMounted(() =>
+  getMyVaults()
+)
 
 </script>
 

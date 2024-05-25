@@ -9,4 +9,5 @@ public class Keep : RepoItem<int>
   public int Kept { get; set; }
   public string CreatorId { get; set; }
   public Profile Creator { get; set; }
+  public int VaultKeepId { get; set; }
 }

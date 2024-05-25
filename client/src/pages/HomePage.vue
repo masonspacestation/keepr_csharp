@@ -40,7 +40,7 @@ onMounted(() =>
     <div class="row">
       <div class="masonry col-12">
         <div class="p-2" v-for="keep in keeps" :key="keep.id">
-          <KeepCard :keep="keep" />
+          <!-- <KeepCard :keep="keep" /> -->
         </div>
       </div>
     </div>
