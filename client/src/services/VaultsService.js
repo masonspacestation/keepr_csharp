@@ -9,6 +9,9 @@ const myVaults = computed(()=> AppState.myVaults)
 
 
 class VaultsService{
+  createVault(value) {
+    throw new Error("Method not implemented.");
+  }
   async destroyVault(vaultId) {
     const myVaults = AppState.myVaults
     const indexToDestroy = myVaults.findIndex(vault => vault.id == vaultId)

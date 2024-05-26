@@ -32,11 +32,16 @@ onMounted(() =>
   <div class="about text-center">
     <div class="container" v-if="account">
 
+      <CreateVaultForm :account="account" />
+
       <div class="my-3">
         <RoundProfilePhoto :profile="account" />
         <!-- <img class="rounded" :src="account.picture" alt="" /> -->
         <h1>{{ account.name }}</h1>
         <p>{{ myVaults?.length }} Vaults | XX Keeps</p>
+      </div>
+      <div class="row justify-content-end">
+
       </div>
 
       <!-- TODO set a v-if to say that their vaults will appear here once they create some -->
