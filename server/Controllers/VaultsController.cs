@@ -38,11 +38,12 @@ public class VaultsController : ControllerBase
   }
 
   [HttpGet("{vaultId}")]
-  public ActionResult<Vault> GetVaultById(int vaultId)
+  public async Task<ActionResult<Vault>> GetVaultById(int vaultId)
   {
     try
     {
-      Vault vault = _vaultsService.GetVaultById(vaultId);
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      Vault vault = _vaultsService.GetVaultById(vaultId, userInfo?.Id);
       return Ok(vault);
     }
     catch (Exception exception)
@@ -59,6 +60,38 @@ public class VaultsController : ControllerBase
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
       List<Keep> keeps = _keepsService.GetKeepsByVaultId(vaultId, userInfo?.Id);
       return Ok(keeps);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
+
+  [Authorize]
+  [HttpPut("{vaultId}")]
+  public async Task<ActionResult<Vault>> UpdateVault(int vaultId, [FromBody] Vault vaultData)
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      Vault vault = _vaultsService.UpdateVault(vaultId, vaultData, userInfo.Id);
+      return Ok(vault);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
+
+  [Authorize]
+  [HttpDelete("{vaultId}")]
+  public async Task<ActionResult<string>> DestroyVault(int vaultId)
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      _vaultsService.DestroyVault(vaultId, userInfo?.Id);
+      return Ok("Vault was destroyed!");
     }
     catch (Exception exception)
     {

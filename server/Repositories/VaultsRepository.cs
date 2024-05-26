@@ -12,6 +12,12 @@ public class VaultsRepository : IRepository<Vault>
     _db = db;
   }
 
+  private Vault PopulateCreator(Vault vault, Profile creator)
+  {
+    vault.Creator = creator;
+    return vault;
+  }
+
   public Vault Create(Vault data)
   {
     string sql = @"
@@ -37,9 +43,10 @@ public class VaultsRepository : IRepository<Vault>
   }
 
 
-  public void Destroy(int id)
+  public void Destroy(int vaultId)
   {
-    throw new NotImplementedException();
+    string sql = "DELETE FROM vaults WHERE vaults.id = @vaultId LIMIT 1;";
+    _db.Execute(sql, new { vaultId });
   }
 
   public List<Vault> GetAll()
@@ -68,9 +75,25 @@ public class VaultsRepository : IRepository<Vault>
     return vault;
   }
 
-  public Vault Udpate(Vault data)
+  public Vault Udpate(Vault vaultData)
   {
-    throw new NotImplementedException();
+    string sql = @"
+    UPDATE vaults
+    SET
+    name = @Name,
+    isPrivate = @IsPrivate
+    WHERE id = @Id
+    LIMIT 1;
+
+    SELECT
+    vaults.*,
+    accounts.*
+    FROM vaults
+    JOIN accounts ON accounts.id = vaults.creatorId
+    WHERE vaults.id = @Id;";
+
+    Vault vault = _db.Query<Vault, Profile, Vault>(sql, PopulateCreator, vaultData).FirstOrDefault();
+    return vault;
   }
 
   internal List<Vault> GetMyVaults(string userId)

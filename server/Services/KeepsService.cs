@@ -9,10 +9,12 @@ public class KeepsService
 {
 
   private readonly KeepsRepository _repository;
+  private readonly VaultsService _vaultsService;
 
-  public KeepsService(KeepsRepository repository)
+  public KeepsService(KeepsRepository repository, VaultsService vaultsService)
   {
     _repository = repository;
+    _vaultsService = vaultsService;
   }
 
   internal Keep CreateKeep(Keep keepData)
@@ -44,6 +46,7 @@ public class KeepsService
 
   internal List<Keep> GetKeepsByVaultId(int vaultId, string userId)
   {
+    _vaultsService.GetVaultById(vaultId, userId);
     List<Keep> keeps = _repository.GetKeepsByVaultId(vaultId, userId);
     return keeps;
   }

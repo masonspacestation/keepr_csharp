@@ -101,7 +101,7 @@ WHERE
 
     List<Keep> keeps = _db.Query<Keep, Vault, VaultKeep, Profile, Keep>(sql, (keep, vault, vk, profile) =>
     {
-      keep.VaultKeepId = vk.Id;
+      // keep.VaultKeepId = vk.Id;
       keep.Creator = profile;
       return keep;
     }, new { vaultId }).ToList();
