@@ -9,8 +9,11 @@ const myVaults = computed(()=> AppState.myVaults)
 
 
 class VaultsService{
-  createVault(value) {
-    throw new Error("Method not implemented.");
+  async createVault(vaultData) {
+    const response = await api.post('api/vaults', vaultData)
+    console.log('Creating vault', response.data);
+const newVault = new Vault(response.data)
+AppState.myVaults.unshift(newVault)
   }
   async destroyVault(vaultId) {
     const myVaults = AppState.myVaults

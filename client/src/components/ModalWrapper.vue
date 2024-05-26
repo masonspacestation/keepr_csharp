@@ -16,7 +16,7 @@ defineProps({ modalId: String })
 
         <div class="body">
           <slot>
-            <KeepModal :keep="keep" />
+            <!-- <KeepModal :keep="keep" /> -->
             Swap out modal content
           </slot>
         </div>

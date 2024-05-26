@@ -32,7 +32,6 @@ onMounted(() =>
   <div class="about text-center">
     <div class="container" v-if="account">
 
-      <CreateVaultForm :account="account" />
 
       <div class="my-3">
         <RoundProfilePhoto :profile="account" />
@@ -41,7 +40,7 @@ onMounted(() =>
         <p>{{ myVaults?.length }} Vaults | XX Keeps</p>
       </div>
       <div class="row justify-content-end">
-
+        <AddItemFloatingButton />
       </div>
 
       <!-- TODO set a v-if to say that their vaults will appear here once they create some -->
@@ -54,7 +53,7 @@ onMounted(() =>
 
       <!-- TODO set a v-if to say that their keeps will appear here once they create some -->
       <h3>Keeps</h3>
-      <KeepWall />
+      <!-- <KeepWall /> -->
     </div>
     <div v-else>
       <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
