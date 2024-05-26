@@ -8,26 +8,19 @@ import { accountService } from "../services/AccountService.js";
 
 const keeps = computed(() => AppState.keeps)
 
-async function getAllKeeps() {
-  try {
-    await keepsService.getAllKeeps()
-  } catch (error) {
-    Pop.toast('Could not get keeps', 'error')
-    logger.error('Could not get keeps', error)
-  }
-}
-// async function getMyVaults() {
+// async function getAllKeeps() {
 //   try {
-//     await accountService.getMyVaults()
+//     await keepsService.getAllKeeps()
 //   } catch (error) {
-//     Pop.error(error)
+//     Pop.toast('Could not get keeps', 'error')
+//     logger.error('Could not get keeps', error)
 //   }
 // }
 
-onMounted(() =>
-  getAllKeeps(),
-  // getMyVaults()
-)
+
+// onMounted(() =>
+//   getAllKeeps(),
+// )
 </script>
 
 <template>

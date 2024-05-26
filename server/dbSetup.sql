@@ -1,4 +1,4 @@
--- Active: 1715633466013@@127.0.0.1@3306@cooperative_mountain_fe2c50_db
+-- Active: 1715633466013@@127.0.0.1@3306
 CREATE TABLE IF NOT EXISTS accounts (
     id VARCHAR(255) NOT NULL primary key COMMENT 'primary key',
     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
@@ -62,7 +62,7 @@ FROM keeps
 WHERE
     keeps.id = LAST_INSERT_ID();
 
--- DROP TABLE keeps;
+DROP TABLE keeps;
 
 -- #SECTION 📦 vaults
 CREATE TABLE vaults (
