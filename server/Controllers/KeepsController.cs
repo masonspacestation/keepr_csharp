@@ -32,10 +32,12 @@ public class KeepsController : ControllerBase
   }
 
   [HttpGet]
-  public ActionResult<List<Keep>> GetAllKeeps()
+  public async Task<ActionResult<List<Keep>>> GetAllKeeps()
   {
     try
     {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+
       List<Keep> keeps = _keepsService.GetAllKeeps();
       return Ok(keeps);
     }

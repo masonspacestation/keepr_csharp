@@ -36,7 +36,7 @@ onMounted(() =>
         <RoundProfilePhoto :profile="account" />
         <!-- <img class="rounded" :src="account.picture" alt="" /> -->
         <h1>{{ account.name }}</h1>
-        <p>{{ myVaults.length }} Vaults | XX Keeps</p>
+        <p>{{ myVaults?.length }} Vaults | XX Keeps</p>
       </div>
 
       <!-- TODO set a v-if to say that their vaults will appear here once they create some -->

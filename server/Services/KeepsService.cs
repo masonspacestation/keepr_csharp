@@ -26,6 +26,11 @@ public class KeepsService
     List<Keep> keeps = _repository.GetAll();
     return keeps;
   }
+  internal List<Keep> GetAllKeeps(string userId)
+  {
+    List<Keep> keeps = _repository.GetAll();
+    return keeps;
+  }
 
   internal Keep GetKeepById(int keepId)
   {

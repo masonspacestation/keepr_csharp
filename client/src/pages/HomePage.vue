@@ -33,10 +33,10 @@ onMounted(() =>
 <template>
   <div class="container">
 
-    <div v-for="keep in keeps" :key="keep.id">
-      <!-- <RoundProfilePhoto :profile="keep.creator" /> -->
-      <!-- <KeepModal :keep="keep" /> -->
-    </div>
+    <!-- <div v-for="keep in keeps" :key="keep.id"> -->
+    <!-- <RoundProfilePhoto :profile="keep.creator" /> -->
+    <!-- <KeepModal :keep="keep" /> -->
+    <!-- </div> -->
     <KeepWall />
 
 

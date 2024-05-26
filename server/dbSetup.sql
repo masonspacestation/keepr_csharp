@@ -23,7 +23,6 @@ CREATE TABLE keeps (
     creatorId varchar(255) NOT NULL,
     FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE,
     vaultKeepId int NOT NULL DEFAULT 0
-    -- FOREIGN KEY (vaultKeepId) REFERENCES vaultKeeps (id) ON DELETE CASCADE
 );
 
 SELECT * FROM keeps;
@@ -42,6 +41,26 @@ FROM
     JOIN accounts ON vaultKeeps.creatorId = accounts.id
 WHERE
     vaults.id = 2;
+
+INSERT INTO
+    keeps (
+        name,
+        description,
+        img,
+        creatorId
+    )
+VALUES (
+        "Bowling",
+        "shoes for bowling",
+        "https://images.unsplash.com/photo-1628139483293-eea5a6b2e0a5?q=80&w=3328&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "662818ab0bd0398d8bf3cd62"
+    );
+
+SELECT keeps.*, accounts.*
+FROM keeps
+    JOIN accounts ON accounts.id = keeps.creatorId
+WHERE
+    keeps.id = LAST_INSERT_ID();
 
 -- DROP TABLE keeps;
 
