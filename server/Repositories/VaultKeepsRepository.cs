@@ -47,9 +47,11 @@ FROM vaultKeeps
     return newVk;
   }
 
-  public void Destroy(int id)
+  public void Destroy(int vkId)
   {
-    throw new NotImplementedException();
+    string sql = "DELETE FROM vaultKeeps WHERE id = @vkId LIMIT 1;";
+    _db.Execute(sql, new { vkId });
+
   }
 
   public List<VaultKeep> GetAll()
@@ -59,8 +61,16 @@ FROM vaultKeeps
 
   public VaultKeep GetById(int vaultKeepId)
   {
-    throw new NotImplementedException();
-    //     string sql = @"
+    // throw new NotImplementedException();
+    string sql = @"
+        SELECT *
+    FROM
+        vaultKeeps
+        
+    WHERE
+        vaultKeeps.id = @vaultKeepId
+        ;";
+    // string sql = @"
     //     SELECT vaultKeeps.*, vaults.*, keeps.*, accounts.*
     // FROM
     //     vaultKeeps
@@ -71,14 +81,8 @@ FROM vaultKeeps
     //     vaultKeeps.id = @vaultKeepId
     //     ;";
 
-    //     VaultKeep vk = _db.Query<VaultKeep, Keep, Vault, Profile, VaultKeep>(sql, (vaultKeep, vault, keep, profile) =>
-    //     {
-    //       vaultKeep.VaultId = vault.Id;
-    //       vaultKeep.KeepId = keep.Id;
-    //       vaultKeep.CreatorId = profile.Id;
-    //       return vaultKeep;
-    //     }, vaultKeepId).FirstOrDefault();
-    //     return vk;
+    VaultKeep vk = _db.Query<VaultKeep>(sql, new { vaultKeepId }).FirstOrDefault();
+    return vk;
   }
 
   public VaultKeep Udpate(VaultKeep data)
