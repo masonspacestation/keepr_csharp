@@ -42,7 +42,10 @@ public class VaultKeepsService
   {
     VaultKeep vk = GetVaultKeepById(vkId);
     Vault vault = _vaultsService.GetVaultById(vk.VaultId, userId);
-    if (vault.IsPrivate == true && vault.CreatorId != userId)
+    // FIXME the check below should be to get by Id
+    // FIXME the check below should only really check if the creator is the one doing it. with an and, that means that someone else would be able to delete a public vaultKeep
+    // if (vault.IsPrivate == true && vault.CreatorId != userId)
+    if (vault.CreatorId != userId)
     {
       throw new Exception($"Unauthorized to delete this vault");
     }
