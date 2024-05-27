@@ -23,6 +23,17 @@ public class KeepsService
     return keep;
   }
 
+  internal string DestroyKeep(int keepId, string userId)
+  {
+    Keep keep = GetKeepById(keepId);
+    if (keep.CreatorId != userId)
+    {
+      throw new Exception($"Not authorized to delete this keep");
+    }
+    _repository.Destroy(keepId);
+    return $"Removed keep {keep.Name}";
+  }
+
   internal List<Keep> GetAllKeeps()
   {
     List<Keep> keeps = _repository.GetAll();

@@ -36,9 +36,10 @@ public class KeepsRepository : IRepository<Keep>
     return keep;
   }
 
-  public void Destroy(int id)
+  public void Destroy(int keepId)
   {
-    throw new NotImplementedException();
+    string sql = "DELETE FROM keeps WHERE id = @keepId LIMIT 1;";
+    _db.Execute(sql, new { keepId });
   }
 
   public List<Keep> GetAll()
