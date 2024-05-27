@@ -91,7 +91,7 @@ onMounted(() =>
       <div class="row"></div>
       <!-- TODO set a v-if to say that their keeps will appear here once they create some -->
       <h3>Keeps</h3>
-      <KeepWall />
+      <!-- <KeepWall /> -->
     </div>
 
     <div v-else>

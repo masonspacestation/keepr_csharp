@@ -2,7 +2,7 @@
 import { computed } from "vue";
 import { AppState } from "../AppState.js";
 
-const keep = computed(() => AppState.activeKeep)
+
 defineProps({ modalId: String })
 
 </script>
@@ -16,7 +16,7 @@ defineProps({ modalId: String })
 
         <div class="body">
           <slot>
-            <!-- <KeepModal :keep="keep" /> -->
+
             Swap out modal content
           </slot>
         </div>

@@ -1,6 +1,9 @@
 <script setup>
 import { AppState } from './AppState'
 import Navbar from './components/Navbar.vue'
+import { Modal } from "bootstrap";
+import ModalWrapper from "./components/ModalWrapper.vue";
+import CreateVaultForm from "./components/CreateVaultForm.vue";
 
 
 </script>

@@ -5,8 +5,12 @@ import { api } from "./AxiosService.js";
 
 
 class KeepsService{
-  createKeep(keepData) {
-    throw new Error("Method not implemented.");
+  async createKeep(keepData) {
+    const response = await api.post('api/keeps', keepData)
+    console.log('Creating new keep', response.data);
+    const newKeep = new Keep(response.data)
+    AppState.keeps.unshift(newKeep)
+    return newKeep
   }
   async getKeepById(keepId) {
     const response = await api.get(`api/keeps/${keepId}`)

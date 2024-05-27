@@ -14,6 +14,7 @@ class VaultsService{
     console.log('Creating vault', response.data);
 const newVault = new Vault(response.data)
 AppState.myVaults.unshift(newVault)
+return newVault
   }
   async destroyVault(vaultId) {
     const myVaults = AppState.myVaults

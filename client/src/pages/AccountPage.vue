@@ -6,6 +6,8 @@ import { logger } from "../utils/Logger.js";
 import { accountService } from "../services/AccountService.js";
 import RoundProfilePhoto from "../components/RoundProfilePhoto.vue";
 import KeepWall from "../components/KeepWall.vue";
+import { Modal } from "bootstrap";
+import ModalWrapper from "../components/ModalWrapper.vue";
 
 const account = computed(() => AppState.account)
 const myVaults = computed(() => AppState.myVaults)
@@ -59,6 +61,12 @@ onMounted(() =>
       <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
     </div>
   </div>
+  <ModalWrapper modalId="create-vault-modal">
+    <CreateVaultForm />
+  </ModalWrapper>
+  <ModalWrapper modalId="create-keep-modal">
+    <CreateKeepForm />
+  </ModalWrapper>
 </template>
 
 <style scoped lang="scss">

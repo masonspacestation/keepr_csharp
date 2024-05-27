@@ -4,20 +4,23 @@ import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
 import { vaultsService } from "../services/VaultsService.js";
 import { Modal } from "bootstrap";
+import { useRouter } from "vue-router";
+
+const router = useRouter()
 
 
 const vaultData = ref({
-  name: '',
-  description: '',
-  isPrivate: '',
-  img: '',
+  name: 'test',
+  description: 'ing',
+  isPrivate: false,
+  img: 'https://images.unsplash.com/photo-1518349619113-03114f06ac3a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dGVzdGluZ3xlbnwwfHwwfHx8MA%3D%3D',
 })
 
 function resetForm() {
   vaultData.value = {
     name: '',
     description: '',
-    isPrivate: '',
+    isPrivate: false,
     img: '',
   }
 }
@@ -25,20 +28,21 @@ function resetForm() {
 async function createVault() {
   try {
     const newVault = await vaultsService.createVault(vaultData.value)
-    Modal.getOrCreateInstance('#new-vault-modal').hide()
+    resetForm()
+    Modal.getOrCreateInstance('#create-vault-modal').hide()
     Pop.toast('New vault created!', 'success')
-    console.log('New Vault Created!', newVault);
+    router.push({ name: 'Active Vault', params: { vaultId: newVault.id } })
+    // console.log('New Vault Created!', newVault);
   } catch (error) {
     Pop.toast('Could not create vault', 'error')
     logger.error('Could not create vault', error)
   }
-  resetForm()
 }
 </script>
 
 
 <template>
-  <form @submit.prevent="createVault">
+  <form @submit.prevent="createVault()">
     <div class="container">
 
       <div class="row pt-4 pb-2 bg-success">
@@ -87,7 +91,8 @@ async function createVault() {
       </div>
     </div>
     <div class="row px-1 pb-2">
-      <div class="col-12 col-lg-6 my-1 my-lg-3"><button type="reset" data-bs-toggle="modal" data-bs-target="modal"
+      <div class="col-12 col-lg-6 my-1 my-lg-3"><button type="reset" data-bs-toggle="modal"
+          data-bs-target="#create-vault-modal"
           class="btn btn-outline-secondary border-2 text-dark w-100">Cancel</button></div>
       <div class="col-12 col-lg-6 my-1 my-lg-3"><button class="btn btn-primary w-100">Create Vault</button>
       </div>

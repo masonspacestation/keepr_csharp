@@ -21,9 +21,7 @@
     </div>
 
   </section>
-  <ModalWrapper modalId="create-vault-modal">
-    <CreateVaultForm />
-  </ModalWrapper>
+
 </template>
 
 <style lang="scss" scoped></style>
