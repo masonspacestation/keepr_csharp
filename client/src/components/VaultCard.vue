@@ -33,10 +33,6 @@ const bgStyle = computed(() => `url(${props.vault.img})`)
       <div class="row h-100 justify-content-center align-items-center p-3">
         <!-- <img :src="vault.img" alt=""> -->
         <h4 class="my-0">{{ vault.name }}</h4>
-
-        <!-- <div class="col-3">
-        <RoundProfilePhoto :profile="vault.creator" />
-      </div> -->
       </div>
     </div>
   </RouterLink>

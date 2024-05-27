@@ -6,6 +6,7 @@ import { keepsService } from "../services/KeepsService.js";
 import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
 import RoundProfilePhoto from "../components/RoundProfilePhoto.vue";
+import { Modal } from "bootstrap";
 
 // const keep = computed(() => AppState.activeKeep)
 // const keeps = computed(() => AppState.keeps)
@@ -17,7 +18,7 @@ async function getKeepById(keepId) {
     AppState.activeKeep = null
     console.log('getting active keep', keepId);
     await keepsService.setActiveKeep(keepId);
-
+    // Modal.getOrCreateInstance('#keep-details-modal')
   } catch (error) {
     Pop.toast(`Could not get keep with ID: ${keepId}`)
     logger.error(`Could not get keep with ID: ${keepId}`, error)
@@ -25,12 +26,18 @@ async function getKeepById(keepId) {
 }
 
 
+
+
 </script>
 
 
 <template>
-  <!-- FIXME the p tag is getting the background set, and the image is above that, so it looks like 2 images stacked on top of each other. If I take aay the data-bound image, and just rely in the background property for the image, the card shrinks to the height of the p tag — hacky way it's working is that the image is there, but set to hidden -->
+  <!-- FIXME the p tag is getting the background set, and the image is above that, so it looks like 2 images stacked on top of each other. If I take away the data-bound image, and just rely in the background property for the image, the card shrinks to the height of the p tag — hacky way it's working is that the image is there, but set to hidden -->
   <div class="container mb-4 keep-card rounded rounded-2 shadow" @click="getKeepById(keep.id)">
+    <!-- data-bs-toggle="modal"
+    data-bs-target="#keep-details-modal" -->
+    <!--   <div class=" col-6 p-2 d-inline"> <button class="btn btn-outline-primary" data-bs-toggle="modal"
+            data-bs-target="#create-keep-modal">Add Keep</button></div> -->
     <div class="row justify-content-between align-items-center p-3">
       <img class="bg-size" :src="keep.img" :alt="`Image of ${keep.name}`">
       <div class="col-9">

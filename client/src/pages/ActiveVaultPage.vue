@@ -68,7 +68,7 @@ onMounted(() =>
           <!-- <RoundProfilePhoto :profile="account" /> -->
           <!-- <img class="rounded" :src="activeVault.img" alt="" /> -->
           <h4>{{ activeVault.name }}</h4>
-          <h4>By {{ account?.name }}</h4>
+          <h4>By {{ activeVault.creator?.name }}</h4>
         </div>
         <div v-if="activeVault.creator.id == account?.id" class="text-end btn-group dropstart">
           <i role="button" class="mdi mdi-dots-horizontal fs-3" data-bs-toggle="dropdown" data-bs-auto-close="outside"

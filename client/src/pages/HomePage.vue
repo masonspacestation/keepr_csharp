@@ -6,7 +6,7 @@ import { keepsService } from "../services/KeepsService.js";
 import { AppState } from "../AppState.js";
 import { accountService } from "../services/AccountService.js";
 import KeepCard from "../components/KeepCard.vue";
-import KeepModal from "../components/KeepModal.vue";
+import KeepDetailsModal from "../components/KeepDetailsModal.vue";
 
 const keeps = computed(() => AppState.keeps)
 
@@ -37,15 +37,20 @@ onMounted(() =>
         <!-- <KeepWall /> -->
 
         <KeepCard :keep="keep" />
-
         <!-- <div class="home-card p-5 card align-items-center shadow rounded elevation-3"> -->
 
+      </div>
+      <div v-if="AppState.activeKeep">
+        <KeepDetailsModal />
       </div>
     </div>
   </div>
   <!-- <ModalWrapper modalId="keep-modal">
     <KeepModal :keep="AppState.activeKeep" />
   </ModalWrapper> -->
+  <ModalWrapper>
+    <KeepDetailsModal modalId="keep-details-modal" />
+  </ModalWrapper>
 </template>
 
 <style scoped lang="scss">

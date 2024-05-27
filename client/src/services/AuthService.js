@@ -6,6 +6,7 @@ import { api } from './AxiosService'
 import { socketService } from './SocketService'
 import Pop from "../utils/Pop.js"
 import { vaultsService } from "./VaultsService.js"
+import { logger } from "../utils/Logger.js"
 
 
 export const AuthService = initialize({
@@ -23,6 +24,16 @@ AuthService.on(AUTH_EVENTS.AUTHENTICATED, async function() {
   AppState.identity = AuthService.identity
   await accountService.getAccount()
   socketService.authenticate(AuthService.bearer)
+  // async function getMyVaults() {
+    try {
+      AppState.myVaults = null
+      await accountService.getMyVaults()
+    } catch (error) {
+      Pop.toast('Could not get your vaults', 'error')
+      logger.error('Error getting your vaults', error)
+  
+    // }
+  }
   // try {
   //   await vaultsService.getMyVaults()
   // } catch (error) {

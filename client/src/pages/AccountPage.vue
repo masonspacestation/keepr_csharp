@@ -12,21 +12,21 @@ import ModalWrapper from "../components/ModalWrapper.vue";
 const account = computed(() => AppState.account)
 const myVaults = computed(() => AppState.myVaults)
 
-async function getMyVaults() {
-  try {
-    AppState.myVaults = null
-    await accountService.getMyVaults()
-  } catch (error) {
-    Pop.toast('Could not get your vaults', 'error')
-    logger.error('Error getting your vaults', error)
+// async function getMyVaults() {
+//   try {
+//     AppState.myVaults = null
+//     await accountService.getMyVaults()
+//   } catch (error) {
+//     Pop.toast('Could not get your vaults', 'error')
+//     logger.error('Error getting your vaults', error)
 
-  }
-}
+//   }
+// }
 
 
-onMounted(() =>
-  getMyVaults()
-)
+// onMounted(() =>
+//   getMyVaults()
+// )
 
 </script>
 
