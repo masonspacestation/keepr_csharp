@@ -89,9 +89,32 @@ public class KeepsRepository : IRepository<Keep>
     return keep;
   }
 
-  public Keep Udpate(Keep data)
+  public Keep Udpate(Keep keepData)
   {
-    throw new NotImplementedException();
+    string sql = @"
+    UPDATE keeps
+    SET
+    name = @Name,
+    description = @Description
+    WHERE id = @Id
+    LIMIT 1;
+
+    SELECT
+    keeps.*,
+    accounts.*
+    FROM keeps
+
+    JOIN accounts ON accounts.id = keeps.creatorId
+    WHERE keeps.id = @Id
+    ;";
+
+    Keep keep = _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
+    {
+      keep.Creator = profile;
+      keep.CreatorId = profile.Id;
+      return keep;
+    }, keepData).FirstOrDefault();
+    return keep;
   }
 
   internal List<Keep> GetKeepsByVaultId(int vaultId, string userId)

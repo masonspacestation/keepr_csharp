@@ -93,5 +93,18 @@ public class KeepsService
     return profileKeeps;
   }
 
+  internal Keep UpdateKeep(int keepId, Keep keepData, string userId)
+  {
+    Keep keepToUpdate = GetKeepById(keepId, userId);
+    if (keepToUpdate.CreatorId != userId)
+    {
+      throw new Exception("Not authorized to update this keep");
+    }
+    keepToUpdate.Name = keepData.Name ?? keepToUpdate.Name;
+    keepToUpdate.Description = keepData.Description ?? keepToUpdate.Description;
+
+    Keep updatedKeep = _repository.Udpate(keepToUpdate);
+    return updatedKeep;
+  }
 }
 
