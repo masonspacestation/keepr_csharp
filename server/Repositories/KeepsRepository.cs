@@ -36,11 +36,6 @@ public class KeepsRepository : IRepository<Keep>
     return keep;
   }
 
-  public void Destroy(int keepId)
-  {
-    string sql = "DELETE FROM keeps WHERE id = @keepId LIMIT 1;";
-    _db.Execute(sql, new { keepId });
-  }
 
   public List<Keep> GetAll()
   {
@@ -57,7 +52,28 @@ public class KeepsRepository : IRepository<Keep>
     return keeps;
   }
 
-  public Keep GetById(int keepId)
+  internal List<Keep> GetProfileKeeps(string profileId)
+  {
+    string sql = @"
+        SELECT
+        keeps.*,
+        accounts.*
+
+        FROM keeps
+        JOIN accounts ON keeps.creatorId = accounts.id
+        WHERE keeps.creatorId = @profileId
+        ;";
+
+    List<Keep> profileKeeps = _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
+    {
+      keep.Creator = profile;
+      keep.CreatorId = profile.Id;
+      return keep;
+    }, new { profileId }).ToList();
+    return profileKeeps;
+  }
+
+  public Keep GetById(int keepId, string userId)
   {
     string sql = @"
     SELECT
@@ -107,5 +123,37 @@ WHERE
       return keep;
     }, new { vaultId }).ToList();
     return keeps;
+  }
+
+  internal void IncrementViews(int keepId)
+  {
+    string sql = @"
+    UPDATE keeps
+    SET views = views + 1
+    WHERE keeps.id = @keepId
+    LIMIT 1;";
+
+    _db.Execute(sql, new { keepId });
+  }
+
+  public Keep GetById(int keepId)
+  {
+    string sql = @"
+    SELECT
+    keeps.*,
+    accounts.*
+    FROM keeps
+
+    JOIN accounts ON keeps.creatorId = accounts.id
+    WHERE keeps.id = @keepId
+    ;";
+
+    Keep keep = _db.Query<Keep, Profile, Keep>(sql, PopulateCreator, new { keepId }).FirstOrDefault();
+    return keep;
+  }
+  public void Destroy(int keepId)
+  {
+    string sql = "DELETE FROM keeps WHERE id = @keepId LIMIT 1;";
+    _db.Execute(sql, new { keepId });
   }
 }

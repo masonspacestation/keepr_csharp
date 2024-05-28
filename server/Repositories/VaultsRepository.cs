@@ -98,8 +98,7 @@ public class VaultsRepository : IRepository<Vault>
 
   internal List<Vault> GetMyVaults(string userId)
   {
-    {
-      string sql = @"
+    string sql = @"
     SELECT
     vaults.*,
     accounts.*
@@ -109,34 +108,34 @@ public class VaultsRepository : IRepository<Vault>
     WHERE vaults.creatorId = @userId
     ;";
 
-      List<Vault> myVaults = _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
-      {
-        vault.Creator = profile;
-        return vault;
-      }, new { userId }).ToList();
-      return myVaults;
-    }
+    List<Vault> myVaults = _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
+    {
+      vault.Creator = profile;
+      vault.CreatorId = profile.Id;
+      return vault;
+    }, new { userId }).ToList();
+    return myVaults;
   }
 
-  internal List<Vault> GetProfileVaults(string profileId, string userId)
+  internal List<Vault> GetProfileVaults(string profileId)
   {
     string sql = @"
         SELECT
         vaults.*,
-        profiles.*
+        accounts.*
 
         FROM vaults
-        JOIN profiles ON vaults.creatorId = @userId
+        JOIN accounts ON vaults.creatorId = accounts.id
 
         WHERE vaults.creatorId = @profileId
         ;";
 
-    List<Vault> myVaults = _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
+    List<Vault> profileVaults = _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
   {
     vault.Creator = profile;
     return vault;
-  }, new { userId }).ToList();
-    return myVaults;
+  }, new { profileId }).ToList();
+    return profileVaults;
 
   }
 }

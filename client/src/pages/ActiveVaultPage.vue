@@ -64,10 +64,12 @@ onMounted(() =>
       <div class="my-3">
         <div class="hero-section rounded rounded-3 shadow mt-2 mx-0 mb-5">
 
-          <!-- <RoundProfilePhoto :profile="account" /> -->
           <!-- <img class="rounded" :src="activeVault.img" alt="" /> -->
           <h4>{{ activeVault.name }}</h4>
-          <h4>By {{ activeVault.creator?.name }}</h4>
+          <RouterLink :to="{ name: 'Profile Page', params: { profileId: activeVault.creator.id } }">
+            <p class="text-dark">{{ activeVault.creator?.name }}</p>
+          </RouterLink>
+          <!-- <p>{{ activeVault.img }}</p> -->
         </div>
         <div v-if="activeVault.creator.id == account?.id" class="text-end btn-group dropstart">
           <i role="button" class="mdi mdi-dots-horizontal fs-3" data-bs-toggle="dropdown" data-bs-auto-close="outside"
@@ -77,14 +79,13 @@ onMounted(() =>
             <ul class="dropdown-menu text-center w-auto p-1">
               <i role="button" @click="destroyVault(activeVault.id)" class="fs-3 m-2 mdi mdi-delete opacity-75"></i>
               <i role="button" @click="updateVault()" class="fs-3 m-2 mdi mdi-pencil opacity-75"></i>
-              <!-- <FavoriteButton :vault="activeVault" /> -->
             </ul>
           </div>
 
         </div>
-        <div v-else>
+        <!-- <div v-else>
           <FavoriteButton :vault="activeVault" />
-        </div>
+        </div> -->
       </div>
       <p class="rounded rounded-pill bg-info">XX Keeps</p>
       <div class="row"></div>

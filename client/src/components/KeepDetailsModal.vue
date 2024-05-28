@@ -31,16 +31,15 @@ async function createVaultKeep(vkData) {
     logger.error('Could not keep this keep.', error)
   }
 }
-
 </script>
 
 
 <template>
-  <div v-if="keep" class="container rounded rounded-2 shadow mb-3">
+  <div v-if="keep" class="container">
     <div class="row p-0">
       <div class="col-6 p-0">
         <!-- hiya 👋 -->
-        <img :src="keep.img" alt="" class="rounded-start-2">
+        <img :src="keep.img" alt="" class="">
       </div>
       <div class="col-6 p-4 d-flex flex-column justify-content-between align-items-center">
         <p class="text-secondary opacity-50"><i class="mdi mdi-eye-outline"></i> {{ keep.views }} | {{ keep.kept }}
@@ -76,7 +75,11 @@ async function createVaultKeep(vkData) {
           <div class="col-6 ms-auto">
             <small class="w-auto">{{ keep.creator.name }}</small>
             <div class="">
-              <RoundProfilePhoto :profile="keep.creator" class="" />
+              <RouterLink :to="{ name: 'Profile Page', params: { profileId: keep.creator.id } }">
+                <!-- <RouterLink :to="{ name: 'Active Vault', params: { vaultId: vault.id } }"></RouterLink> -->
+                <RoundProfilePhoto :profile="keep.creator" role="button" data-bs-toggle="modal"
+                  data-bs-target="#keep-details-modal" />
+              </RouterLink>
             </div>
 
           </div>

@@ -10,11 +10,13 @@ public class KeepsService
 
   private readonly KeepsRepository _repository;
   private readonly VaultsService _vaultsService;
+  private readonly ProfilesService _profilesService;
 
-  public KeepsService(KeepsRepository repository, VaultsService vaultsService)
+  public KeepsService(KeepsRepository repository, VaultsService vaultsService, ProfilesService profilesService)
   {
     _repository = repository;
     _vaultsService = vaultsService;
+    _profilesService = profilesService;
   }
 
   internal Keep CreateKeep(Keep keepData)
@@ -44,6 +46,12 @@ public class KeepsService
     List<Keep> keeps = _repository.GetAll();
     return keeps;
   }
+  internal Keep IncrementVisits(int keepId, string userId)
+  {
+    _repository.IncrementViews(keepId);
+    Keep keep = GetKeepById(keepId, userId);
+    return keep;
+  }
 
   internal Keep GetKeepById(int keepId)
   {
@@ -54,12 +62,25 @@ public class KeepsService
     }
     return keep;
   }
+  internal Keep GetKeepById(int keepId, string userId)
+  {
+    Keep keep = GetKeepById(keepId);
+
+    return keep;
+  }
 
   internal List<Keep> GetKeepsByVaultId(int vaultId, string userId)
   {
     _vaultsService.GetVaultById(vaultId, userId);
     List<Keep> keeps = _repository.GetKeepsByVaultId(vaultId, userId);
     return keeps;
+  }
+
+  internal List<Keep> GetProfileKeeps(string profileId, string userId)
+  {
+    _profilesService.GetProfileById(profileId, userId);
+    List<Keep> profileKeeps = _repository.GetProfileKeeps(profileId);
+    return profileKeeps;
   }
 }
 

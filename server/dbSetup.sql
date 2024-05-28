@@ -10,15 +10,15 @@ CREATE TABLE IF NOT EXISTS accounts (
 
 SELECT * FROM accounts;
 
-CREATE TABLE profiles (
-    id int NOT NULL AUTO_INCREMENT primary key,
-    name VARCHAR(255) NOT NULL,
-    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
-    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
-    creatorId VARCHAR(255) NOT NULL,
-    picture varchar(255) COMMENT 'User Picture',
-    FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
-);
+-- CREATE TABLE profiles (
+--     id int NOT NULL AUTO_INCREMENT primary key,
+--     name VARCHAR(255) NOT NULL,
+--     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+--     updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+--     creatorId VARCHAR(255) NOT NULL,
+--     picture varchar(255) COMMENT 'User Picture',
+--     FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
+-- );
 
 -- INSERT INTO
 --     profiles (name, creatorId, picture)

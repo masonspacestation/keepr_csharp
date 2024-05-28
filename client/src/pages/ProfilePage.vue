@@ -7,18 +7,20 @@ import { logger } from "../utils/Logger.js";
 import { accountService } from "../services/AccountService.js";
 import RoundProfilePhoto from "../components/RoundProfilePhoto.vue";
 import KeepWall from "../components/KeepWall.vue";
+import KeepCard from "../components/KeepCard.vue";
 import { Modal } from "bootstrap";
 import ModalWrapper from "../components/ModalWrapper.vue";
 import { useRoute } from "vue-router";
 import { profilesService } from "../services/ProfilesService.js";
+import { keepsService } from "../services/KeepsService.js";
+
 
 
 const route = useRoute()
 
 const profile = computed(() => AppState.activeProfile)
 const account = computed(() => AppState.account)
-
-// TODO getVaultsByProfileId
+const keeps = computed(() => AppState.profileKeeps)
 const vaults = computed(() => AppState.profileVaults)
 
 
@@ -40,9 +42,33 @@ async function getProfileVaults() {
   }
 }
 
+async function getProfileKeeps() {
+  try {
+    await profilesService.getProfileKeeps(route.params.profileId)
+  } catch (error) {
+    Pop.toast("Could not get profile's keeps", 'error')
+    console.log(`Could not get keeps for profile id: ${route.params.profileId}`)
+  }
+}
 
-onMounted(() =>
-  setActiveProfile())
+async function getKeepById(keepId) {
+  try {
+    AppState.activeKeep = null
+    console.log(`Setting ${keepId} to active`);
+    await keepsService.getKeepById(keepId);
+  } catch (error) {
+    Pop.toast(`Could not get keep with ID: ${keepId}`)
+    logger.error(`Could not get keep with ID: ${keepId}`, error)
+  }
+}
+
+
+onMounted(() => {
+  setActiveProfile()
+  getProfileVaults()
+  getProfileKeeps()
+}
+)
 
 </script>
 
@@ -57,7 +83,7 @@ onMounted(() =>
         <h1>{{ profile.name }}</h1>
         <p>{{ vaults?.length }} Vaults | XX Keeps</p>
       </div>
-      <div v-if="profile.id = account.id" class="row justify-content-end">
+      <div v-if="profile.id = account?.id" class="row justify-content-end">
         <AddItemFloatingButton />
       </div>
 
@@ -71,7 +97,17 @@ onMounted(() =>
 
       <!-- TODO set a v-if to say that their keeps will appear here once they create some -->
       <h3>Keeps</h3>
-      <!-- <KeepWall /> -->
+      <div class="row">
+        <div class="masonry col-12">
+          <!-- <div class="p-2" v-for="keep in keeps" :key="keep.id">
+            <KeepCard :keep="keep" />
+          </div> -->
+          <div v-for="keep in keeps" :key="keep.id" class="col-12 col-md-6 col-lg-4 py-3 px-4 masonry" role="button"
+            data-bs-toggle="modal" data-bs-target="#keep-details-modal">
+            <KeepCard :keep="keep" @click="getKeepById(keep.id)" />
+          </div>
+        </div>
+      </div>
     </div>
     <div v-else>
       <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>

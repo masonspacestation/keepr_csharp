@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { computed } from "vue";
 import { AppState } from "../AppState.js";
 import { Vault } from "../models/Vault.js";
@@ -13,7 +14,7 @@ class VaultsService{
     const response = await api.post('api/vaults', vaultData)
     console.log('Creating vault', response.data);
 const newVault = new Vault(response.data)
-AppState.myVaults.unshift(newVault)
+AppState.myVaults.push(newVault)
 return newVault
   }
   async destroyVault(vaultId) {
@@ -23,11 +24,7 @@ return newVault
     console.log('Vault to delete', response.data);
     if(indexToDestroy == -1) throw new Error('Vault not found - check findIndex function on delete');
     myVaults.splice(indexToDestroy, 1)
-
   }
-  async getMyVaults() {
-  const response = await api.get('api/vaults')
-}
 async getVaultById(vaultId){
     const response = await api.get(`api/vaults/${vaultId}`)
     console.log('looking for vault', response.data);

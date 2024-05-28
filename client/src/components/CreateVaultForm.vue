@@ -75,7 +75,7 @@ async function createVault() {
           <!-- isPrivate -->
           <div class="row ps-4">
             <div class="form-check form-switch w-auto mb-3">
-              <input v-model="vaultData.isPrivate" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+              <input v-model="vaultData.isPrivate" class="form-check-input" type="checkbox" id="isPrivate">
               <label class="form-check-label" for="isPrivate">Make vault private?</label>
             </div>
           </div>

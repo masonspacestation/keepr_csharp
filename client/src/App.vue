@@ -18,9 +18,9 @@ import CreateVaultForm from "./components/CreateVaultForm.vue";
   <!-- <footer class="bg-dark text-light">
     Made with 💖 by CodeWorks
   </footer> -->
-  <!-- <ModalWrapper>
-    <KeepDetailsModal modalId="keep-details-modal" />
-  </ModalWrapper> -->
+  <ModalWrapper modalId="keep-details-modal">
+    <KeepDetailsModal />
+  </ModalWrapper>
 </template>
 
 <style lang="scss">

@@ -30,8 +30,8 @@ public class ProfilesRepository : IRepository<Profile>
   {
     string sql = @"
     SELECT *
-FROM profiles
-    WHERE profiles.creatorId = @profileId
+FROM accounts
+    WHERE accounts.id = @profileId
     ;";
 
     Profile profile = _db.Query<Profile>(sql, new { profileId }).FirstOrDefault();
