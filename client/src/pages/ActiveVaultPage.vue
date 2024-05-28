@@ -103,7 +103,6 @@ onMounted(() => {
         <h3>Keeps</h3>
 
         <div v-for="keep in keeps" :key="keep.id" class="col-12 col-md-6 col-lg-4 py-3 px-4 masonry">
-          {{ keep }}
           <KeepCard :keep="keep" />
         </div>
       </div>

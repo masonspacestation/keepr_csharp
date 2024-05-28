@@ -71,7 +71,6 @@ async function createVaultKeep() {
             <small class="w-auto">{{ keep.creator.name }}</small>
             <div class="">
               <RouterLink :to="{ name: 'Profile Page', params: { profileId: keep.creator.id } }">
-                <!-- <RouterLink :to="{ name: 'Active Vault', params: { vaultId: vault.id } }"></RouterLink> -->
                 <RoundProfilePhoto :profile="keep.creator" role="button" data-bs-toggle="modal"
                   data-bs-target="#keep-details-modal" />
               </RouterLink>
