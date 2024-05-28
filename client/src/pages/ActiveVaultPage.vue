@@ -4,7 +4,7 @@ import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
 import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
-import KeepCard from "../components/KeepWall.vue";
+import KeepCard from "../components/KeepCard.vue";
 import { useRoute, useRouter } from "vue-router";
 import { vaultsService } from "../services/VaultsService.js";
 
@@ -103,7 +103,7 @@ onMounted(() => {
         <h3>Keeps</h3>
 
         <div v-for="keep in keeps" :key="keep.id" class="col-12 col-md-6 col-lg-4 py-3 px-4 masonry">
-          {{ keep. }}
+          {{ keep }}
           <KeepCard :keep="keep" />
         </div>
       </div>

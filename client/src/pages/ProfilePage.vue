@@ -103,9 +103,8 @@ onMounted(() => {
           <!-- <div class="p-2" v-for="keep in keeps" :key="keep.id">
             <KeepCard :keep="keep" />
           </div> -->
-          <div v-for="keep in keeps" :key="keep.id" class="col-12 col-md-6 col-lg-4 py-3 px-4 masonry" role="button"
-            data-bs-toggle="modal" data-bs-target="#keep-details-modal">
-            <KeepCard :keep="keep" @click="getKeepById(keep.id)" />
+          <div v-for="keep in keeps" :key="keep?.id" class="col-12 col-md-6 col-lg-4 py-3 px-4 masonry">
+            <KeepCard :keep="keep" />
           </div>
         </div>
       </div>
