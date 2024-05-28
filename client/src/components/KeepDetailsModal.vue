@@ -13,6 +13,8 @@ const keep = computed(() => AppState.activeKeep)
 const account = computed(() => AppState.account)
 const myVaults = computed(() => AppState.myVaults)
 
+// const keepKept = ref(keep.value?.kept)
+
 const vkData = ref({
   vaultId: '',
   keepid: keep.value?.id,
@@ -41,7 +43,8 @@ async function createVaultKeep(vkData) {
         <img :src="keep.img" alt="" class="rounded-start-2">
       </div>
       <div class="col-6 p-4 d-flex flex-column justify-content-between align-items-center">
-        <p class="text-secondary opacity-50"><i class="mdi mdi-eye-outline"></i> {{ keep.views }} | XX Keeps</p>
+        <p class="text-secondary opacity-50"><i class="mdi mdi-eye-outline"></i> {{ keep.views }} | {{ keep.kept }}
+          Keeps</p>
 
         <div class="px-5 text-center">
           <h3 class="mb-3">{{ keep.name }}</h3>

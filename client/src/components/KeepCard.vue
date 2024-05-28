@@ -17,7 +17,7 @@ async function getKeepById(keepId) {
   try {
     AppState.activeKeep = null
     console.log('getting active keep', keepId);
-    await keepsService.setActiveKeep(keepId);
+    await keepsService.getKeepById(keepId);
     // Modal.getOrCreateInstance('#keep-details-modal')
   } catch (error) {
     Pop.toast(`Could not get keep with ID: ${keepId}`)

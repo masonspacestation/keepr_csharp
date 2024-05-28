@@ -1,4 +1,4 @@
--- Active: 1715633466013@@127.0.0.1@3306
+-- Active: 1715633466013@@127.0.0.1@3306@cooperative_mountain_fe2c50_db
 CREATE TABLE IF NOT EXISTS accounts (
     id VARCHAR(255) NOT NULL primary key COMMENT 'primary key',
     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
@@ -9,6 +9,31 @@ CREATE TABLE IF NOT EXISTS accounts (
 ) default charset utf8mb4 COMMENT '';
 
 SELECT * FROM accounts;
+
+CREATE TABLE profiles (
+    id int NOT NULL AUTO_INCREMENT primary key,
+    name VARCHAR(255) NOT NULL,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+    creatorId VARCHAR(255) NOT NULL,
+    picture varchar(255) COMMENT 'User Picture',
+    FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
+);
+
+-- INSERT INTO
+--     profiles (name, creatorId, picture)
+-- VALUES (
+--         "Andrew Mason",
+--         "662818ab0bd0398d8bf3cd62",
+--         "https://lh3.googleusercontent.com/a/ACg8ocI9JfdgpZffz4H9dU-xomwRedOBAVoBq9cRvhAGGsRzUIIr2mr4=s96-c"
+--     );
+
+-- SELECT *
+-- FROM profiles
+-- WHERE
+--     profiles.creatorId = "662818ab0bd0398d8bf3cd62";
+
+-- DROP TABLE profiles;
 
 -- #SECTION 🖼️ keeps -
 CREATE TABLE keeps (
@@ -62,7 +87,7 @@ FROM keeps
 WHERE
     keeps.id = LAST_INSERT_ID();
 
-DROP TABLE keeps;
+-- DROP TABLE keeps;
 
 -- #SECTION 📦 vaults
 CREATE TABLE vaults (

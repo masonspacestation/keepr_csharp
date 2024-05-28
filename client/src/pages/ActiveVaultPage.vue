@@ -21,7 +21,6 @@ async function getVaultById() {
   try {
     // AppState.activeVault = null
     await vaultsService.setActiveVault(route.params.vaultId);
-
   } catch (error) {
     if (error.response.status !== 200) {
       Pop.toast(`Unauthorized to access this vault`)

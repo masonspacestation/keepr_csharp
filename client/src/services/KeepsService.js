@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { AppState } from "../AppState.js";
 import { Keep } from "../models/Keep.js";
 import { api } from "./AxiosService.js";
@@ -15,16 +16,24 @@ class KeepsService{
   async getKeepById(keepId) {
     const response = await api.get(`api/keeps/${keepId}`)
     console.log("Found keep: ", response.data);
-    const keep = new Keep(response.data)
-    return keep    
+    AppState.activeKeep = new Keep(response.data)
+    const foundKeep = AppState.keeps.find(keep => keep.id == AppState.activeKeep.id)
+if (!foundKeep) {return}
+foundKeep.views++
+    AppState.activeKeep.views++
+    console.log('activeKeep', AppState.activeKeep);
+    // return keep    
   }
 
-async setActiveKeep(keepId){
-  const activeKeep = await this.getKeepById(keepId)
-  AppState.activeKeep = activeKeep
-  console.log('activeKeep', AppState.activeKeep);
-  // return activeKeep
-}
+// async setActiveKeep(keepId){
+//   const activeKeep = await this.getKeepById(keepId)
+//   AppState.activeKeep = activeKeep
+
+// const foundKeep = AppState.keeps.find(keep => keep.id == activeKeep.id)
+// if (!foundKeep) {return}
+// foundKeep.views++
+//   console.log('activeKeep', AppState.activeKeep);
+// }
 
   async getAllKeeps() {
     const response = await api.get('api/keeps')

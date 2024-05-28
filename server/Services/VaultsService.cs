@@ -5,10 +5,12 @@ namespace keepr_csharp.Services;
 public class VaultsService
 {
   private readonly VaultsRepository _repository;
+  private readonly ProfilesService _profilesService;
 
-  public VaultsService(VaultsRepository repository)
+  public VaultsService(VaultsRepository repository, ProfilesService profilesService)
   {
     _repository = repository;
+    _profilesService = profilesService;
   }
 
   internal Vault CreateVault(Vault vaultData)
@@ -66,5 +68,12 @@ public class VaultsService
       throw new Exception("Unauthorized to destroy this vault.");
     }
     _repository.Destroy(vaultId);
+  }
+
+  internal List<Vault> GetProfileVaults(string profileId, string userId)
+  {
+    _profilesService.GetProfileById(profileId, userId);
+    List<Vault> vaults = _repository.GetProfileVaults(profileId, userId);
+    return vaults;
   }
 }

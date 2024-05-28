@@ -24,7 +24,7 @@ function resetForm() {
     img: '',
   }
 }
-// FIXME take all recipe stuff off, implement function in service, and put in modal
+// FIXME put in modal
 async function createVault() {
   try {
     const newVault = await vaultsService.createVault(vaultData.value)
