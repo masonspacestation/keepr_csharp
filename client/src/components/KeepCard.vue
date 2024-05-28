@@ -13,34 +13,17 @@ import { Modal } from "bootstrap";
 const props = defineProps({ keep: { type: Keep, required: true } })
 const bgStyle = computed(() => `url(${props.keep.img})`)
 
-
-// async function getKeepById(keepId) {
-//   try {
-//     AppState.activeKeep = null
-//     console.log(`Setting ${keepId} to active`);
-//     await keepsService.getKeepById(keepId);
-//   } catch (error) {
-//     Pop.toast(`Could not get keep with ID: ${keepId}`)
-//     logger.error(`Could not get keep with ID: ${keepId}`, error)
-//   }
-// }
-
-// onMounted(() =>
-//   getKeepById(props.keep.id)
-// )
-
-// async function getKeepById(keepId) {
-//   try {
-//     AppState.activeKeep = null
-//     console.log('getting active keep', keepId);
-//     await keepsService.getKeepById(keepId);
-//     // Modal.getOrCreateInstance('#keep-details-modal')
-//   } catch (error) {
-//     Pop.toast(`Could not get keep with ID: ${keepId}`)
-//     logger.error(`Could not get keep with ID: ${keepId}`, error)
-//   }
-// }
-
+async function getKeepById(keepId) {
+  try {
+    AppState.activeKeep = null
+    console.log(`Setting ${keepId} to active`);
+    await keepsService.getKeepById(keepId);
+    Modal.getOrCreateInstance('#keep-details-modal')
+  } catch (error) {
+    Pop.toast(`Could not get keep with ID: ${keepId}`)
+    logger.error(`Could not get keep with ID: ${keepId}`, error)
+  }
+}
 
 
 
@@ -49,7 +32,9 @@ const bgStyle = computed(() => `url(${props.keep.img})`)
 
 <template>
   <!-- FIXME the p tag is getting the background set, and the image is above that, so it looks like 2 images stacked on top of each other. If I take away the data-bound image, and just rely in the background property for the image, the card shrinks to the height of the p tag — hacky way it's working is that the image is there, but set to hidden -->
-  <div class="container mb-4 keep-card rounded rounded-2 shadow">
+  <div class="container mb-4 keep-card rounded rounded-2 shadow" @click="getKeepById(keep.id)">
+    <!-- role="button" data-bs-toggle="modal"
+    data-bs-target="#keep-details-modal"  -->
     <div class="row justify-content-between align-items-center p-3">
       <img class="bg-size" :src="keep.img" :alt="`Image of ${keep.name}`">
       <div class="col-9">

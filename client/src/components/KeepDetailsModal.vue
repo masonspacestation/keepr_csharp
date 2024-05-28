@@ -16,13 +16,13 @@ const myVaults = computed(() => AppState.myVaults)
 // const keepKept = ref(keep.value?.kept)
 
 const vkData = ref({
-  vaultId: '',
+  vaultId: 0,
   keepid: keep.value?.id,
 })
 
-async function createVaultKeep(vkData) {
+async function createVaultKeep() {
   try {
-    const newVk = await vaultKeepsService.createVaultKeep(vkData)
+    await vaultKeepsService.createVaultKeep(vkData.value)
     Pop.toast('Kept new keep!', 'success')
     //  TODO increment vk count of keep
     // TODO change "add keep" form to a router link to the vault and a button to "unkeep" it
@@ -49,11 +49,12 @@ async function createVaultKeep(vkData) {
           <h3 class="mb-3">{{ keep.name }}</h3>
           <p>{{ keep.description }}</p>
         </div>
+
         <div class="row w-100 align-items-center">
           <div class="col-6 text-center">
             <div v-if="account" class="row justify-content-between align-content-center">
 
-              <form @submit.prevent="createVaultKeep(vkData)" class="py-3">
+              <form @submit.prevent="createVaultKeep()" class="py-3">
                 <select v-model="vkData.vaultId" class="form-select w-50">
                   <option value="" selected>Keep this</option>
                   <option v-for="vault in myVaults" :key="vault.id" :value="vault.id" name="keep-to-vault"
@@ -62,13 +63,7 @@ async function createVaultKeep(vkData) {
                 </select>
                 <button type="submit" class="w-50 btn btn-primary">Keep</button>
               </form>
-              <!-- <form class="dropdown-menu dropdown-menu-end shadow col-12 col-lg-8 p-4 p-lg-1" style="">
-                  <div class="row justify-content-center px-lg-3 justify-content-lg-between align-content-center">
-                    <ul>
-                      <li v-for="vault in myVaults" :key="vault.id" class="dropdown-menu">name</li>
-                    </ul>
-                  </div>
-                </form> -->
+
 
             </div>
           </div>

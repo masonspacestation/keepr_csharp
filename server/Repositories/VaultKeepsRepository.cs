@@ -90,4 +90,15 @@ FROM vaultKeeps
     throw new NotImplementedException();
   }
 
+
+
+  //   SELECT vaultKeeps.*, keeps.*, vaults.*, accounts.*
+  // FROM
+  //     keeps
+  //     JOIN vaultKeeps ON vaultKeeps.keepId = keeps.id
+  //     JOIN vaults ON vaultKeeps.vaultId = vaults.id
+  //     JOIN accounts ON vaultKeeps.creatorId = accounts.id
+  // WHERE
+  //     vaultKeeps.vaultId = 1
+
 }

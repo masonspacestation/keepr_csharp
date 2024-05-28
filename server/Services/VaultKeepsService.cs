@@ -29,15 +29,6 @@ public class VaultKeepsService
     return vk;
   }
 
-  // internal VaultKeep GetVaultKeepById(int vkId, string userId)
-  // {
-  //   VaultKeep vk = GetVaultKeepById(vkId);
-  //   if (vault.CreatorId != userId)
-  //   {
-  //     throw new Exception($"Unauthorized to ");
-  //     }
-  // }
-
   internal string DestroyVault(int vkId, string userId)
   {
     VaultKeep vk = GetVaultKeepById(vkId);

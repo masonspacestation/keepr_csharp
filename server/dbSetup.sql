@@ -10,31 +10,6 @@ CREATE TABLE IF NOT EXISTS accounts (
 
 SELECT * FROM accounts;
 
--- CREATE TABLE profiles (
---     id int NOT NULL AUTO_INCREMENT primary key,
---     name VARCHAR(255) NOT NULL,
---     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
---     updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
---     creatorId VARCHAR(255) NOT NULL,
---     picture varchar(255) COMMENT 'User Picture',
---     FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
--- );
-
--- INSERT INTO
---     profiles (name, creatorId, picture)
--- VALUES (
---         "Andrew Mason",
---         "662818ab0bd0398d8bf3cd62",
---         "https://lh3.googleusercontent.com/a/ACg8ocI9JfdgpZffz4H9dU-xomwRedOBAVoBq9cRvhAGGsRzUIIr2mr4=s96-c"
---     );
-
--- SELECT *
--- FROM profiles
--- WHERE
---     profiles.creatorId = "662818ab0bd0398d8bf3cd62";
-
--- DROP TABLE profiles;
-
 -- #SECTION 🖼️ keeps -
 CREATE TABLE keeps (
     id INT NOT NULL AUTO_INCREMENT primary key,
@@ -132,13 +107,4 @@ CREATE TABLE vaultKeeps (
 
 SELECT * FROM vaultKeeps;
 
-SELECT vaultKeeps.*, keeps.*, vaults.*, accounts.*
-FROM
-    vaultKeeps
-    JOIN keeps ON vaultKeeps.keepId = keeps.id
-    JOIN vaults ON vaultKeeps.vaultId = vaults.id
-    JOIN accounts ON vaultKeeps.creatorId = accounts.id
-WHERE
-    vaultKeeps.id = 1
-
-DROP TABLE vaultKeeps;
+-- DROP TABLE vaultKeeps;

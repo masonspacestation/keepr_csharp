@@ -10,8 +10,8 @@ const router = useRouter()
 
 
 const keepData = ref({
-  name: 'test',
-  description: 'ing',
+  name: '',
+  description: '',
   img: 'https://images.unsplash.com/photo-1616458964840-5108e4d3adb3?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHRlc3Rpbmd8ZW58MHx8MHx8fDA%3D',
 })
 

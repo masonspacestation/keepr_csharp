@@ -21,17 +21,6 @@ async function getAllKeeps() {
   }
 }
 
-async function getKeepById(keepId) {
-  try {
-    AppState.activeKeep = null
-    console.log(`Setting ${keepId} to active`);
-    await keepsService.getKeepById(keepId);
-    // Modal.getOrCreateInstance('#keep-details-modal')
-  } catch (error) {
-    Pop.toast(`Could not get keep with ID: ${keepId}`)
-    logger.error(`Could not get keep with ID: ${keepId}`, error)
-  }
-}
 
 
 onMounted(() =>
@@ -42,17 +31,8 @@ onMounted(() =>
 <template>
   <div class="container">
     <div class="row">
-      <div v-for="keep in keeps" :key="keep.id" class="col-12 col-md-6 col-lg-4 py-3 px-4 masonry" role="button"
-        data-bs-toggle="modal" data-bs-target="#keep-details-modal">
-
-
-        <!-- <RoundProfilePhoto :profile="keep.creator" /> -->
-        <!-- <KeepModal :keep="keep" /> -->
-        <!-- </div> -->
-        <!-- <KeepWall /> -->
-
-        <KeepCard :keep="keep" @click="getKeepById(keep.id)" />
-
+      <div v-for="keep in keeps" :key="keep.id" class="col-12 col-md-6 col-lg-4 py-3 px-4 masonry">
+        <KeepCard :keep="keep" />
       </div>
       <!-- NOTE testing keep details independent of modal -->
       <!-- <div v-if="AppState.activeKeep">

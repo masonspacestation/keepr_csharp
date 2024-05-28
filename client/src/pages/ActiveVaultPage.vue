@@ -1,26 +1,27 @@
+<!-- eslint-disable no-console -->
 <script setup>
 import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
 import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
-import { accountService } from "../services/AccountService.js";
-import RoundProfilePhoto from "../components/RoundProfilePhoto.vue";
-import KeepWall from "../components/KeepWall.vue";
+import KeepCard from "../components/KeepWall.vue";
 import { useRoute, useRouter } from "vue-router";
 import { vaultsService } from "../services/VaultsService.js";
-import HomePage from "./HomePage.vue";
+
+import { vaultKeepsService } from "../services/VaultKeepsService.js";
 
 const account = computed(() => AppState.account)
-
 const route = useRoute()
 const router = useRouter()
 const activeVault = computed(() => AppState.activeVault)
-const bgStyle = computed(() => `(url${activeVault.value?.img})`)
+const bgStyle = computed(() => `url(${activeVault.value?.img})`)
+const keeps = computed(() => AppState.activeVaultKeeps)
 
 async function getVaultById() {
   try {
-    // AppState.activeVault = null
-    await vaultsService.setActiveVault(route.params.vaultId);
+    const vaultId = await vaultsService.setActiveVault(route.params.vaultId);
+    console.log('vault id', vaultId);
+    getKeepsByVaultId(vaultId)
   } catch (error) {
     if (error.response.status !== 200) {
       Pop.toast(`Unauthorized to access this vault`)
@@ -30,6 +31,15 @@ async function getVaultById() {
       Pop.error(error)
       logger.error('Unauthorized access', error)
     }
+  }
+}
+
+async function getKeepsByVaultId(vaultId) {
+  try {
+    await vaultKeepsService.getKeepsByVaultId(vaultId)
+  } catch (error) {
+    Pop.toast(`Could not retrieve keeps for vault: ${activeVault.value.name}`, 'error')
+    logger.error(`Could not retrieve keeps for vault: ${activeVault.value.name}`, error)
   }
 }
 
@@ -51,8 +61,10 @@ async function updateVault() {
   logger.error('Vault update is not supported')
 }
 
-onMounted(() =>
+onMounted(() => {
   getVaultById()
+  // getKeepsByVaultId(activeVault.value?.id)
+}
 )
 
 </script>
@@ -69,7 +81,6 @@ onMounted(() =>
           <RouterLink :to="{ name: 'Profile Page', params: { profileId: activeVault.creator.id } }">
             <p class="text-dark">{{ activeVault.creator?.name }}</p>
           </RouterLink>
-          <!-- <p>{{ activeVault.img }}</p> -->
         </div>
         <div v-if="activeVault.creator.id == account?.id" class="text-end btn-group dropstart">
           <i role="button" class="mdi mdi-dots-horizontal fs-3" data-bs-toggle="dropdown" data-bs-auto-close="outside"
@@ -83,20 +94,26 @@ onMounted(() =>
           </div>
 
         </div>
-        <!-- <div v-else>
-          <FavoriteButton :vault="activeVault" />
-        </div> -->
       </div>
-      <p class="rounded rounded-pill bg-info">XX Keeps</p>
-      <div class="row"></div>
-      <!-- TODO set a v-if to say that their keeps will appear here once they create some -->
-      <h3>Keeps</h3>
-      <!-- <KeepWall /> -->
+      <div v-if="keeps" class="row">
+        <p class="rounded rounded-pill bg-info">{{ keeps.length }} Keeps</p>
+
+        <!-- TODO set a v-if to say that their keeps will appear here once they create some -->
+
+        <h3>Keeps</h3>
+
+        <div v-for="keep in keeps" :key="keep.id" class="col-12 col-md-6 col-lg-4 py-3 px-4 masonry">
+          {{ keep. }}
+          <KeepCard :keep="keep" />
+        </div>
+      </div>
     </div>
 
     <div v-else>
       <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
+
     </div>
+
   </div>
 </template>
 
@@ -110,9 +127,12 @@ onMounted(() =>
   background-size: cover;
 }
 
+// img {
+//   max-width: 100px;
+// }
 
-
-img {
-  max-width: 100px;
+.masonry {
+  columns: 300px;
+  column-gap: 1rem;
 }
 </style>

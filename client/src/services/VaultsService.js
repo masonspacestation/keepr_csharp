@@ -37,6 +37,7 @@ async setActiveVault(vaultId){
   const activeVault = await this.getVaultById(vaultId)
   AppState.activeVault = activeVault
   console.log('Active Vault: ', AppState.activeVault);
+  return vaultId
 }
 
 }

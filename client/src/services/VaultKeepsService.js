@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { AppState } from "../AppState.js";
+import { Keep } from "../models/Keep.js";
 import { VaultKeep } from "../models/VaultKeep.js";
 import { api } from "./AxiosService.js"
 
@@ -7,6 +8,12 @@ import { api } from "./AxiosService.js"
 
 
 class VaultKeepsService {
+  async getKeepsByVaultId(vaultId) {
+    const response = await api.get(`api/vaults/${vaultId}/keeps`)
+    const vaultKeeps = response.data.map(vkData => new Keep(vkData))
+    AppState.activeVaultKeeps = vaultKeeps 
+    console.log("Vault's keeps", response.data);
+  }
   async createVaultKeep(vkData) {
     const response = await api.post('api/vaultkeeps', vkData)
     console.log('New vaultKeep: ', response.data);
