@@ -14,20 +14,20 @@ const props = defineProps({ keep: { type: Keep, required: true } })
 const bgStyle = computed(() => `url(${props.keep.img})`)
 
 
-async function getKeepById(keepId) {
-  try {
-    AppState.activeKeep = null
-    console.log(`Setting ${keepId} to active`);
-    await keepsService.getKeepById(keepId);
-  } catch (error) {
-    Pop.toast(`Could not get keep with ID: ${keepId}`)
-    logger.error(`Could not get keep with ID: ${keepId}`, error)
-  }
-}
+// async function getKeepById(keepId) {
+//   try {
+//     AppState.activeKeep = null
+//     console.log(`Setting ${keepId} to active`);
+//     await keepsService.getKeepById(keepId);
+//   } catch (error) {
+//     Pop.toast(`Could not get keep with ID: ${keepId}`)
+//     logger.error(`Could not get keep with ID: ${keepId}`, error)
+//   }
+// }
 
-onMounted(() =>
-  getKeepById(props.keep.id)
-)
+// onMounted(() =>
+//   getKeepById(props.keep.id)
+// )
 
 // async function getKeepById(keepId) {
 //   try {

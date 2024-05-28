@@ -136,6 +136,18 @@ WHERE
     _db.Execute(sql, new { keepId });
   }
 
+  internal void IncrementKeeps(int keepId)
+  {
+    string sql = @"
+        UPDATE keeps
+        SET kept = kept + 1
+        WHERE keeps.id = @keepId
+        LIMIT 1
+        ;";
+
+    _db.Execute(sql, new { keepId });
+  }
+
   public Keep GetById(int keepId)
   {
     string sql = @"
@@ -156,4 +168,6 @@ WHERE
     string sql = "DELETE FROM keeps WHERE id = @keepId LIMIT 1;";
     _db.Execute(sql, new { keepId });
   }
+
+
 }

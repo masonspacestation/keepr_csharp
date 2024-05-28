@@ -51,6 +51,7 @@ async function getProfileKeeps() {
   }
 }
 
+// TODO change so that this doesn't need to be on each place that has the keep card component
 async function getKeepById(keepId) {
   try {
     AppState.activeKeep = null

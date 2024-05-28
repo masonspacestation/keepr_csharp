@@ -41,16 +41,26 @@ public class KeepsService
     List<Keep> keeps = _repository.GetAll();
     return keeps;
   }
-  internal List<Keep> GetAllKeeps(string userId)
-  {
-    List<Keep> keeps = _repository.GetAll();
-    return keeps;
-  }
+
+  // internal List<Keep> GetAllKeeps(string userId)
+  // {
+  //   List<Keep> keeps = _repository.GetAll();
+  //   return keeps;
+  // }
+
   internal Keep IncrementVisits(int keepId, string userId)
   {
     _repository.IncrementViews(keepId);
     Keep keep = GetKeepById(keepId, userId);
     return keep;
+  }
+
+
+  internal void IncrementKeeps(int keepId)
+  {
+    _repository.IncrementKeeps(keepId);
+    // Keep keep = GetKeepById(vaultKeepId);
+    // return keep;
   }
 
   internal Keep GetKeepById(int keepId)
@@ -82,5 +92,6 @@ public class KeepsService
     List<Keep> profileKeeps = _repository.GetProfileKeeps(profileId);
     return profileKeeps;
   }
+
 }
 

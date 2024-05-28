@@ -17,7 +17,6 @@ class VaultKeepsService {
     const foundKeep = AppState.keeps.find(keep => keep.id == newVk.keepId)
     if (!foundKeep) {return}
     console.log('found keep', foundKeep);
-    foundKeep.kept++
 
     AppState.vaultKeeps.unshift(newVk)
     return newVk
