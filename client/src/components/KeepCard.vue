@@ -56,11 +56,11 @@ async function destroyKeep(keepId) {
     <div class="row justify-content-between align-items-center p-3">
       <div class="delete-button-row"><i v-if="keep.creatorId == account?.id" @click.stop="destroyKeep(keep.id)"
           role="button" class="delete-button mdi mdi-close"></i></div>
-      <img class="bg-size" :src="keep.img" :alt="`Image of ${keep.name}`">
-      <div class="col-9">
+      <!-- <img class="bg-size" :src="keep.img" :alt="`Image of ${keep.name}`"> -->
+      <div class="col-12 col-md-9">
         <h4 class="my-0 text-light">{{ keep.name }}</h4>
       </div>
-      <div class="col-3">
+      <div class="col-3 d-none d-md-block">
         <RoundProfilePhoto :profile="keep.creator" />
       </div>
     </div>
@@ -78,9 +78,20 @@ img {
   background-image: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.2)), v-bind(bgStyle);
   background-size: cover;
   background-position: center;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  position: relative;
+
+  // &:nth-child(odd) {
+  //   height: 500px;
+  // }
+
 
   .bg-size {
-    visibility: hidden;
+    // visibility: hidden;
+    // object-fit: cover;
+    // object-position: center;
   }
 
   .delete-button {

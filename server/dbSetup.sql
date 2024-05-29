@@ -106,6 +106,7 @@ CREATE TABLE vaultKeeps (
     keepId int NOT NULL,
     vaultId int NOT NULL,
     creatorId varchar(255) NOT NULL,
+    -- FIXME add foreign key for keeps to this table
     FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE,
     FOREIGN KEY (vaultId) REFERENCES vaults (id) ON DELETE CASCADE
 );

@@ -66,7 +66,7 @@ public class AccountController : ControllerBase
   }
 
   [Authorize]
-  [HttpPut("account")]
+  [HttpPut]
   public async Task<ActionResult<Account>> UpdateAccount(string accountId, [FromBody] Account updateData)
   {
     try

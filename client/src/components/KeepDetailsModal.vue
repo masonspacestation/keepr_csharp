@@ -20,6 +20,7 @@ const vkId = computed(() => AppState.activeVaultKeeps.find((vk) => vk.id == keep
 
 const vkData = ref({
   vaultId: 0,
+  // FIXME don't assign this value here
   keepId: keep.value?.id,
 })
 
@@ -36,6 +37,7 @@ function setVkId() {
 
 async function createVaultKeep() {
   try {
+    // TODO assign the keepId to ref value here
     await vaultKeepsService.createVaultKeep(vkData.value)
     Pop.toast('Kept new keep!', 'success')
     resetForm()

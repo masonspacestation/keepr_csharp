@@ -36,11 +36,10 @@ onMounted(() =>
 
   <div class="container w-75">
     <div class="masonry my-3">
-      <div v-for="keep in keeps" :key="keep.id" class="mb-3">
-        <!-- <div v-for="keep in keeps" :key="keep.id" class="col-12 col-md-6 col-lg-4 py-3 px-4"> -->
-        <KeepCard :keep="keep" />
+      <!-- <div v-for="keep in keeps" :key="keep.id" class="col-12 col-md-6 col-lg-4 py-3 px-4"> -->
+      <KeepCard class="keep-card mb-3" :keep="keep" v-for="keep in keeps" :key="keep.id" />
 
-      </div>
+
     </div>
   </div>
 
@@ -72,5 +71,21 @@ onMounted(() =>
 .masonry {
   columns: 200px;
   column-gap: 1em;
+
+  .keep-card {
+    min-height: 300px;
+  }
+
+  .keep-card:nth-child(2n) {
+    min-height: 500px;
+  }
+
+  .keep-card:nth-child(3n) {
+    min-height: 300px;
+  }
+
+  .keep-card:nth-child(4n) {
+    min-height: 800px;
+  }
 }
 </style>
