@@ -18,10 +18,9 @@ class KeepsService{
     const response = await api.get(`api/keeps/${keepId}`)
     console.log("Found keep: ", response.data);
     AppState.activeKeep = new Keep(response.data)
-    const foundKeep = AppState.keeps.find(keep => keep.id == AppState.activeKeep.id)
-if (!foundKeep) {return}
-foundKeep.views++
-    AppState.activeKeep.views++
+    // AppState.activeKeep.kept++
+//     const foundKeep = AppState.keeps.find(keep => keep.id == AppState.activeKeep.id)
+// if (!foundKeep) {return}
     console.log('activeKeep', AppState.activeKeep);
     // return keep    
   }

@@ -17,8 +17,15 @@ const myVaults = computed(() => AppState.myVaults)
 
 const vkData = ref({
   vaultId: 0,
-  keepid: keep.value?.id,
+  keepId: keep.value?.id,
 })
+
+function resetForm() {
+  vkData.value = {
+    vaultId: 0,
+    keepId: keep.value?.id,
+  }
+}
 
 async function createVaultKeep() {
   try {
@@ -42,8 +49,9 @@ async function createVaultKeep() {
         <img :src="keep.img" alt="" class="">
       </div>
       <div class="col-6 p-4 d-flex flex-column justify-content-between align-items-center">
-        <p class="text-secondary opacity-50"><i class="mdi mdi-eye-outline"></i> {{ keep.views }} | {{ keep.kept }}
-          Keeps</p>
+        <p class="text-secondary opacity-50"><i class="mdi mdi-eye-outline"></i> <span class="me-2"> {{ keep.views }}
+          </span><span class="ms-2">𝌊 {{ keep.kept }}</span>
+        </p>
 
         <div class="px-5 text-center">
           <h3 class="mb-3">{{ keep.name }}</h3>

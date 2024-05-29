@@ -24,9 +24,9 @@ public class VaultKeepsController : ControllerBase
     try
     {
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-      vkData.CreatorId = userInfo.Id;
-      VaultKeep newVk = _vaultKeepsService.CreateVaultKeep(vkData);
       _keepsService.IncrementKeeps(vkData.KeepId);
+      vkData.CreatorId = userInfo?.Id;
+      VaultKeep newVk = _vaultKeepsService.CreateVaultKeep(vkData);
       return Ok(newVk);
     }
     catch (Exception exception)
@@ -42,7 +42,9 @@ public class VaultKeepsController : ControllerBase
     try
     {
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-      _keepsService.IncrementKeeps(vaultKeepId);
+      // _keepsService.IncrementKeeps(vaultKeepId);
+      _vaultKeepsService.DestroyVaultKeep(vaultKeepId, userInfo?.Id);
+
       return Ok("VaultKeep was deleted. Huzzah!");
     }
     catch (Exception exception)

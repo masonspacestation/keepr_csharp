@@ -16,6 +16,11 @@ public class VaultKeepsService
   internal VaultKeep CreateVaultKeep(VaultKeep vkData)
   {
     VaultKeep newVk = _repository.Create(vkData);
+    Vault vault = _vaultsService.GetVaultById(vkData.VaultId, vkData.CreatorId);
+    if (vkData.CreatorId != vault.CreatorId)
+    {
+      throw new Exception($"Unauthorized to add to this vault.");
+    }
     return newVk;
   }
 
