@@ -29,15 +29,17 @@ onMounted(() =>
 </script>
 
 <template>
+  <!-- NOTE testing keep details independent of modal -->
+  <!-- <div v-if="AppState.activeKeep">
+    <KeepDetailsModal />
+  </div> -->
+
   <div class="container">
     <div class="row">
       <div v-for="keep in keeps" :key="keep.id" class="col-12 col-md-6 col-lg-4 py-3 px-4 masonry">
         <KeepCard :keep="keep" />
+
       </div>
-      <!-- NOTE testing keep details independent of modal -->
-      <!-- <div v-if="AppState.activeKeep">
-        <KeepDetailsModal />
-      </div> -->
     </div>
   </div>
 

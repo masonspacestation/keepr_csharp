@@ -8,6 +8,16 @@ import { api } from "./AxiosService.js"
 
 
 class VaultKeepsService {
+  async destroyVaultKeep(vkId) {
+    const myVaultKeeps = AppState.vaultKeeps
+    const vkIndex = myVaultKeeps.findIndex(keep => keep.id == vkId)
+    const response = await api.delete(`api/vaultKeeps/${vkId}`)
+    console.log('Destroying vaultKeep', response.data);
+    if(vkIndex == -1){
+      console.log('vaultKeep not found - check findIndex function on delete');
+    }
+    myVaultKeeps.splice(vkIndex, 1)
+  }
   async getKeepsByVaultId(vaultId) {
     const response = await api.get(`api/vaults/${vaultId}/keeps`)
     const vaultKeeps = response.data.map(vkData => new Keep(vkData))

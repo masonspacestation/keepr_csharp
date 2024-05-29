@@ -46,26 +46,22 @@ public class AccountController : ControllerBase
       return BadRequest(error.Message);
     }
   }
+  [Authorize]
+  [HttpPut("{account}")]
+  public async Task<ActionResult<Account>> UpdateAccount(string accountId, [FromBody] Account updateData)
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      Account account = _accountService.Edit(updateData, userInfo.Email);
+      return Ok(account);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
+
 }
 
 
-/** 
-page
-async function getCultistsByCultId() {
-  try {
-    await cultMembersService.getCultistsByCultId(route.params.cultId)
-  } catch (error) {
-    Pop.error(error)
-  }
-}
-
-
-svc
-  async getCultistsByCultId(cultId) {
-    AppState.cultists.length = 0 // empties array, same as: AppState.cultists = []
-    const res = await api.get(`api/cults/${cultId}/cultMembers`)
-    logger.log('GOT CULTISTS 🧙‍♂️🧙', res.data)
-    AppState.cultists = res.data.map(pojo => new Cultist(pojo))
-  }
-
-*/

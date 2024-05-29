@@ -21,6 +21,10 @@ import CreateVaultForm from "./components/CreateVaultForm.vue";
   <ModalWrapper modalId="keep-details-modal">
     <KeepDetailsModal />
   </ModalWrapper>
+
+  <ModalWrapper modalId="update-account-modal">
+    <KeepDetailsModal />
+  </ModalWrapper>
 </template>
 
 <style lang="scss">

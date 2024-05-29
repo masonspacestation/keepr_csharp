@@ -8,6 +8,7 @@ import RoundProfilePhoto from "../components/RoundProfilePhoto.vue";
 import KeepWall from "../components/KeepWall.vue";
 import { Modal } from "bootstrap";
 import ModalWrapper from "../components/ModalWrapper.vue";
+import AccountForm from "../components/AccountForm.vue";
 
 const account = computed(() => AppState.account)
 const myVaults = computed(() => AppState.myVaults)
@@ -42,8 +43,13 @@ const myVaults = computed(() => AppState.myVaults)
         <p>{{ myVaults?.length }} Vaults | XX Keeps</p>
       </div>
       <div class="row justify-content-end">
+        <button class="btn btn-outline-secondary opacity-50 w-auto me-3 mb-3"><i class="mdi mdi-pencil"
+            data-bs-toggle="modal" data-bs-target="#update-account-modal" data-bs-dismiss="modal"></i></button>
         <AddItemFloatingButton />
       </div>
+
+      <!-- <AccountForm /> -->
+      <!-- <div v-if="profile?.id == account?.id" class="row"> -->
 
       <!-- TODO set a v-if to say that their vaults will appear here once they create some -->
       <h3>Vaults</h3>
@@ -66,6 +72,9 @@ const myVaults = computed(() => AppState.myVaults)
   </ModalWrapper>
   <ModalWrapper modalId="create-keep-modal">
     <CreateKeepForm />
+  </ModalWrapper>
+  <ModalWrapper modalId="update-account-modal">
+    <AccountForm />
   </ModalWrapper>
 </template>
 
