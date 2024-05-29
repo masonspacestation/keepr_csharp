@@ -34,7 +34,7 @@ async function destroyKeep(keepId) {
     if (wantsToDelete != true) { return }
 
     await keepsService.destroyKeep(keepId)
-    Pop.toast('Your vaultKeep was deleted!', 'success')
+    Pop.toast('Your Keep was deleted!', 'success')
     console.log('Keep was destroyed: ', keepId);
   } catch (error) {
     Pop.toast(`Could not delete keep with ID: ${keepId}`)

@@ -4,9 +4,9 @@
 
 
 <template>
-  <section class="container p-0 m-0 text-center text-lg-end">
+  <section class="p-0 m-0 text-center text-lg-end">
 
-    <div class="dropdown">
+    <div class="dropdown container">
       <button type="button" class="btn btn-primary dropdown-toggle fs-6" data-bs-toggle="dropdown" aria-expanded="false"
         data-bs-auto-close="outside">
         Create

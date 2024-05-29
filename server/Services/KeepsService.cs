@@ -106,5 +106,11 @@ public class KeepsService
     Keep updatedKeep = _repository.Udpate(keepToUpdate);
     return updatedKeep;
   }
+
+  internal List<Keep> GetMyKeeps(string userId)
+  {
+    List<Keep> myKeeps = _repository.GetMyKeeps(userId);
+    return myKeeps.FindAll(keep => keep.CreatorId == userId);
+  }
 }
 

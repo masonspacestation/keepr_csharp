@@ -29,6 +29,10 @@ public class AccountService
   internal Account Edit(Account editData, string userEmail)
   {
     Account original = GetProfileByEmail(userEmail);
+    if (original.Id != editData.Id)
+    {
+      throw new Exception("Not authorized to edit this Account");
+    }
     original.Name = editData.Name?.Length > 0 ? editData.Name : original.Name;
     original.Picture = editData.Picture?.Length > 0 ? editData.Picture : original.Picture;
     original.CoverImg = editData.CoverImg?.Length > 0 ? editData.CoverImg : original.CoverImg;

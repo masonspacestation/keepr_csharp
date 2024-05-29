@@ -71,7 +71,7 @@ onMounted(() => {
 
 <template>
   <div class="about text-center">
-    <div class="container" v-if="activeVault">
+    <div class="container w-75" v-if="activeVault">
 
       <div class="my-3">
         <div class="hero-section rounded rounded-3 shadow mt-2 mx-0 mb-5">

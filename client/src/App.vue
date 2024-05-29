@@ -4,6 +4,7 @@ import Navbar from './components/Navbar.vue'
 import { Modal } from "bootstrap";
 import ModalWrapper from "./components/ModalWrapper.vue";
 import CreateVaultForm from "./components/CreateVaultForm.vue";
+import AccountForm from "./components/AccountForm.vue";
 
 
 </script>
@@ -22,10 +23,20 @@ import CreateVaultForm from "./components/CreateVaultForm.vue";
     <KeepDetailsModal />
   </ModalWrapper>
 
-  <ModalWrapper modalId="update-account-modal">
-    <KeepDetailsModal />
+  <ModalWrapper modalId="create-vault-modal">
+    <CreateVaultForm />
   </ModalWrapper>
+
+  <ModalWrapper modalId="create-keep-modal">
+    <CreateKeepForm />
+  </ModalWrapper>
+
+  <ModalWrapper modalId="update-account-modal">
+    <AccountForm />
+  </ModalWrapper>
+
 </template>
+
 
 <style lang="scss">
 @import "./assets/scss/main.scss";

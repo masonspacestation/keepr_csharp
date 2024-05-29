@@ -14,7 +14,6 @@ const accountData = ref({
   name: '',
   picture: '',
   coverImg: '',
-  // email: '',
 })
 
 watchEffect(() => {

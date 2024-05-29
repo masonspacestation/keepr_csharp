@@ -24,7 +24,7 @@ function resetForm() {
     img: '',
   }
 }
-// FIXME put in modal
+
 async function createVault() {
   try {
     const newVault = await vaultsService.createVault(vaultData.value)

@@ -192,5 +192,24 @@ WHERE
     _db.Execute(sql, new { keepId });
   }
 
+  internal List<Keep> GetMyKeeps(string userId)
+  {
+    string sql = @"
+    SELECT
+    keeps.*,
+    accounts.*
+    FROM keeps
 
+    JOIN accounts ON accounts.id = keeps.creatorId
+    WHERE keeps.creatorId = @userId
+    ;";
+
+    List<Keep> myKeeps = _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
+    {
+      keep.Creator = profile;
+      keep.CreatorId = profile.Id;
+      return keep;
+    }, new { userId }).ToList();
+    return myKeeps;
+  }
 }

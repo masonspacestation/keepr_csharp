@@ -17,6 +17,8 @@ const account = computed(() => AppState.account)
 const keeps = computed(() => AppState.profileKeeps)
 const vaults = computed(() => AppState.profileVaults)
 
+const bgStyle = computed(() => `url(${profile.value?.coverImg})`)
+
 
 async function setActiveProfile() {
   try {
@@ -57,18 +59,24 @@ onMounted(() => {
 
 <template>
   <div class="about text-center">
-    <div class="container" v-if="profile">
-
+    <div class="container w-75" v-if="profile">
 
       <div class="my-3">
-        <RoundProfilePhoto :profile="profile" />
-        <!-- <img class="rounded" :src="account.picture" alt="" /> -->
-        <h1>{{ profile.name }}</h1>
-        <p>{{ vaults?.length }} Vaults | XX Keeps</p>
+        <div class="hero-section rounded rounded-3 shadow mt-2 mx-0">
+        </div>
+        <div class="id-module d-block">
+          <RoundProfilePhotoLarge :profile="profile" class="mb-3" />
+          <h3>{{ profile.name }}</h3>
+          <p>{{ vaults?.length }} Vaults | {{ keeps?.length }} Keeps</p>
+        </div>
       </div>
+
       <div v-if="profile.id = account?.id" class="row justify-content-end">
+        <button class="btn btn-outline-secondary opacity-50 w-auto me-3 mb-3"><i class="mdi mdi-pencil"
+            data-bs-toggle="modal" data-bs-target="#update-account-modal" data-bs-dismiss="modal"></i></button>
         <AddItemFloatingButton />
       </div>
+
 
       <!-- TODO set a v-if to say that their vaults will appear here once they create some -->
       <h3>Vaults</h3>
@@ -80,31 +88,45 @@ onMounted(() => {
 
       <!-- TODO set a v-if to say that their keeps will appear here once they create some -->
       <h3>Keeps</h3>
-      <div class="row">
-        <div class="masonry col-12">
-          <!-- <div class="p-2" v-for="keep in keeps" :key="keep.id">
-            <KeepCard :keep="keep" />
-          </div> -->
-          <div v-for="keep in keeps" :key="keep?.id" class="col-12 col-md-6 col-lg-4 py-3 px-4 masonry">
-            <KeepCard :keep="keep" />
-          </div>
+      <div class="masonry my-3">
+        <div v-for="keep in keeps" :key="keep?.id" class="mb-3">
+          <KeepCard :keep="keep" />
         </div>
       </div>
+
     </div>
     <div v-else>
       <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
     </div>
   </div>
-  <ModalWrapper modalId="create-vault-modal">
+
+
+  <!-- <ModalWrapper modalId="create-vault-modal">
     <CreateVaultForm />
   </ModalWrapper>
   <ModalWrapper modalId="create-keep-modal">
     <CreateKeepForm />
-  </ModalWrapper>
+  </ModalWrapper> -->
+  <!-- <ModalWrapper modalId="update-account-modal">
+    <AccountForm />
+  </ModalWrapper> -->
 </template>
 
 <style scoped lang="scss">
 img {
   max-width: 100px;
+}
+
+.hero-section {
+  height: 20dvh;
+  background-image: v-bind(bgStyle);
+  background-position: center;
+  background-size: cover;
+  margin-bottom: -50px;
+}
+
+.masonry {
+  columns: 200px;
+  column-gap: 1em;
 }
 </style>

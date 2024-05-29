@@ -1,11 +1,13 @@
 /* eslint-disable no-console */
+import { computed } from "vue";
 import { AppState } from "../AppState.js";
 import { Keep } from "../models/Keep.js";
 import { api } from "./AxiosService.js";
 
-
+const account = computed(()=> AppState.account)
 
 class KeepsService{
+
   async destroyKeep(keepId) {
     const myKeeps = AppState.myKeeps
     const keepIndex = myKeeps.findIndex(keep => keep.id == keepId)
@@ -28,11 +30,7 @@ class KeepsService{
     const response = await api.get(`api/keeps/${keepId}`)
     console.log("Found keep: ", response.data);
     AppState.activeKeep = new Keep(response.data)
-    // AppState.activeKeep.kept++
-//     const foundKeep = AppState.keeps.find(keep => keep.id == AppState.activeKeep.id)
-// if (!foundKeep) {return}
     console.log('activeKeep', AppState.activeKeep);
-    // return keep    
   }
 
 // async setActiveKeep(keepId){

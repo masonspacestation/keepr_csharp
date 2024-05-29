@@ -12,6 +12,8 @@ import AccountForm from "../components/AccountForm.vue";
 
 const account = computed(() => AppState.account)
 const myVaults = computed(() => AppState.myVaults)
+const keeps = computed(() => AppState.myKeeps)
+const bgStyle = computed(() => `url(${account.value?.coverImg})`)
 
 // async function getMyVaults() {
 //   try {
@@ -33,15 +35,19 @@ const myVaults = computed(() => AppState.myVaults)
 
 <template>
   <div class="about text-center">
-    <div class="container" v-if="account">
+    <div class="container w-75" v-if="account">
 
 
       <div class="my-3">
-        <RoundProfilePhoto :profile="account" />
-        <!-- <img class="rounded" :src="account.picture" alt="" /> -->
-        <h1>{{ account.name }}</h1>
-        <p>{{ myVaults?.length }} Vaults | XX Keeps</p>
+        <div class="hero-section rounded rounded-3 shadow mt-2 mx-0">
+        </div>
+        <div class="id-module d-block">
+          <RoundProfilePhotoLarge :profile="account" class="mb-3" />
+          <h3>{{ account.name }}</h3>
+          <p>{{ myVaults?.length }} Vaults | {{ keeps?.length }} Keeps</p>
+        </div>
       </div>
+
       <div class="row justify-content-end">
         <button class="btn btn-outline-secondary opacity-50 w-auto me-3 mb-3"><i class="mdi mdi-pencil"
             data-bs-toggle="modal" data-bs-target="#update-account-modal" data-bs-dismiss="modal"></i></button>
@@ -61,13 +67,17 @@ const myVaults = computed(() => AppState.myVaults)
 
       <!-- TODO set a v-if to say that their keeps will appear here once they create some -->
       <h3>Keeps</h3>
-      <!-- <KeepWall /> -->
+      <div class="masonry my-3">
+        <div v-for="keep in keeps" :key="keep?.id" class="mb-3">
+          <KeepCard :keep="keep" />
+        </div>
+      </div>
     </div>
     <div v-else>
       <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
     </div>
   </div>
-  <ModalWrapper modalId="create-vault-modal">
+  <!-- <ModalWrapper modalId="create-vault-modal">
     <CreateVaultForm />
   </ModalWrapper>
   <ModalWrapper modalId="create-keep-modal">
@@ -75,11 +85,26 @@ const myVaults = computed(() => AppState.myVaults)
   </ModalWrapper>
   <ModalWrapper modalId="update-account-modal">
     <AccountForm />
-  </ModalWrapper>
+  </ModalWrapper> -->
 </template>
 
 <style scoped lang="scss">
 img {
   max-width: 100px;
+}
+
+.hero-section {
+  height: 20dvh;
+  // background-color: red;
+  background-image: v-bind(bgStyle);
+  // background-image: url(src/assets/img/calum-lewis-vA1L1jRTM70-unsplash.jpg);
+  background-position: center;
+  background-size: cover;
+  margin-bottom: -50px;
+}
+
+.masonry {
+  columns: 200px;
+  column-gap: 1em;
 }
 </style>

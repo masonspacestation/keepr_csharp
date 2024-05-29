@@ -88,37 +88,37 @@ async function destroyVaultKeep() {
           <div class="row w-100 align-items-center">
             <div v-if="vaultKeeps.some(vk => vk.id == keep.id)" class="col-md-6 text-center">
               <div v-if="account" class="row justify-content-between align-content-center">
-                <button @click="destroyVaultKeep()" class="w-50 btn btn-link fw-bold text-secondary opacity-50"><i
+                <button @click="destroyVaultKeep()" class="btn btn-link fw-bold text-secondary opacity-50"><i
                     class="mdi mdi-cancel"></i>
                   Remove</button>
               </div>
             </div>
 
             <!-- SECTION for keeps that aren't in the current vault, will be shown on pages outside the active vault page -->
-            <div v-else>
-              <div v-if="account" class="row justify-content-between align-content-center">
+            <div v-else class="col-md-6">
+              <div v-if="account" class="justify-content-center align-items-center">
 
-                <form @submit.prevent="createVaultKeep()" class="">
-                  <select v-model="vkData.vaultId" class="form-select w-50">
+                <form @submit.prevent="createVaultKeep()" class="text-end">
+                  <select v-model="vkData.vaultId" class="form-select mb-2">
                     <option value="" selected>Keep this</option>
                     <option v-for="vault in myVaults" :key="vault.id" :value="vault.id" name="keep-to-vault"
                       id="keep-to-vault">{{
                         vault.name }}</option>
                   </select>
-                  <button type="submit" class="w-50 btn btn-primary">Keep</button>
+                  <button type="submit" class="btn btn-primary text-end">Keep</button>
                 </form>
               </div>
             </div>
-          </div>
 
 
-          <div class="col-md-6 d-flex flex-column justify-content-around h-100 align-items-center">
-            <div class="">
-              <RouterLink :to="{ name: 'Profile Page', params: { profileId: keep.creator.id } }">
-                <RoundProfilePhoto class="my-1" :profile="keep.creator" role="button" data-bs-toggle="modal"
-                  data-bs-target="#keep-details-modal" />
-              </RouterLink>
-              <p class="m-0">{{ keep.creator.name }}</p>
+            <div class="col-6 d-flex flex-column justify-content-around h-100 align-items-center">
+              <div class="">
+                <RouterLink :to="{ name: 'Profile Page', params: { profileId: keep.creator.id } }">
+                  <RoundProfilePhoto class="my-1" :profile="keep.creator" role="button" data-bs-toggle="modal"
+                    data-bs-target="#keep-details-modal" />
+                </RouterLink>
+                <p class="m-0">{{ keep.creator.name }}</p>
+              </div>
             </div>
 
           </div>

@@ -6,14 +6,16 @@ public class AccountController : ControllerBase
 {
   private readonly AccountService _accountService;
   private readonly VaultsService _vaultsService;
+  private readonly KeepsService _keepsService;
   private readonly Auth0Provider _auth0Provider;
 
-  public AccountController(AccountService accountService, Auth0Provider auth0Provider, VaultsService vaultsService)
+  public AccountController(AccountService accountService, Auth0Provider auth0Provider, VaultsService vaultsService, KeepsService keepsService)
   {
     _accountService = accountService;
     _accountService = accountService;
     _auth0Provider = auth0Provider;
     _vaultsService = vaultsService;
+    _keepsService = keepsService;
   }
 
   [HttpGet]
@@ -46,8 +48,25 @@ public class AccountController : ControllerBase
       return BadRequest(error.Message);
     }
   }
+
   [Authorize]
-  [HttpPut("{account}")]
+  [HttpGet("keeps")]
+  public async Task<ActionResult<List<Keep>>> GetMyKeeps()
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      List<Keep> myKeeps = _keepsService.GetMyKeeps(userInfo.Id);
+      return Ok(myKeeps);
+    }
+    catch (Exception error)
+    {
+      return BadRequest(error.Message);
+    }
+  }
+
+  [Authorize]
+  [HttpPut("account")]
   public async Task<ActionResult<Account>> UpdateAccount(string accountId, [FromBody] Account updateData)
   {
     try

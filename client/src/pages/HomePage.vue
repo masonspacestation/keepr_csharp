@@ -34,9 +34,10 @@ onMounted(() =>
     <KeepDetailsModal />
   </div> -->
 
-  <div class="container">
-    <div class="row">
-      <div v-for="keep in keeps" :key="keep.id" class="col-12 col-md-6 col-lg-4 py-3 px-4 masonry">
+  <div class="container w-75">
+    <div class="masonry my-3">
+      <div v-for="keep in keeps" :key="keep.id" class="mb-3">
+        <!-- <div v-for="keep in keeps" :key="keep.id" class="col-12 col-md-6 col-lg-4 py-3 px-4"> -->
         <KeepCard :keep="keep" />
 
       </div>
@@ -47,29 +48,29 @@ onMounted(() =>
 </template>
 
 <style scoped lang="scss">
-.home {
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
+// .home {
+//   display: grid;
+//   height: 80vh;
+//   place-content: center;
+//   text-align: center;
+//   user-select: none;
 
-  .home-card {
-    width: clamp(500px, 50vw, 100%);
+//   .home-card {
+//     width: clamp(500px, 50vw, 100%);
 
-    >img {
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
-  }
+//     >img {
+//       height: 200px;
+//       max-width: 200px;
+//       width: 100%;
+//       object-fit: contain;
+//       object-position: center;
+//     }
+//   }
 
-}
+// }
 
 .masonry {
-  columns: 300px;
-  column-gap: 1rem;
+  columns: 200px;
+  column-gap: 1em;
 }
 </style>

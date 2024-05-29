@@ -7,6 +7,7 @@ import { socketService } from './SocketService'
 import Pop from "../utils/Pop.js"
 import { vaultsService } from "./VaultsService.js"
 import { logger } from "../utils/Logger.js"
+import { keepsService } from "./KeepsService.js"
 
 
 export const AuthService = initialize({
@@ -24,6 +25,7 @@ AuthService.on(AUTH_EVENTS.AUTHENTICATED, async function() {
   AppState.identity = AuthService.identity
   await accountService.getAccount()
   socketService.authenticate(AuthService.bearer)
+  // NOTE if there is something you want to do once the user is authenticated, place that here
   // async function getMyVaults() {
     try {
       AppState.myVaults = null
@@ -31,15 +33,15 @@ AuthService.on(AUTH_EVENTS.AUTHENTICATED, async function() {
     } catch (error) {
       Pop.toast('Could not get your vaults', 'error')
       logger.error('Error getting your vaults', error)
-  
-    // }
   }
-  // try {
-  //   await vaultsService.getMyVaults()
-  // } catch (error) {
-  //   Pop.error(error)
-  // }
-  // NOTE if there is something you want to do once the user is authenticated, place that here
+    try {
+      AppState.myKeeps = null
+      await accountService.getMyKeeps()
+    } catch (error) {
+      Pop.toast('Could not get your keeps', 'error')
+      logger.error('Error getting your keeps', error)
+  }
+ 
 })
 
 async function refreshAuthToken(config) {
