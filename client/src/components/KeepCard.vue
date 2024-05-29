@@ -1,3 +1,4 @@
+<!-- eslint-disable no-console -->
 <script setup>
 import { computed, onMounted } from "vue";
 import { AppState } from "../AppState.js";
@@ -10,6 +11,7 @@ import { Modal } from "bootstrap";
 
 // const keep = computed(() => AppState.activeKeep)
 // const keeps = computed(() => AppState.keeps)
+const account = computed(() => AppState.account)
 const props = defineProps({ keep: { type: Keep, required: true } })
 const bgStyle = computed(() => `url(${props.keep.img})`)
 
@@ -26,7 +28,21 @@ async function getKeepById(keepId) {
   }
 }
 
+async function destroyKeep(keepId) {
+  try {
+    const wantsToDelete = await Pop.confirm('Are you sure you want to delete this excellent Keep?')
+    if (wantsToDelete != true) { return }
 
+    await keepsService.destroyKeep(keepId)
+    console.log('Keep was destroyed: ', keepId);
+  } catch (error) {
+    Pop.toast(`Could not delete keep with ID: ${keepId}`)
+    logger.error(`Could not delete keep with ID: ${keepId}`, error)
+
+  }
+}
+
+// NOTE this card is embedded in profile page, account page, and home page
 
 </script>
 
@@ -37,6 +53,8 @@ async function getKeepById(keepId) {
     <!-- role="button" data-bs-toggle="modal"
     data-bs-target="#keep-details-modal"  -->
     <div class="row justify-content-between align-items-center p-3">
+      <div class="delete-button-row"><i v-if="keep.creatorId == account?.id" @click="destroyKeep(keep.id)" role="button"
+          class="delete-button mdi mdi-close"></i></div>
       <img class="bg-size" :src="keep.img" :alt="`Image of ${keep.name}`">
       <div class="col-9">
         <h4 class="my-0 text-light">{{ keep.name }}</h4>
@@ -62,6 +80,29 @@ img {
 
   .bg-size {
     visibility: hidden;
+  }
+
+  .delete-button {
+    display: none;
+  }
+}
+
+.keep-card:hover {
+  .delete-button {
+    background-color: rgb(202, 116, 116);
+    color: whitesmoke;
+    border-radius: 50%;
+    width: 25px;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .delete-button-row {
+    height: 25px;
   }
 }
 </style>

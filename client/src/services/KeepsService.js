@@ -6,6 +6,16 @@ import { api } from "./AxiosService.js";
 
 
 class KeepsService{
+  async destroyKeep(keepId) {
+    const myKeeps = AppState.myKeeps
+    const keepIndex = myKeeps.findIndex(keep => keep.id == keepId)
+    const response = await api.delete(`api/keeps/${keepId}`)
+    console.log('Destroying keep', response.data);
+    if(keepIndex == -1){
+      console.log('Keep not found - check findIndex function on delete');
+    }
+    myKeeps.splice(keepIndex, 1)
+  }
 
   async createKeep(keepData) {
     const response = await api.post('api/keeps', keepData)
