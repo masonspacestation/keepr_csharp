@@ -23,8 +23,8 @@ public class ProfilesController : ControllerBase
   {
     try
     {
-      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-      Profile profile = _profilesService.GetProfileById(profileId, userInfo?.Id);
+      // Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      Profile profile = _profilesService.GetProfileById(profileId);
       return Ok(profile);
     }
     catch (Exception exception)

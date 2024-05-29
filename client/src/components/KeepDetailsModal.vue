@@ -31,6 +31,7 @@ async function createVaultKeep() {
   try {
     await vaultKeepsService.createVaultKeep(vkData.value)
     Pop.toast('Kept new keep!', 'success')
+    resetForm()
     //  TODO increment vk count of keep
     // TODO change "add keep" form to a router link to the vault and a button to "unkeep" it
   } catch (error) {

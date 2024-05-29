@@ -81,6 +81,7 @@ onMounted(() => {
           <RouterLink :to="{ name: 'Profile Page', params: { profileId: activeVault.creator.id } }">
             <p class="text-dark">{{ activeVault.creator?.name }}</p>
           </RouterLink>
+          <i v-if="activeVault.isPrivate == true" class="mdi mdi-lock-outline text-info"></i>
         </div>
         <div v-if="activeVault.creator.id == account?.id" class="text-end btn-group dropstart">
           <i role="button" class="mdi mdi-dots-horizontal fs-3" data-bs-toggle="dropdown" data-bs-auto-close="outside"

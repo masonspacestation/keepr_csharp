@@ -10,10 +10,10 @@ const router = useRouter()
 
 
 const vaultData = ref({
-  name: 'test',
-  description: 'ing',
+  name: '',
+  description: '',
   isPrivate: false,
-  img: 'https://images.unsplash.com/photo-1518349619113-03114f06ac3a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dGVzdGluZ3xlbnwwfHwwfHx8MA%3D%3D',
+  img: '',
 })
 
 function resetForm() {

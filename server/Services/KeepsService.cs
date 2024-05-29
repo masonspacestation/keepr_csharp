@@ -88,7 +88,7 @@ public class KeepsService
 
   internal List<Keep> GetProfileKeeps(string profileId, string userId)
   {
-    _profilesService.GetProfileById(profileId, userId);
+    _profilesService.GetProfileById(profileId);
     List<Keep> profileKeeps = _repository.GetProfileKeeps(profileId);
     return profileKeeps;
   }
