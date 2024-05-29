@@ -10,6 +10,11 @@ CREATE TABLE IF NOT EXISTS accounts (
 
 SELECT * FROM accounts;
 
+ALTER TABLE accounts DROP COLUMN coverImg;
+
+ALTER TABLE accounts
+ADD coverImg VARCHAR(255) NOT NULL default 'https://images.unsplash.com/photo-1528722828814-77b9b83aafb2?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Njh8fGFzdHJvfGVufDB8fDB8fHww';
+
 -- #SECTION 🖼️ keeps -
 CREATE TABLE keeps (
     id INT NOT NULL AUTO_INCREMENT primary key,
