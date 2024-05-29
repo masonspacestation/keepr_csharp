@@ -3,17 +3,11 @@
 import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
 import Pop from "../utils/Pop.js";
-import { logger } from "../utils/Logger.js";
-import { accountService } from "../services/AccountService.js";
 import RoundProfilePhoto from "../components/RoundProfilePhoto.vue";
-import KeepWall from "../components/KeepWall.vue";
 import KeepCard from "../components/KeepCard.vue";
-import { Modal } from "bootstrap";
 import ModalWrapper from "../components/ModalWrapper.vue";
 import { useRoute } from "vue-router";
 import { profilesService } from "../services/ProfilesService.js";
-import { keepsService } from "../services/KeepsService.js";
-
 
 
 const route = useRoute()
@@ -48,18 +42,6 @@ async function getProfileKeeps() {
   } catch (error) {
     Pop.toast("Could not get profile's keeps", 'error')
     console.log(`Could not get keeps for profile id: ${route.params.profileId}`)
-  }
-}
-
-// TODO change so that this doesn't need to be on each place that has the keep card component
-async function getKeepById(keepId) {
-  try {
-    AppState.activeKeep = null
-    console.log(`Setting ${keepId} to active`);
-    await keepsService.getKeepById(keepId);
-  } catch (error) {
-    Pop.toast(`Could not get keep with ID: ${keepId}`)
-    logger.error(`Could not get keep with ID: ${keepId}`, error)
   }
 }
 

@@ -34,11 +34,11 @@ async function logout() {
                 Manage Account
               </div>
             </router-link>
-            <!-- <router-link :to="{ name: 'Profile Page' }">
+            <router-link :to="{ name: 'Profile Page', params: { profileId: account.id } }">
               <div class="list-group-item dropdown-item list-group-item-action">
                 Profile
               </div>
-            </router-link> -->
+            </router-link>
             <div class="list-group-item dropdown-item list-group-item-action text-danger selectable" @click="logout">
               <i class="mdi mdi-logout"></i>
               logout
