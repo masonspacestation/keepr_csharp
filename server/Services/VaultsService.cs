@@ -19,6 +19,12 @@ public class VaultsService
     return newVault;
   }
 
+  private List<Vault> GetAllVaults(string userId)
+  {
+    List<Vault> vaults = _repository.GetAll();
+    return vaults.FindAll(vault => vault.IsPrivate == false || vault.CreatorId == userId);
+  }
+
   private Vault GetVaultById(int vaultId)
   {
     Vault vault = _repository.GetById(vaultId);
@@ -35,7 +41,7 @@ public class VaultsService
     Vault vault = GetVaultById(vaultId);
     if (vault.IsPrivate == true && vault.CreatorId != userId)
     {
-      throw new Exception($"Invalid id: {vaultId} 🦹");
+      throw new Exception($"Unauthorized to access: {vaultId} 🦹");
     }
     return vault;
   }
@@ -73,7 +79,8 @@ public class VaultsService
   internal List<Vault> GetProfileVaults(string profileId, string userId)
   {
     _profilesService.GetProfileById(profileId, userId);
+
     List<Vault> vaults = _repository.GetProfileVaults(profileId);
-    return vaults;
+    return vaults.FindAll(vault => vault.IsPrivate == false || vault.CreatorId == userId);
   }
 }

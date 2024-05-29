@@ -41,7 +41,7 @@ public class ProfilesController : ControllerBase
     try
     {
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-      List<Vault> vaults = _vaultsService.GetProfileVaults(profileId, userInfo.Id);
+      List<Vault> vaults = _vaultsService.GetProfileVaults(profileId, userInfo?.Id);
       return Ok(vaults);
     }
     catch (Exception exception)
@@ -56,7 +56,7 @@ public class ProfilesController : ControllerBase
     try
     {
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-      List<Keep> keeps = _keepsService.GetProfileKeeps(profileId, userInfo.Id);
+      List<Keep> keeps = _keepsService.GetProfileKeeps(profileId, userInfo?.Id);
       return Ok(keeps);
     }
     catch (Exception exception)

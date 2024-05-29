@@ -29,7 +29,7 @@ public class VaultKeepsService
     return vk;
   }
 
-  internal string DestroyVault(int vkId, string userId)
+  internal string DestroyVaultKeep(int vkId, string userId)
   {
     VaultKeep vk = GetVaultKeepById(vkId);
     Vault vault = _vaultsService.GetVaultById(vk.VaultId, userId);
