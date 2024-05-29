@@ -53,8 +53,8 @@ async function destroyKeep(keepId) {
     <!-- role="button" data-bs-toggle="modal"
     data-bs-target="#keep-details-modal"  -->
     <div class="row justify-content-between align-items-center p-3">
-      <div class="delete-button-row"><i v-if="keep.creatorId == account?.id" @click="destroyKeep(keep.id)" role="button"
-          class="delete-button mdi mdi-close"></i></div>
+      <div class="delete-button-row"><i v-if="keep.creatorId == account?.id" @click.stop="destroyKeep(keep.id)"
+          role="button" class="delete-button mdi mdi-close"></i></div>
       <img class="bg-size" :src="keep.img" :alt="`Image of ${keep.name}`">
       <div class="col-9">
         <h4 class="my-0 text-light">{{ keep.name }}</h4>
@@ -99,10 +99,7 @@ img {
     align-items: center;
     margin-top: 0px;
     margin-bottom: 0px;
-  }
-
-  .delete-button-row {
-    height: 25px;
+    position: absolute;
   }
 }
 </style>
