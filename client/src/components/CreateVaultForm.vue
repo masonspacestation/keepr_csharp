@@ -28,11 +28,11 @@ function resetForm() {
 async function createVault() {
   try {
     const newVault = await vaultsService.createVault(vaultData.value)
-    resetForm()
     Modal.getOrCreateInstance('#create-vault-modal').hide()
-    Pop.toast('New vault created!', 'success')
     router.push({ name: 'Active Vault', params: { vaultId: newVault.id } })
-    // console.log('New Vault Created!', newVault);
+    Pop.toast('New vault created!', 'success')
+    resetForm()
+
   } catch (error) {
     Pop.toast('Could not create vault', 'error')
     logger.error('Could not create vault', error)
@@ -82,7 +82,8 @@ async function createVault() {
                 <!-- isPrivate -->
                 <div class="row p-4">
                   <div class="form-check form-switch w-auto mb-3 mb-lg-0">
-                    <input v-model="vaultData.isPrivate" class="form-check-input" type="checkbox" id="isPrivate">
+                    <input v-model="vaultData.isPrivate" class="form-check-input" type="checkbox" id="isPrivate"
+                      title="Switch to make your new vault private.">
                     <label class="form-check-label" for="isPrivate">Make vault private?</label>
                   </div>
                 </div>

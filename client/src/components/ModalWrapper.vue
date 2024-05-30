@@ -13,7 +13,7 @@ defineProps({ modalId: String })
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl mx-4 mx-sm-auto" role="document">
       <div class="modal-content">
 
-        <div class="body">
+        <div class="modal-body p-0">
           <slot>
 
             Swap out modal content

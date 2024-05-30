@@ -16,37 +16,20 @@ const myVaults = computed(() => AppState.myVaults)
 const keeps = computed(() => AppState.myKeeps)
 const bgStyle = computed(() => `url(${account.value?.coverImg})`)
 
-// async function getMyVaults() {
-//   try {
-//     AppState.myVaults = null
-//     await accountService.getMyVaults()
-//   } catch (error) {
-//     Pop.toast('Could not get your vaults', 'error')
-//     logger.error('Error getting your vaults', error)
-
-//   }
-// }
-
-
-// onMounted(() =>
-//   getMyVaults()
-// )
-
 </script>
 
 <template>
   <div class="about text-center">
-    <div class="container w-75" v-if="account">
-
+    <div class="container w-md-75" v-if="account">
 
       <div class="my-3">
-        <div class="hero-section rounded rounded-3 shadow mt-5 w-75 mx-auto d-flex justify-content-end align-items-end">
+        <div class="hero-section rounded rounded-3 shadow mt-5 w-md-75 mx-auto row justify-content-end align-items-end">
 
           <button class="edit-button btn btn-outline-white btn-link w-auto me-3 mb-3"><i class="mdi mdi-pencil"
               data-bs-toggle="modal" data-bs-target="#update-account-modal" data-bs-dismiss="modal"
               title="Edit your account details"></i></button>
         </div>
-        <div class="id-module d-block">
+        <div class="id-module ">
           <RoundProfilePhotoLarge :profile="account" class="mb-3 mx-auto" />
           <h3>{{ account.name }}</h3>
           <p>{{ myVaults?.length }} Vaults | {{ keeps?.length }} Keeps</p>
@@ -106,7 +89,15 @@ img {
 
 
 .masonry {
-  columns: 200px;
   column-gap: 1em;
+
+  @media (min-width: 768px) {
+    columns: 250px;
+    // column-count: 2;
+  }
+
+  @media (max-width: 768px) {
+    column-count: 2;
+  }
 }
 </style>

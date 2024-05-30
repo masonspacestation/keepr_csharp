@@ -20,10 +20,9 @@ const keeps = computed(() => AppState.activeVaultKeeps)
 async function getVaultById() {
   try {
     AppState.activeVaultKeeps = null
-    const vaultId = await vaultsService.setActiveVault(route.params.vaultId);
-    console.log('vault id', vaultId);
-    getKeepsByVaultId()
-    // getKeepsByVaultId(vaultId)
+    const vault = await vaultsService.setActiveVault(route.params.vaultId);
+    console.log('vault id', vault);
+    getKeepsByVaultId(vault.id)
   } catch (error) {
     if (error.response.status !== 200) {
       Pop.toast(`Unauthorized to access this vault`)
@@ -36,9 +35,9 @@ async function getVaultById() {
   }
 }
 
-async function getKeepsByVaultId() {
+async function getKeepsByVaultId(vaultId) {
   try {
-    await vaultKeepsService.getKeepsByVaultId(route.params.vaultId)
+    await vaultKeepsService.getKeepsByVaultId(vaultId)
   } catch (error) {
     Pop.toast(`Could not retrieve keeps for vault: ${activeVault.value.name}`, 'error')
     logger.error(`Could not retrieve keeps for vault: ${activeVault.value.name}`, error)
@@ -50,7 +49,8 @@ async function destroyVault(vaultId) {
     const wantsToDestroy = await Pop.confirm(`Are you sure you want to delete your ${activeVault.value.name} vault? This cannot be undone.`)
     if (!wantsToDestroy) return
     await vaultsService.destroyVault(vaultId)
-    router.push({ name: 'Home' })
+    router.push({ name: 'Profile Page', params: { profileId: activeVault.value.creatorId } })
+    Pop.toast("Vault was deleted!", 'success')
   } catch (error) {
     Pop.error('Could not destroy vault')
     logger.error('Unable to destroy vault', error)
@@ -65,7 +65,6 @@ async function updateVault() {
 
 onMounted(() => {
   getVaultById()
-  // getKeepsByVaultId(activeVault.value?.id)
 }
 )
 
@@ -73,17 +72,17 @@ onMounted(() => {
 
 <template>
   <div class="about text-center">
-    <div class="container w-75" v-if="activeVault">
+    <div class="container w-md-75" v-if="activeVault">
 
       <div class="my-3">
-        <div class="hero-section rounded rounded-3 shadow mx-auto my-5 w-75">
+        <div
+          class="hero-section text-center rounded rounded-3 shadow mt-5 w-md-75 mx-auto row justify-content-center align-content-end">
 
-          <!-- <img class="rounded" :src="activeVault.img" alt="" /> -->
-          <h2 class="text-light fs-1">{{ activeVault.name }}</h2>
+          <h2 class="text-light fs-1 mb-1">{{ activeVault.name }}</h2>
           <RouterLink :to="{ name: 'Profile Page', params: { profileId: activeVault.creator.id } }">
-            <p class="text-dark">{{ activeVault.creator?.name }}</p>
+            <p class="text-light">{{ activeVault.creator.name }}</p>
           </RouterLink>
-          <i v-if="activeVault.isPrivate == true" class="mdi mdi-lock-outline text-info"></i>
+          <i v-if="activeVault.isPrivate == true" class="mdi mdi-lock-outline text-white fs-5 p-3 text-end"></i>
         </div>
         <div v-if="activeVault.creator.id == account?.id" class="text-end btn-group dropstart">
           <i role="button" class="mdi mdi-dots-horizontal fs-3" data-bs-toggle="dropdown" data-bs-auto-close="outside"
@@ -99,23 +98,21 @@ onMounted(() => {
         </div>
       </div>
       <div v-if="keeps" class="row">
-        <p class="rounded rounded-pill bg-info">{{ keeps.length }} Keeps</p>
+        <p class="rounded rounded-pill bg-info w-auto m-auto px-4">{{ keeps.length }} Keeps</p>
 
         <!-- TODO set a v-if to say that their keeps will appear here once they create some -->
-
-        <h3>Keeps</h3>
-
-        <div v-for="keep in keeps" :key="keep.id" class="col-12 col-md-6 col-lg-4 py-3 px-4 masonry">
-          <KeepCard :keep="keep" />
+        <h3 class="mt-5 fs-2">Keeps</h3>
+        <div class="masonry my-3">
+          <div v-for="keep in keeps" :key="keep.id" class="mb-3">
+            <KeepCard :keep="keep" />
+          </div>
         </div>
       </div>
     </div>
 
     <div v-else>
       <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
-
     </div>
-
   </div>
 </template>
 
@@ -123,8 +120,8 @@ onMounted(() => {
 .hero-section {
   height: 20dvh;
   // background-color: red;
-  background-image: v-bind(bgStyle), linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4));
-  ;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), v-bind(bgStyle);
+  // background-color: black;
   // background-image: url(src/assets/img/calum-lewis-vA1L1jRTM70-unsplash.jpg);
   background-position: center;
   background-size: cover;
@@ -135,7 +132,15 @@ onMounted(() => {
 // }
 
 .masonry {
-  columns: 300px;
-  column-gap: 1rem;
+  column-gap: 1em;
+
+  @media (min-width: 768px) {
+    columns: 250px;
+    // column-count: 2;
+  }
+
+  @media (max-width: 768px) {
+    column-count: 2;
+  }
 }
 </style>

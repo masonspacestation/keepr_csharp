@@ -102,8 +102,9 @@ async function destroyVaultKeep() {
               <div v-if="account" class="container-fluid">
 
                 <!-- <form @submit.prevent="createVaultKeep()" class="text-end form-floating col-9 p-0"> -->
-                <form @submit.prevent="createVaultKeep()" class="row justify-content-between align-items-center p-0">
-                  <div class="col-9">
+                <form @submit.prevent="createVaultKeep()"
+                  class="row justify-content-between align-items-center mb-3 mb-lg-0 p-0">
+                  <div class="col-12 col-lg-9">
 
                     <select v-model="vkData.vaultId" class="form-select mx-0" id="my-vaults-dropdown">
                       <!-- <option selected>Keep this</option> -->
@@ -113,7 +114,7 @@ async function destroyVaultKeep() {
                       <label for="my-vaults-dropdown">Add to Vault</label>
                     </select>
                   </div>
-                  <div class="col-2">
+                  <div class="col-12 col-lg-2">
 
                     <button type="submit" class="btn btn-primary text-end"><i class="mdi mdi-plus"
                         :title="`Add keep to one of your vaults.`"></i></button>
@@ -122,20 +123,10 @@ async function destroyVaultKeep() {
               </div>
             </div>
 
-            <!-- <div class="form-floating">
-              <select class="form-select" id="floatingSelectGrid">
-                <option selected>Open this select menu</option>
-                <option v-for="vault in myVaults" :key="vault.id" :value="vault.id" name="keep-to-vault"
-                  id="keep-to-vault">{{
-                    vault.name }}</option>
-              </select>
-              <label for="floatingSelectGrid">Works with selects</label>
-            </div> -->
-
-            <div class="col-6 m-0 p-0 d-flex flex-column justify-content-around h-100 align-items-center">
+            <div class="col-12 col-lg-6 m-0 p-0 d-flex flex-column justify-content-around h-100 align-items-center">
               <div class="">
                 <RouterLink :to="{ name: 'Profile Page', params: { profileId: keep.creator.id } }">
-                  <RoundProfilePhoto class="my-1" :profile="keep.creator" role="button" data-bs-toggle="modal"
+                  <RoundProfilePhoto class="my-1 mx-auto" :profile="keep.creator" role="button" data-bs-toggle="modal"
                     data-bs-target="#keep-details-modal" />
                 </RouterLink>
                 <p class="m-0">{{ keep.creator.name }}</p>

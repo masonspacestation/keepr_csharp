@@ -34,7 +34,7 @@ onMounted(() =>
     <KeepDetailsModal />
   </div> -->
 
-  <div class="container w-75">
+  <div class="container w-lg-75">
     <div class="masonry my-3">
       <!-- <div v-for="keep in keeps" :key="keep.id" class="col-12 col-md-6 col-lg-4 py-3 px-4"> -->
       <KeepCard class="keep-card mb-3" :keep="keep" v-for="keep in keeps" :key="keep.id" />
@@ -48,8 +48,16 @@ onMounted(() =>
 
 <style scoped lang="scss">
 .masonry {
-  columns: 200px;
   column-gap: 1em;
+
+  @media (min-width: 768px) {
+    columns: 250px;
+    // column-count: 2;
+  }
+
+  @media (max-width: 768px) {
+    column-count: 2;
+  }
 
   // .keep-card {
   //   min-height: 300px;

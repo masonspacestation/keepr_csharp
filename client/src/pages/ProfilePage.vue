@@ -59,10 +59,10 @@ onMounted(() => {
 
 <template>
   <div class="about text-center">
-    <div class="container w-75" v-if="profile">
+    <div class="container w-md-75" v-if="profile">
 
       <div class="my-3">
-        <div class="hero-section rounded rounded-3 shadow mt-5 w-75 mx-auto d-flex justify-content-end align-items-end">
+        <div class="hero-section rounded rounded-3 shadow mt-5 w-md-75 mx-auto row justify-content-end align-items-end">
 
           <button v-if="profile?.id == account?.id"
             class="edit-button btn btn-outline-white btn-link w-auto me-3 mb-3"><i class="mdi mdi-pencil"
@@ -97,8 +97,8 @@ onMounted(() => {
           <KeepCard :keep="keep" />
         </div>
       </div>
-
     </div>
+
     <div v-else>
       <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
     </div>
@@ -119,7 +119,15 @@ img {
 }
 
 .masonry {
-  columns: 200px;
   column-gap: 1em;
+
+  @media (min-width: 768px) {
+    columns: 250px;
+    // column-count: 2;
+  }
+
+  @media (max-width: 768px) {
+    column-count: 2;
+  }
 }
 </style>

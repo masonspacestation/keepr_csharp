@@ -25,9 +25,9 @@ function resetForm() {
 async function createKeep() {
   try {
     const newKeep = await keepsService.createKeep(keepData.value)
-    resetForm()
     Modal.getOrCreateInstance('#create-keep-modal').hide()
     Pop.toast('New keep created!', 'success')
+    resetForm()
     // TODO consider making this convert the modal to the keep details modal
     // router.push({ name: 'Active Keep', params: { keepId: newKeep.id } })
   } catch (error) {
