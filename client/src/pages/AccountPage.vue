@@ -51,17 +51,18 @@ const bgStyle = computed(() => `url(${account.value?.coverImg})`)
           <p>{{ myVaults?.length }} Vaults | {{ keeps?.length }} Keeps</p>
         </div>
       </div>
+      <!-- FIXME the sizing of the dropdown container gets narrow any time this is directly inside a div. The buttons either get narrow and the text inside them stacks, or the buttons stack on each other. I'd like to change this to a fab if I have time at the end -->
+      <AddItemFloatingButton />
 
       <div class="row justify-content-end">
         <!-- <ProfileOwnerButtons :profile="account" /> -->
-        <!-- <AddItemFloatingButton /> -->
       </div>
 
       <!-- <AccountForm /> -->
       <!-- <div v-if="profile?.id == account?.id" class="row"> -->
 
       <!-- TODO set a v-if to say that their vaults will appear here once they create some -->
-      <h3>Vaults</h3>
+      <h3 class="mt-5 fs-2">Vaults</h3>
       <div class="row">
         <div v-for="vault in myVaults" :key="vault.id" class="col-6 col-md-3">
           <VaultCard :vault="vault" />
@@ -69,7 +70,7 @@ const bgStyle = computed(() => `url(${account.value?.coverImg})`)
       </div>
 
       <!-- TODO set a v-if to say that their keeps will appear here once they create some -->
-      <h3>Keeps</h3>
+      <h3 class="mt-5 fs-2">Keeps</h3>
       <div class="masonry my-3">
         <div v-for="keep in keeps" :key="keep?.id" class="mb-3">
           <KeepCard :keep="keep" />
@@ -88,7 +89,11 @@ img {
   max-width: 100px;
 }
 
-
+.fab {
+  position: absolute;
+  bottom: 50px;
+  right: 1em;
+}
 
 .hero-section {
   height: 20dvh;

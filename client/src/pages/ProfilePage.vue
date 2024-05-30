@@ -76,14 +76,13 @@ onMounted(() => {
       </div>
 
       <div v-if="profile.id == account?.id" class="row justify-content-end">
-        <button class="btn btn-outline-secondary opacity-50 w-auto me-3 mb-3"><i class="mdi mdi-pencil"
-            data-bs-toggle="modal" data-bs-target="#update-account-modal" data-bs-dismiss="modal"></i></button>
+
         <AddItemFloatingButton />
       </div>
 
 
       <!-- TODO set a v-if to say that their vaults will appear here once they create some -->
-      <h3>Vaults</h3>
+      <h3 class="mt-5 fs-2">Vaults</h3>
       <div class="row">
         <div v-for="vault in vaults" :key="vault.id" class="col-6 col-md-3">
           <VaultCard :vault="vault" />
@@ -91,7 +90,7 @@ onMounted(() => {
       </div>
 
       <!-- TODO set a v-if to say that their keeps will appear here once they create some -->
-      <h3>Keeps</h3>
+      <h3 class="mt-5 fs-2">Keeps</h3>
       <div class="masonry my-3">
         <div v-for="keep in keeps" :key="keep?.id" class="mb-3">
           <KeepCard :keep="keep" />
