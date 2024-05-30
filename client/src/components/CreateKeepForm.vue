@@ -43,7 +43,7 @@ async function createKeep() {
     <div class="container">
 
       <div class="row">
-        <div class="col-12 col-md-9">
+        <div class="col-12 col-lg-9">
 
           <h3 class="p-3 mb-0">
             Create a Keep!
@@ -51,7 +51,7 @@ async function createKeep() {
           <div class="container">
 
             <div class="row px-2 px-0">
-              <div class="col-12 col-lg-6 pt-3 pe-lg-3 pt-lg-0 d-flex flex-column justify-content-start">
+              <div class="col-12 col-lg-6 pt-3 pe-lg-3 pt-lg-0 d-flex flex-column justify-content-center">
 
                 <!-- name -->
                 <!-- <div class="row form-floating p-1">
@@ -101,7 +101,8 @@ async function createKeep() {
             </div>
           </div>
         </div>
-        <div class="col-12 col-lg-3 px-2 p-lg-0 rounded rounded-2 mb-3 m-lg-0">
+
+        <div class="col-12 col-lg-3 p-0 p-lg-0 rounded rounded-2  m-lg-0">
           <img :src="keepData.img" alt="" class="img-preview" :title="`Preview of image for ${keepData.name}`">
         </div>
       </div>

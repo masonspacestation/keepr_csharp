@@ -74,7 +74,7 @@ async function destroyVaultKeep() {
     <div class="row p-0">
       <div class="col-12 col-md-6 p-0">
         <!-- hiya 👋 -->
-        <img :src="keep.img" alt="" class="m-0" :title="`Picture of ${keep.name}`">
+        <img :src="keep.img" alt="" class="m-0 p-0" :title="`Picture of ${keep.name}`">
       </div>
 
       <div class="col-12 col-md-6 p-4 d-flex flex-column justify-content-between align-items-center">
@@ -91,7 +91,7 @@ async function destroyVaultKeep() {
 
         <div class="container-fluid p-0">
           <div class="row w-100 p-0 m-0 align-items-center">
-            <div v-if="vaultKeeps.some(vk => vk.id == keep.id)" class="col-md-6 text-center">
+            <div v-if="vaultKeeps?.some(vk => vk.id == keep.id)" class="col-md-6 text-center">
               <div v-if="account" class="row justify-content-between align-content-center">
                 <button @click="destroyVaultKeep()" class="btn btn-link fw-bold text-secondary opacity-50"><i
                     class="mdi mdi-cancel" :title="`Remove keep from this vault`"></i>

@@ -10,7 +10,8 @@ defineProps({ modalId: String })
 <template>
   <div class="modal fade" :id="modalId" tabindex="-1" data-bs-keyboard="false" role="dialog"
     aria-labelledby="modalTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl mx-4 mx-sm-auto" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl mx-4 mx-sm-auto p-0"
+      role="document">
       <div class="modal-content">
 
         <div class="modal-body p-0">

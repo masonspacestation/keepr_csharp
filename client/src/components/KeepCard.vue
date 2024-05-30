@@ -49,7 +49,7 @@ async function destroyKeep(keepId) {
 
 
 <template>
-  <!-- FIXME the p tag is getting the background set, and the image is above that, so it looks like 2 images stacked on top of each other. If I take away the data-bound image, and just rely in the background property for the image, the card shrinks to the height of the p tag — hacky way it's working is that the image is there, but set to hidden -->
+
   <div class="container mb-4 keep-card rounded rounded-2 shadow" @click="getKeepById(keep.id)"
     :title="`Card for keep ${keep.name}`">
     <!-- role="button" data-bs-toggle="modal"
