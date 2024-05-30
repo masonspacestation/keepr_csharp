@@ -21,8 +21,10 @@ async function getVaultById() {
   try {
     AppState.activeVaultKeeps = null
     const vault = await vaultsService.setActiveVault(route.params.vaultId);
-    console.log('vault id', vault);
+    console.log('found vault', vault);
+    console.log('looking now')
     getKeepsByVaultId(vault.id)
+    console.log('done now')
   } catch (error) {
     if (error.response.status !== 200) {
       Pop.toast(`Unauthorized to access this vault`)
@@ -37,7 +39,9 @@ async function getVaultById() {
 
 async function getKeepsByVaultId(vaultId) {
   try {
+    console.log('1');
     await vaultKeepsService.getKeepsByVaultId(vaultId)
+    console.log('2');
   } catch (error) {
     Pop.toast(`Could not retrieve keeps for vault: ${activeVault.value.name}`, 'error')
     logger.error(`Could not retrieve keeps for vault: ${activeVault.value.name}`, error)

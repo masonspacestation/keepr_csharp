@@ -34,7 +34,7 @@ const bgStyle = computed(() => `url(${props.vault.img})`)
         <!-- <img :src="vault.img" alt=""> -->
         <h4 class="my-0 text-light">{{ vault.name }}</h4>
 
-        <i v-if="vault.isPrivate == true" class="mdi mdi-lock-outline text-info"></i>
+        <i v-if="vault.isPrivate == true" class="mdi mdi-lock-outline text-white"></i>
 
       </div>
     </div>

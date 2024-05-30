@@ -18,7 +18,7 @@ async function getProfileById(profileId) {
 
 <template>
   <div class="d-flex justify-content-center profile-pic shadow">
-    <img @click="getProfileById(profile.id)" class="" :src="profile?.picture"
+    <img @click="getProfileById(profile.id)" role="button" class="" :src="profile?.picture"
       :alt="`Profile picture for ${profile.name}`" :title="`Profile picture for ${profile.name}`">
   </div>
 </template>

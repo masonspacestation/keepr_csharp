@@ -16,7 +16,9 @@ const account = computed(() => AppState.account)
 const myVaults = computed(() => AppState.myVaults)
 const vaultKeeps = computed(() => AppState.activeVaultKeeps)
 
+
 const vkId = computed(() => AppState.activeVaultKeeps.find((vk) => vk.id == keep.value.id)?.vaultKeepId)
+
 
 const vkData = ref({
   vaultId: 0,
