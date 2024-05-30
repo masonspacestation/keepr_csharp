@@ -43,10 +43,11 @@ const bgStyle = computed(() => `url(${account.value?.coverImg})`)
         <div class="hero-section rounded rounded-3 shadow mt-5 w-75 mx-auto d-flex justify-content-end align-items-end">
 
           <button class="edit-button btn btn-outline-white btn-link w-auto me-3 mb-3"><i class="mdi mdi-pencil"
-              data-bs-toggle="modal" data-bs-target="#update-account-modal" data-bs-dismiss="modal"></i></button>
+              data-bs-toggle="modal" data-bs-target="#update-account-modal" data-bs-dismiss="modal"
+              title="Edit your account details"></i></button>
         </div>
         <div class="id-module d-block">
-          <RoundProfilePhotoLarge :profile="account" class="mb-3" />
+          <RoundProfilePhotoLarge :profile="account" class="mb-3 mx-auto" />
           <h3>{{ account.name }}</h3>
           <p>{{ myVaults?.length }} Vaults | {{ keeps?.length }} Keeps</p>
         </div>

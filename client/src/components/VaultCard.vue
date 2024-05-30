@@ -29,7 +29,7 @@ const bgStyle = computed(() => `url(${props.vault.img})`)
 
 <template>
   <RouterLink :to="{ name: 'Active Vault', params: { vaultId: vault.id } }" :vault="vault">
-    <div class="container mb-4 vault-card rounded rounded-2 shadow">
+    <div class="container mb-4 vault-card rounded rounded-2 shadow" :title="`Card for vault ${vault.name}`">
       <div class="row h-100 justify-content-center align-items-center p-3">
         <!-- <img :src="vault.img" alt=""> -->
         <h4 class="my-0 text-light">{{ vault.name }}</h4>

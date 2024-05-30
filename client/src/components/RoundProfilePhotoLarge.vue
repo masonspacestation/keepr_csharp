@@ -17,8 +17,8 @@ async function getProfileById(profileId) {
 
 
 <template>
-  <div class="d-flex justify-content-center">
-    <img @click="getProfileById(profile.id)" class="profile-pic shadow" :src="profile?.picture"
+  <div class="d-flex justify-content-center profile-pic shadow">
+    <img @click="getProfileById(profile.id)" class="" :src="profile?.picture"
       :alt="`Profile picture for ${profile.name}`" :title="`Profile picture for ${profile.name}`">
   </div>
 </template>
@@ -29,5 +29,12 @@ async function getProfileById(profileId) {
   height: 10vh;
   aspect-ratio: 1/1;
   border-radius: 50%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
 }
 </style>

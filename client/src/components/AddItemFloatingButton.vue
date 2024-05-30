@@ -8,46 +8,19 @@
 
     <div class="dropdown container">
       <button type="button" class="btn btn-primary dropdown-toggle fs-6" data-bs-toggle="dropdown" aria-expanded="false"
-        data-bs-auto-close="outside">
+        data-bs-auto-close="outside" title="Create a new vault or keep">
         Create
       </button>
       <ul class="dropdown-menu dropdown-menu-end row justify-contents-between align-items-center"
         aria-labelledby="dropdownMenuButton1">
         <div class=" col-6 p-2 d-inline"> <button class="btn btn-primary" data-bs-toggle="modal"
-            data-bs-target="#create-vault-modal">Add Vault</button></div>
+            data-bs-target="#create-vault-modal" title="Create a new vault">Add Vault</button></div>
         <div class=" col-6 p-2 d-inline"> <button class="btn btn-outline-primary" data-bs-toggle="modal"
-            data-bs-target="#create-keep-modal">Add Keep</button></div>
+            data-bs-target="#create-keep-modal" title="Create a new keep">Add Keep</button></div>
       </ul>
     </div>
 
   </section>
-
-  <!-- <div class="container">
-
-    <div class="row justify-content-end align-items-center">
-      <div class="col-1 text-end">
-        <button class="btn btn-outline-secondary opacity-50"><i class="mdi mdi-pencil" data-bs-toggle="modal"
-            data-bs-target="#update-account-modal" data-bs-dismiss="modal"></i>
-        </button>
-      </div>
-      <div class="col-1">
-        <div class="dropdown">
-          <button type="button" class="d-inline btn btn-primary dropdown-toggle fs-6" data-bs-toggle="dropdown"
-            aria-expanded="false" data-bs-auto-close="outside"><i class="mdi mdi-plus fw-bold"></i>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end container justify-contents-between align-items-center"
-            aria-labelledby="dropdownMenuButton1">
-            <div class="row">
-              <div class=" col-6 p-2 d-inline"> <button class="btn btn-primary" data-bs-toggle="modal"
-                  data-bs-target="#create-vault-modal">Add Vault</button></div>
-              <div class=" col-6 p-2 d-inline"> <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                  data-bs-target="#create-keep-modal">Add Keep</button></div>
-            </div>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div> -->
 
 </template>
 

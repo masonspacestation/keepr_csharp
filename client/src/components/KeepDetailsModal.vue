@@ -72,7 +72,7 @@ async function destroyVaultKeep() {
     <div class="row p-0">
       <div class="col-12 col-md-6 p-0">
         <!-- hiya 👋 -->
-        <img :src="keep.img" alt="" class="">
+        <img :src="keep.img" alt="" class="m-0" :title="`Picture of ${keep.name}`">
       </div>
 
       <div class="col-12 col-md-6 p-4 d-flex flex-column justify-content-between align-items-center">
@@ -92,14 +92,14 @@ async function destroyVaultKeep() {
             <div v-if="vaultKeeps.some(vk => vk.id == keep.id)" class="col-md-6 text-center">
               <div v-if="account" class="row justify-content-between align-content-center">
                 <button @click="destroyVaultKeep()" class="btn btn-link fw-bold text-secondary opacity-50"><i
-                    class="mdi mdi-cancel"></i>
+                    class="mdi mdi-cancel" :title="`Remove keep from this vault`"></i>
                   Remove</button>
               </div>
             </div>
 
             <!-- SECTION for keeps that aren't in the current vault, will be shown on pages outside the active vault page -->
             <div v-else class="col-md-6">
-              <div v-if="account">
+              <div v-if="account" class="container-fluid">
 
                 <!-- <form @submit.prevent="createVaultKeep()" class="text-end form-floating col-9 p-0"> -->
                 <form @submit.prevent="createVaultKeep()" class="row justify-content-between align-items-center p-0">
@@ -115,7 +115,8 @@ async function destroyVaultKeep() {
                   </div>
                   <div class="col-2">
 
-                    <button type="submit" class="btn btn-primary text-end"><i class="mdi mdi-plus"></i></button>
+                    <button type="submit" class="btn btn-primary text-end"><i class="mdi mdi-plus"
+                        :title="`Add keep to one of your vaults.`"></i></button>
                   </div>
                 </form>
               </div>

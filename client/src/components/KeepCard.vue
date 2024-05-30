@@ -50,20 +50,21 @@ async function destroyKeep(keepId) {
 
 <template>
   <!-- FIXME the p tag is getting the background set, and the image is above that, so it looks like 2 images stacked on top of each other. If I take away the data-bound image, and just rely in the background property for the image, the card shrinks to the height of the p tag — hacky way it's working is that the image is there, but set to hidden -->
-  <div class="container mb-4 keep-card rounded rounded-2 shadow" @click="getKeepById(keep.id)">
+  <div class="container mb-4 keep-card rounded rounded-2 shadow" @click="getKeepById(keep.id)"
+    :title="`Card for keep ${keep.name}`">
     <!-- role="button" data-bs-toggle="modal"
       data-bs-target="#keep-details-modal"  -->
     <div class="row justify-content-between align-items-center p-0">
       <div class="delete-button-row"><i v-if="keep.creatorId == account?.id" @click.stop="destroyKeep(keep.id)"
-          role="button" class="delete-button mdi mdi-close"></i></div>
+          role="button" class="delete-button mdi mdi-close" :title="`Delete keep ${keep.name}`"></i></div>
       <img class="bg-size" :src="keep.img" :alt="`Image of ${keep.name}`">
       <div class="card-deets d-flex justify-content-between align-items-center px-2">
         <div class="col-md-8">
           <h4 class="my-0 text-light text-start">{{ keep.name }}</h4>
         </div>
-        <div class="col-2">
-          <RoundProfilePhoto :profile="keep.creator" class="profile-photo shadow" />
-        </div>
+
+        <RoundProfilePhoto :profile="keep.creator" class="profile-photo shadow" />
+
       </div>
     </div>
     <!-- <img :src=" keep.creator.picture" :alt="`Image of ${keep.creator.name}`"> -->

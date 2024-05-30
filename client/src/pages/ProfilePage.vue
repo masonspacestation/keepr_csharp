@@ -66,10 +66,11 @@ onMounted(() => {
 
           <button v-if="profile?.id == account?.id"
             class="edit-button btn btn-outline-white btn-link w-auto me-3 mb-3"><i class="mdi mdi-pencil"
-              data-bs-toggle="modal" data-bs-target="#update-account-modal" data-bs-dismiss="modal"></i></button>
+              data-bs-toggle="modal" data-bs-target="#update-account-modal" data-bs-dismiss="modal"
+              title="Edit your account details"></i></button>
         </div>
-        <div class="id-module d-block">
-          <RoundProfilePhotoLarge :profile="profile" class="mb-3" />
+        <div class="id-module ">
+          <RoundProfilePhotoLarge :profile="profile" class="mb-3 mx-auto" />
           <h3>{{ profile.name }}</h3>
           <p>{{ vaults?.length }} Vaults | {{ keeps?.length }} Keeps</p>
         </div>

@@ -39,20 +39,6 @@ async function saveAccount() {
 
 
 <template>
-
-  <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Profile Details</h1>
-          <button type="button" class="btn bg-none text-secondary opacity-50" data-bs-dismiss="modal"
-            aria-label="Close and discard changes">Cancel</button>
-        </div>
-        <div class="modal-body">
-          <div class="container-fluid"> -->
-
-
   <h5 class="p-3 pb-2">Update your account details</h5>
   <hr>
   <form @submit.prevent="saveAccount()">
@@ -75,12 +61,6 @@ async function saveAccount() {
           <input placeholder="Image url . . ." v-model="accountData.coverImg" class="form-control" type="url"
             id="account-cover-image" maxlength="1000">
         </div>
-
-        <!-- <div class="mb-3 col-4">
-          <label for="account-email">Email Address</label>
-          <input placeholder="email address" v-model="accountData.email" class="form-control" type="email"
-            id="account-email" maxlength="500">
-        </div> -->
 
         <div class="modal-footer col-12 d-flex align-items-center justify-content-end">
           <button type="submit" class="btn btn-primary w-25" data-bs-dismiss="modal">Save</button>

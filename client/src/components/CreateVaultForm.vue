@@ -91,16 +91,17 @@ async function createVault() {
             <!-- buttons -->
             <div class="row mt-2 mb-3 px-1">
               <div class="col-12 col-lg-4 mt-2 mt-lg-0"><button @click="resetForm()" type="reset" data-bs-toggle="modal"
-                  data-bs-target="#create-vault-modal"
-                  class="btn btn-outline-secondary border-2 text-dark w-100">Cancel</button></div>
-              <div class="col-12 col-lg-4 mt-2 mt-lg-0"><button class="btn btn-primary w-100">Create Vault</button>
+                  data-bs-target="#create-vault-modal" class="btn btn-outline-secondary border-2 text-dark w-100"
+                  title="Cancel creation of vault">Cancel</button></div>
+              <div class="col-12 col-lg-4 mt-2 mt-lg-0"><button class="btn btn-primary w-100"
+                  :title="`Create vault ${vaultData.name}`">Create Vault</button>
               </div>
             </div>
           </div>
         </div>
         <!-- end of form fields -->
         <div class="col-12 col-lg-3 px-2 p-lg-0 rounded rounded-2 mb-3">
-          <img :src="vaultData.img" alt="" class="img-preview">
+          <img :src="vaultData.img" alt="" class="img-preview" :title="`Preview of image for ${vaultData.name}`">
         </div>
 
       </div>

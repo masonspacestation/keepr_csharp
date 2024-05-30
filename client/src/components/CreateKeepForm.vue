@@ -92,45 +92,20 @@ async function createKeep() {
             <!-- buttons -->
             <div class="row mt-2 mb-3 px-1">
               <div class="col-12 col-lg-4 mt-2 mt-lg-0"><button @click="resetForm()" type="reset" data-bs-toggle="modal"
-                  data-bs-target="#create-keep-modal"
-                  class="btn btn-outline-secondary border-2 text-dark w-100">Cancel</button></div>
-              <div class="col-12 col-lg-4 mt-2 mt-lg-0"><button class="btn btn-primary w-100">Create Keep</button>
+                  data-bs-target="#create-keep-modal" class="btn btn-outline-secondary border-2 text-dark w-100"
+                  title="Cancel creation of keep">Cancel</button></div>
+              <div class="col-12 col-lg-4 mt-2 mt-lg-0"><button class="btn btn-primary w-100"
+                  :title="`Create keep ${keepData.name}`">Create
+                  Keep</button>
               </div>
             </div>
           </div>
         </div>
         <div class="col-12 col-lg-3 px-2 p-lg-0 rounded rounded-2 mb-3 m-lg-0">
-          <img :src="keepData.img" alt="" class="img-preview">
+          <img :src="keepData.img" alt="" class="img-preview" :title="`Preview of image for ${keepData.name}`">
         </div>
       </div>
     </div>
-    <!-- end of form fields -->
-
-    <!--    </div>
-
-      <div class="row form-floating p-1">
-        <input v-model="keepData.img" type="text" name="keep-img" id="keep-img" class="form-control mb-3" minlength="3"
-          maxlength="1000" placeholder="Image URL" required>
-        <label for="keep-img">Image URL</label>
-      </div>
-    </div> -->
-
-
-    <!-- end of form fields -->
-    <!-- <div class="col-12 col-lg-4 px-2 p-lg-0 rounded rounded-2 mb-3">
-      <img :src="keepData.img" alt="" class="img-preview">
-    </div> -->
-    <!-- https://images.unsplash.com/photo-1582139329536-e7284fece509?w=1600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dmF1bHR8ZW58MHx8MHx8fDA%3D -->
-
-
-    <!-- <div class="row px-1 pb-2">
-      <div class="col-12 col-lg-6 my-1 my-lg-3"><button type="reset" data-bs-toggle="modal"
-          data-bs-target="#create-keep-modal" class="btn btn-outline-secondary border-2 text-dark w-100">Cancel</button>
-      </div>
-      <div class="col-12 col-lg-6 my-1 my-lg-3"><button class="btn btn-primary w-100">Create Keep</button>
-      </div>
-    </div> -->
-
 
   </form>
 </template>
