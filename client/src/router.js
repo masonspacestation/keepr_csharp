@@ -26,7 +26,6 @@ const routes = [
     name: 'Active Vault',
     component: loadPage('ActiveVaultPage'),
     beforeEnter: authSettled
-    // FIXME see if tthe user is logged in before loading this page (help reviews)
   },
   {
     path: '/account',

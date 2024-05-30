@@ -35,7 +35,6 @@ public class AccountsRepository
 
   internal Account Edit(Account update)
   {
-    // FIXME somthing wrong with sql
     string sql = @"
             UPDATE accounts
             SET 
