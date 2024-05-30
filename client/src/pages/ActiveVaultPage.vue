@@ -76,10 +76,10 @@ onMounted(() => {
     <div class="container w-75" v-if="activeVault">
 
       <div class="my-3">
-        <div class="hero-section rounded rounded-3 shadow mt-2 mx-0 mb-5">
+        <div class="hero-section rounded rounded-3 shadow mx-auto my-5 w-75">
 
           <!-- <img class="rounded" :src="activeVault.img" alt="" /> -->
-          <h4>{{ activeVault.name }}</h4>
+          <h2 class="text-light fs-1">{{ activeVault.name }}</h2>
           <RouterLink :to="{ name: 'Profile Page', params: { profileId: activeVault.creator.id } }">
             <p class="text-dark">{{ activeVault.creator?.name }}</p>
           </RouterLink>
@@ -123,7 +123,8 @@ onMounted(() => {
 .hero-section {
   height: 20dvh;
   // background-color: red;
-  background-image: v-bind(bgStyle);
+  background-image: v-bind(bgStyle), linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4));
+  ;
   // background-image: url(src/assets/img/calum-lewis-vA1L1jRTM70-unsplash.jpg);
   background-position: center;
   background-size: cover;

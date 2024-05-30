@@ -99,18 +99,25 @@ async function destroyVaultKeep() {
 
             <!-- SECTION for keeps that aren't in the current vault, will be shown on pages outside the active vault page -->
             <div v-else class="col-md-6">
-              <div v-if="account" class="row justify-content-between align-items-center p-0">
+              <div v-if="account">
 
-                <form @submit.prevent="createVaultKeep()" class="text-end form-floating col-9 p-0">
-                  <select v-model="vkData.vaultId" class="form-select mx-0" id="my-vaults-dropdown">
-                    <!-- <option selected>Keep this</option> -->
-                    <option v-for="vault in myVaults" :key="vault.id" :value="vault.id" name="keep-to-vault"
-                      id="keep-to-vault">{{
-                        vault.name }}</option>
-                  </select>
-                  <label for="my-vaults-dropdown">Add to Vault</label>
+                <!-- <form @submit.prevent="createVaultKeep()" class="text-end form-floating col-9 p-0"> -->
+                <form @submit.prevent="createVaultKeep()" class="row justify-content-between align-items-center p-0">
+                  <div class="col-9">
+
+                    <select v-model="vkData.vaultId" class="form-select mx-0" id="my-vaults-dropdown">
+                      <!-- <option selected>Keep this</option> -->
+                      <option v-for="vault in myVaults" :key="vault.id" :value="vault.id" name="keep-to-vault"
+                        id="keep-to-vault">{{
+                          vault.name }}</option>
+                      <label for="my-vaults-dropdown">Add to Vault</label>
+                    </select>
+                  </div>
+                  <div class="col-2">
+
+                    <button type="submit" class="btn btn-primary text-end"><i class="mdi mdi-plus"></i></button>
+                  </div>
                 </form>
-                <button type="submit" class="btn btn-primary text-end col-2"><i class="mdi mdi-plus"></i></button>
               </div>
             </div>
 

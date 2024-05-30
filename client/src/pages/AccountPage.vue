@@ -39,7 +39,7 @@ const bgStyle = computed(() => `url(${account.value?.coverImg})`)
 
 
       <div class="my-3">
-        <div class="hero-section rounded rounded-3 shadow mt-2 mx-0">
+        <div class="hero-section rounded rounded-3 shadow mt-5 w-75 mx-auto">
         </div>
         <div class="id-module d-block">
           <RoundProfilePhotoLarge :profile="account" class="mb-3" />

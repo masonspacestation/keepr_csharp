@@ -42,47 +42,94 @@ async function createKeep() {
   <form @submit.prevent="createKeep()">
     <div class="container">
 
-      <div class="row pt-4 pb-2 bg-success">
-        <h3>
-          Create a Keep!
-        </h3>
-      </div>
-      <div class="row px-2 ps-lg-2 pe-lg-0 border-bottom">
-        <div class="col-12 col-lg-8 pt-3 pe-lg-3 pt-lg-4 d-flex flex-column justify-content-around">
-          <div>
-            <div class="row form-floating p-1">
-              <input v-model="keepData.name" type="text" name="keep-name" id="keep-name" class="form-control mb-3"
-                minlength="3" maxlength="50" placeholder="Keep Name" required>
-              <label for="keep-name">Keep Name</label>
+      <div class="row">
+        <div class="col-12 col-md-9">
+
+          <h3 class="p-3 mb-0">
+            Create a Keep!
+          </h3>
+          <div class="container">
+
+            <div class="row px-2 px-0">
+              <div class="col-12 col-lg-6 pt-3 pe-lg-3 pt-lg-0 d-flex flex-column justify-content-start">
+
+                <!-- name -->
+                <!-- <div class="row form-floating p-1">
+            <input v-model="keepData.name" type="text" name="vault-name" id="vault-name"
+              class="form-control mb-3" minlength="3" maxlength="50" placeholder="Vault Name" required>
+            <label for="vault-name">Vault Name</label>
+          </div> -->
+                <div class="row form-floating p-1">
+                  <input v-model="keepData.name" type="text" name="keep-name" id="keep-name" class="form-control mb-3"
+                    minlength="3" maxlength="50" placeholder="Keep Name" required>
+                  <label for="keep-name">Keep Name</label>
+                </div>
+                <!-- imgUrl -->
+                <div class="row form-floating p-1">
+                  <input v-model="keepData.img" type="text" name="keep-img" id="keep-img"
+                    class="form-control mb-3 mb-lg-0" minlength="3" maxlength="1000" placeholder="Image URL" required>
+                  <label for="keep-img">Image URL</label>
+                </div>
+
+
+              </div>
+              <!-- description -->
+              <div class="col-12 col-lg-6 pt-3 pe-lg-3 pt-lg-0 d-flex flex-column justify-content-between">
+
+                <!-- <div class="row form-floating p-1">
+                  <input v-model="keepData.description" type="text" description="vault-title" id="vault-title"
+                    class="form-control mb-3" minlength="3" maxlength="50" placeholder="Vault Title" required>
+                  <label for="vault-title">Vault Description</label>
+                </div> -->
+                <div class="row form-floating p-1">
+                  <input v-model="keepData.description" type="text" description="keep-description" id="keep-description"
+                    class="form-control mb-3" minlength="3" maxlength="50" placeholder="Keep Description" required>
+                  <label for="keep-description">Keep Description</label>
+                </div>
+
+              </div>
             </div>
-            <div class="row form-floating p-1">
-              <input v-model="keepData.description" type="text" description="keep-title" id="keep-title"
-                class="form-control mb-3" minlength="3" maxlength="50" placeholder="Keep Title" required>
-              <label for="keep-title">Keep Description</label>
-            </div>
-            <div class="row form-floating p-1">
-              <input v-model="keepData.img" type="text" name="keep-img" id="keep-img" class="form-control mb-3"
-                minlength="3" maxlength="1000" placeholder="Image URL" required>
-              <label for="keep-img">Image URL</label>
+            <!-- buttons -->
+            <div class="row mt-2 mb-3 px-1">
+              <div class="col-12 col-lg-4 mt-2 mt-lg-0"><button @click="resetForm()" type="reset" data-bs-toggle="modal"
+                  data-bs-target="#create-keep-modal"
+                  class="btn btn-outline-secondary border-2 text-dark w-100">Cancel</button></div>
+              <div class="col-12 col-lg-4 mt-2 mt-lg-0"><button class="btn btn-primary w-100">Create Keep</button>
+              </div>
             </div>
           </div>
         </div>
-
-        <!-- end of form fields -->
-        <div class="col-12 col-lg-4 px-2 p-lg-0 rounded rounded-2 mb-3">
+        <div class="col-12 col-lg-3 px-2 p-lg-0 rounded rounded-2 mb-3 m-lg-0">
           <img :src="keepData.img" alt="" class="img-preview">
         </div>
-        <!-- https://images.unsplash.com/photo-1582139329536-e7284fece509?w=1600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dmF1bHR8ZW58MHx8MHx8fDA%3D -->
-
       </div>
     </div>
-    <div class="row px-1 pb-2">
+    <!-- end of form fields -->
+
+    <!--    </div>
+
+      <div class="row form-floating p-1">
+        <input v-model="keepData.img" type="text" name="keep-img" id="keep-img" class="form-control mb-3" minlength="3"
+          maxlength="1000" placeholder="Image URL" required>
+        <label for="keep-img">Image URL</label>
+      </div>
+    </div> -->
+
+
+    <!-- end of form fields -->
+    <!-- <div class="col-12 col-lg-4 px-2 p-lg-0 rounded rounded-2 mb-3">
+      <img :src="keepData.img" alt="" class="img-preview">
+    </div> -->
+    <!-- https://images.unsplash.com/photo-1582139329536-e7284fece509?w=1600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dmF1bHR8ZW58MHx8MHx8fDA%3D -->
+
+
+    <!-- <div class="row px-1 pb-2">
       <div class="col-12 col-lg-6 my-1 my-lg-3"><button type="reset" data-bs-toggle="modal"
           data-bs-target="#create-keep-modal" class="btn btn-outline-secondary border-2 text-dark w-100">Cancel</button>
       </div>
       <div class="col-12 col-lg-6 my-1 my-lg-3"><button class="btn btn-primary w-100">Create Keep</button>
       </div>
-    </div>
+    </div> -->
 
 
   </form>
@@ -92,7 +139,7 @@ async function createKeep() {
 <style lang="scss" scoped>
 .img-preview {
   width: 100%;
-  height: 25dvh;
+  // height: 25dvh;
   object-fit: cover;
   object-position: center;
 }
