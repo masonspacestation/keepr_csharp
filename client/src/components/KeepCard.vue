@@ -57,16 +57,16 @@ async function destroyKeep(keepId) {
       <div class="delete-button-row"><i v-if="keep.creatorId == account?.id" @click.stop="destroyKeep(keep.id)"
           role="button" class="delete-button mdi mdi-close"></i></div>
       <img class="bg-size" :src="keep.img" :alt="`Image of ${keep.name}`">
-      <div class="card-deets">
-        <div class="col-12 col-md-9">
-          <h4 class="my-0 text-light">{{ keep.name }}</h4>
+      <div class="card-deets d-flex justify-content-between align-items-center px-2">
+        <div class="col-md-8">
+          <h4 class="my-0 text-light text-start">{{ keep.name }}</h4>
         </div>
-        <div class="col-3 d-none d-md-block">
-          <RoundProfilePhoto :profile="keep.creator" />
+        <div class="col-2">
+          <RoundProfilePhoto :profile="keep.creator" class="profile-photo shadow" />
         </div>
       </div>
     </div>
-    <!-- <img :src="keep.creator.picture" :alt="`Image of ${keep.creator.name}`"> -->
+    <!-- <img :src=" keep.creator.picture" :alt="`Image of ${keep.creator.name}`"> -->
   </div>
 </template>
 
@@ -121,5 +121,9 @@ img {
     left: 1em;
     z-index: 2;
   }
+}
+
+.profile-photo {
+  transform: scale(.7);
 }
 </style>
