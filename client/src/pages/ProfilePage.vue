@@ -93,8 +93,8 @@ onMounted(() => {
       <!-- TODO set a v-if to say that their keeps will appear here once they create some -->
       <h3 class="mt-5 fs-2">Keeps</h3>
       <div class="masonry my-3">
-        <div v-for="keep in keeps" :key="keep?.id" class="mb-3">
-          <KeepCard :keep="keep" />
+        <div v-if="keeps" class="mb-3">
+          <KeepCard v-for="keep in keeps" :key="keep?.id" :keep="keep" />
         </div>
       </div>
     </div>

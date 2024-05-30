@@ -33,6 +33,8 @@ async function destroyKeep(keepId) {
     const wantsToDelete = await Pop.confirm('Are you sure you want to delete this excellent Keep?', 'confirm')
     if (wantsToDelete != true) { return }
 
+
+
     await keepsService.destroyKeep(keepId)
     Pop.toast('Your Keep was deleted!', 'success')
     console.log('Keep was destroyed: ', keepId);

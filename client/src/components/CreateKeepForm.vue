@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
 import { Modal } from "bootstrap";
@@ -7,7 +7,7 @@ import { useRouter } from "vue-router";
 import { keepsService } from "../services/KeepsService.js";
 
 const router = useRouter()
-
+const bgStyle = computed(() => `url(${keepData.value?.img})`)
 
 const keepData = ref({
   name: '',
@@ -102,8 +102,8 @@ async function createKeep() {
           </div>
         </div>
 
-        <div class="col-12 col-lg-3 p-0 p-lg-0 rounded rounded-2  m-lg-0">
-          <img :src="keepData.img" alt="" class="img-preview" :title="`Preview of image for ${keepData.name}`">
+        <div class="col-12 col-lg-3 p-0 p-lg-0 img-preview m-lg-0">
+          <!-- <img :src="keepData.img" alt="" class="img-preview" :title="`Preview of image for ${keepData.name}`"> -->
         </div>
       </div>
     </div>
@@ -114,9 +114,13 @@ async function createKeep() {
 
 <style lang="scss" scoped>
 .img-preview {
-  width: 100%;
-  // height: 25dvh;
-  object-fit: cover;
-  object-position: center;
+  // min-width: 100%;
+  // object-fit: cover;
+  // object-position: center;
+  // max-height: 100%;
+  overflow: hidden;
+  background-image: v-bind(bgStyle);
+  background-size: cover;
+  background-position: center;
 }
 </style>

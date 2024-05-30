@@ -9,21 +9,27 @@ const account = computed(()=> AppState.account)
 class KeepsService{
 
   async destroyKeep(keepId) {
-    const myKeeps = AppState.myKeeps
-    const keepIndex = myKeeps.findIndex(keep => keep.id == keepId)
+    const keeps = AppState.keeps
+    const keepIndex = keeps.findIndex(keep => keep.id == keepId)
+
+    if(keeps[keepIndex].creatorId != account.value?.id) {
+    console.log('not yours to delete');  
+      return
+    }
+
     const response = await api.delete(`api/keeps/${keepId}`)
     console.log('Destroying keep', response.data);
     if(keepIndex == -1){
       console.log('Keep not found - check findIndex function on delete');
     }
-    myKeeps.splice(keepIndex, 1)
+    keeps.splice(keepIndex, 1)
   }
 
   async createKeep(keepData) {
     const response = await api.post('api/keeps', keepData)
     console.log('Creating new keep', response.data);
     const newKeep = new Keep(response.data)
-    AppState.keeps.unshift(newKeep)
+    AppState.profileKeeps.push(newKeep)
     return newKeep
   }
   async getKeepById(keepId) {

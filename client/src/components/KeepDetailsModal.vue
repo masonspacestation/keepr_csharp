@@ -9,6 +9,7 @@ import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
 import { vaultKeepsService } from "../services/VaultKeepsService.js";
 import { Modal } from "bootstrap";
+import { useRoute } from "vue-router";
 
 // defineProps({ keep: { type: Keep, required: true } })
 const keep = computed(() => AppState.activeKeep)
@@ -16,7 +17,7 @@ const account = computed(() => AppState.account)
 const myVaults = computed(() => AppState.myVaults)
 const vaultKeeps = computed(() => AppState.activeVaultKeeps)
 
-
+const route = useRoute()
 const vkId = computed(() => AppState.activeVaultKeeps.find((vk) => vk.id == keep.value.id)?.vaultKeepId)
 
 
