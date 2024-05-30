@@ -16,6 +16,7 @@ const keep = computed(() => AppState.activeKeep)
 const account = computed(() => AppState.account)
 const myVaults = computed(() => AppState.myVaults)
 const vaultKeeps = computed(() => AppState.activeVaultKeeps)
+const allVk = computed(() => AppState.vaultKeeps)
 
 const route = useRoute()
 const vkId = computed(() => AppState.activeVaultKeeps.find((vk) => vk.id == keep.value.id)?.vaultKeepId)
@@ -92,7 +93,8 @@ async function destroyVaultKeep() {
 
         <div class="container-fluid p-0">
           <div class="row w-100 p-0 m-0 align-items-center">
-            <div v-if="vaultKeeps?.some(vk => vk.id == keep.id)" class="col-md-6 text-center">
+            <div v-if="allVk?.some(vk => vk.vaultId == route.params.vaultId)" class="col-md-6 text-center">
+              <!-- <div v-if="vaultKeeps?.some(vk => vk.id == keep.id)" class="col-md-6 text-center"> -->
               <div v-if="account" class="row justify-content-between align-content-center">
                 <button @click="destroyVaultKeep()" class="btn btn-link fw-bold text-secondary opacity-50"><i
                     class="mdi mdi-cancel" :title="`Remove keep from this vault`"></i>

@@ -7,7 +7,7 @@ const props = defineProps({ profile: { type: Profile, required: true } })
 
 async function getProfileById(profileId) {
   try {
-    const profile = await accountService.getAccount
+    await accountService.getAccount
   } catch (error) {
     Pop.toast(`Could not get profile for `, props.profile.name)
   }
@@ -18,8 +18,8 @@ async function getProfileById(profileId) {
 
 <template>
   <div class="d-flex justify-content-center profile-pic shadow">
-    <img @click="getProfileById(profile.id)" role="button" :src="profile?.picture"
-      :alt="`Profile picture for ${profile.name}`" :title="`Profile picture for ${profile.name}`">
+    <img @click="getProfileById(profile?.id)" role="button" :src="profile?.picture"
+      :alt="`Profile picture for ${profile?.name}`" :title="`Profile picture for ${profile.name}`">
   </div>
 </template>
 

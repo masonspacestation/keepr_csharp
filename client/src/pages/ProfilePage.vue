@@ -15,6 +15,7 @@ const route = useRoute()
 const profile = computed(() => AppState.activeProfile)
 const account = computed(() => AppState.account)
 const keeps = computed(() => AppState.profileKeeps)
+// const keeps = computed(() => AppState.keeps.find((keep) => keep.creatorId == profile.value.id)?.id)
 const vaults = computed(() => AppState.profileVaults)
 
 const bgStyle = computed(() => `url(${profile.value?.coverImg})`)
