@@ -62,7 +62,11 @@ onMounted(() => {
     <div class="container w-75" v-if="profile">
 
       <div class="my-3">
-        <div class="hero-section rounded rounded-3 shadow mt-5 w-75 mx-auto">
+        <div class="hero-section rounded rounded-3 shadow mt-5 w-75 mx-auto d-flex justify-content-end align-items-end">
+
+          <button v-if="profile?.id == account?.id"
+            class="edit-button btn btn-outline-white btn-link w-auto me-3 mb-3"><i class="mdi mdi-pencil"
+              data-bs-toggle="modal" data-bs-target="#update-account-modal" data-bs-dismiss="modal"></i></button>
         </div>
         <div class="id-module d-block">
           <RoundProfilePhotoLarge :profile="profile" class="mb-3" />
@@ -71,7 +75,7 @@ onMounted(() => {
         </div>
       </div>
 
-      <div v-if="profile.id = account?.id" class="row justify-content-end">
+      <div v-if="profile.id == account?.id" class="row justify-content-end">
         <button class="btn btn-outline-secondary opacity-50 w-auto me-3 mb-3"><i class="mdi mdi-pencil"
             data-bs-toggle="modal" data-bs-target="#update-account-modal" data-bs-dismiss="modal"></i></button>
         <AddItemFloatingButton />
@@ -99,17 +103,6 @@ onMounted(() => {
       <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
     </div>
   </div>
-
-
-  <!-- <ModalWrapper modalId="create-vault-modal">
-    <CreateVaultForm />
-  </ModalWrapper>
-  <ModalWrapper modalId="create-keep-modal">
-    <CreateKeepForm />
-  </ModalWrapper> -->
-  <!-- <ModalWrapper modalId="update-account-modal">
-    <AccountForm />
-  </ModalWrapper> -->
 </template>
 
 <style scoped lang="scss">
@@ -119,10 +112,10 @@ img {
 
 .hero-section {
   height: 20dvh;
+  margin-bottom: -50px;
   background-image: v-bind(bgStyle);
   background-position: center;
   background-size: cover;
-  margin-bottom: -50px;
 }
 
 .masonry {
