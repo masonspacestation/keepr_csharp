@@ -20,7 +20,6 @@ const vkId = computed(() => AppState.activeVaultKeeps.find((vk) => vk.id == keep
 
 const vkData = ref({
   vaultId: 0,
-  // FIXME don't assign this value here
   keepId: 0,
 })
 
@@ -37,7 +36,6 @@ function setVkId(activeKeepId) {
 
 async function createVaultKeep() {
   try {
-    // TODO assign the keepId to ref value here
     setVkId(AppState.activeKeep.id)
     await vaultKeepsService.createVaultKeep(vkData.value)
     Pop.toast('Kept new keep!', 'success')
@@ -101,18 +99,28 @@ async function destroyVaultKeep() {
             <div v-else class="col-md-6">
               <div v-if="account" class="justify-content-center align-items-center">
 
-                <form @submit.prevent="createVaultKeep()" class="text-end">
-                  <select v-model="vkData.vaultId" class="form-select mb-2">
-                    <option value="" selected>Keep this</option>
+                <form @submit.prevent="createVaultKeep()" class="text-end form-floating">
+                  <select v-model="vkData.vaultId" class="form-select mb-2" id="my-vaults-dropdown">
+                    <!-- <option selected>Keep this</option> -->
                     <option v-for="vault in myVaults" :key="vault.id" :value="vault.id" name="keep-to-vault"
                       id="keep-to-vault">{{
                         vault.name }}</option>
                   </select>
+                  <label for="my-vaults-dropdown">Add to Vault</label>
                   <button type="submit" class="btn btn-primary text-end">Keep</button>
                 </form>
               </div>
             </div>
 
+            <!-- <div class="form-floating">
+              <select class="form-select" id="floatingSelectGrid">
+                <option selected>Open this select menu</option>
+                <option v-for="vault in myVaults" :key="vault.id" :value="vault.id" name="keep-to-vault"
+                  id="keep-to-vault">{{
+                    vault.name }}</option>
+              </select>
+              <label for="floatingSelectGrid">Works with selects</label>
+            </div> -->
 
             <div class="col-6 d-flex flex-column justify-content-around h-100 align-items-center">
               <div class="">
@@ -138,5 +146,6 @@ img {
   width: 100%;
   object-fit: cover;
   object-position: center;
+  max-height: 60dvh;
 }
 </style>
