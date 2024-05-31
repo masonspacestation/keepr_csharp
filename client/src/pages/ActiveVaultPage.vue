@@ -118,6 +118,8 @@ onMounted(() => {
       <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
     </div>
   </div>
+
+  <KeepWall :keeps="keeps" />
 </template>
 
 <style scoped lang="scss">

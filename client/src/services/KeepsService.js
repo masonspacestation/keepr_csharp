@@ -25,7 +25,7 @@ class KeepsService{
     keeps.splice(keepIndex, 1)
   }
 
-  
+  // NOTE this can push to profileKeeps because they're the only ones displaying on the page where keeps can be created.
   async createKeep(keepData) {
     const response = await api.post('api/keeps', keepData)
     console.log('Creating new keep', response.data);

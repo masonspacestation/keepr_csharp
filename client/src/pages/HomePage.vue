@@ -43,6 +43,7 @@ onMounted(() =>
     </div>
   </div>
 
+  <KeepWall :keeps="keeps" />
 
 </template>
 

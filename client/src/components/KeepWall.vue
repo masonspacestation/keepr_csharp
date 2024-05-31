@@ -3,9 +3,9 @@ import { computed } from "vue";
 import { AppState } from "../AppState.js";
 import { Keep } from "../models/Keep.js";
 
-const keeps = computed(() => AppState.keeps)
 
-// defineProps({ keep: { type: Keep, required: true } })
+defineProps({ keeps: { type: [Keep], required: true } })
+
 </script>
 
 
