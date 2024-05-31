@@ -90,12 +90,14 @@ onMounted(() => {
         </div>
         <div v-if="activeVault.creator.id == account?.id" class="text-end btn-group dropstart">
           <i role="button" class="mdi mdi-dots-horizontal fs-3" data-bs-toggle="dropdown" data-bs-auto-close="outside"
-            aria-expanded="false"></i>
+            aria-expanded="false" title="Vault Options"></i>
 
           <div>
             <ul class="dropdown-menu text-center w-auto p-1">
-              <i role="button" @click="destroyVault(activeVault.id)" class="fs-3 m-2 mdi mdi-delete opacity-75"></i>
-              <i role="button" @click="updateVault()" class="fs-3 m-2 mdi mdi-pencil opacity-75"></i>
+              <i role="button" @click="destroyVault(activeVault.id)" class="fs-3 m-2 mdi mdi-delete opacity-75"
+                :title="`Delete vault ${activeVault.name}`"></i>
+              <i role="button" @click="updateVault()" class="fs-3 m-2 mdi mdi-pencil opacity-75"
+                :title="`Edit vault details for ${activeVault.name}`"></i>
             </ul>
           </div>
 
