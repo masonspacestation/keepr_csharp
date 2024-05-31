@@ -1,6 +1,6 @@
 <!-- eslint-disable no-console -->
 <script setup>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { AppState } from '../AppState.js';
 import Pop from "../utils/Pop.js";
 import RoundProfilePhoto from "../components/RoundProfilePhoto.vue";
@@ -8,6 +8,7 @@ import KeepCard from "../components/KeepCard.vue";
 import ModalWrapper from "../components/ModalWrapper.vue";
 import { useRoute } from "vue-router";
 import { profilesService } from "../services/ProfilesService.js";
+import App from "../App.vue";
 
 
 const route = useRoute()
@@ -20,6 +21,22 @@ const vaults = computed(() => AppState.profileVaults)
 
 const bgStyle = computed(() => `url(${profile.value?.coverImg})`)
 
+// onchange(()=>
+// AppState.keeps.length
+// )
+
+// const allKeeps = computed(() => AppState.keeps)
+const allKeeps = ref(AppState.keeps)
+// watch(allKeeps, async () => { console.log('a change has occurred'); })
+// watch(allKeeps.value.length, (allKeeps.value.length) => {
+//   console.log('a change has occurred')
+// })
+
+// watch: {
+//   title: (newTitle, oldTitle) => {
+//     console.log("Title changed from " + oldTitle + " to " + newTitle);
+//   };
+// }
 
 async function setActiveProfile() {
   try {
@@ -104,7 +121,7 @@ onMounted(() => {
       <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
     </div>
   </div>
-  <KeepWall :keeps="keeps" />
+  <!-- <KeepWall :keeps="keeps" /> -->
 </template>
 
 <style scoped lang="scss">

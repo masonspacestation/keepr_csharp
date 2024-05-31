@@ -1,10 +1,13 @@
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { AppState } from "../AppState.js";
 import { Keep } from "../models/Keep.js";
 
-
 defineProps({ keeps: { type: [Keep], required: true } })
+
+// const allKeeps = ref(
+//   AppState.keeps
+// )
 
 </script>
 

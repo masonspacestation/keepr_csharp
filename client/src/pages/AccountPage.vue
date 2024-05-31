@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { AppState } from '../AppState.js';
 import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
@@ -14,8 +14,11 @@ import ProfileOwnerButtons from "../components/ProfileOwnerButtons.vue";
 const account = computed(() => AppState.account)
 const myVaults = computed(() => AppState.myVaults)
 const keeps = computed(() => AppState.myKeeps)
+
+// const keeps = computed(() => AppState.keeps.find((keep) => keep.creatorId == account.value.id)?.id)
 const bgStyle = computed(() => `url(${account.value?.coverImg})`)
 
+// watch(AppState.keeps.length, )
 </script>
 
 <template>
@@ -52,20 +55,25 @@ const bgStyle = computed(() => `url(${account.value?.coverImg})`)
           <VaultCard :vault="vault" />
         </div>
       </div>
-
-      <!-- TODO set a v-if to say that their keeps will appear here once they create some -->
-      <h3 class="mt-5 fs-2">Keeps</h3>
-      <div class="masonry my-3">
-        <div v-for="keep in keeps" :key="keep?.id" class="mb-3">
-          <KeepCard :keep="keep" />
+      <div v-if="keeps">
+        <!-- TODO set a v-if to say that their keeps will appear here once they create some -->
+        <h3 class="mt-5 fs-2">Keeps</h3>
+        <div class="masonry my-3">
+          <div v-for="keep in keeps" :key="keep?.id" class="mb-3">
+            <KeepCard :keep="keep" />
+          </div>
         </div>
+      </div>
+      <div v-else>
+        <h4>Create some keeps and they'll show up here!</h4>
+        <p>(Use the button up there)</p>
       </div>
     </div>
     <div v-else>
       <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
     </div>
   </div>
-  <KeepWall :keeps="keeps" />
+  <!-- <KeepWall :keeps="keeps" /> -->
 </template>
 
 <style scoped lang="scss">

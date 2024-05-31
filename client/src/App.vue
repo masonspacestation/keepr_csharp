@@ -5,8 +5,26 @@ import { Modal } from "bootstrap";
 import ModalWrapper from "./components/ModalWrapper.vue";
 import CreateVaultForm from "./components/CreateVaultForm.vue";
 import AccountForm from "./components/AccountForm.vue";
+import { keepsService } from "./services/KeepsService.js";
+import Pop from "./utils/Pop.js";
+import { logger } from "./utils/Logger.js";
+import { onMounted } from "vue";
 
 
+async function getAllKeeps() {
+  try {
+    await keepsService.getAllKeeps()
+  } catch (error) {
+    Pop.toast('Could not get keeps', 'error')
+    logger.error('Could not get keeps', error)
+  }
+}
+
+
+
+onMounted(() =>
+  getAllKeeps(),
+)
 </script>
 
 <template>

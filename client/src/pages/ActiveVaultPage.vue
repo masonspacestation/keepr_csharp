@@ -119,7 +119,7 @@ onMounted(() => {
     </div>
   </div>
 
-  <KeepWall :keeps="keeps" />
+  <!-- <KeepWall :keeps="keeps" /> -->
 </template>
 
 <style scoped lang="scss">

@@ -12,20 +12,20 @@ import { Modal } from "bootstrap";
 
 const keeps = computed(() => AppState.keeps)
 
-async function getAllKeeps() {
-  try {
-    await keepsService.getAllKeeps()
-  } catch (error) {
-    Pop.toast('Could not get keeps', 'error')
-    logger.error('Could not get keeps', error)
-  }
-}
+// async function getAllKeeps() {
+//   try {
+//     await keepsService.getAllKeeps()
+//   } catch (error) {
+//     Pop.toast('Could not get keeps', 'error')
+//     logger.error('Could not get keeps', error)
+//   }
+// }
 
 
 
-onMounted(() =>
-  getAllKeeps(),
-)
+// onMounted(() =>
+//   getAllKeeps(),
+// )
 </script>
 
 <template>
@@ -43,7 +43,7 @@ onMounted(() =>
     </div>
   </div>
 
-  <KeepWall :keeps="keeps" />
+  <!-- <KeepWall :keeps="keeps" /> -->
 
 </template>
 
