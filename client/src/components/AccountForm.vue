@@ -44,19 +44,19 @@ async function saveAccount() {
   <form @submit.prevent="saveAccount()">
     <div class="col-12 p-3">
       <div class="row">
-        <div class="col-4 mb-3">
+        <div class="col-12 col-lg-4 mb-3">
           <label for="account-name">Name</label>
           <input placeholder="Name . . ." v-model="accountData.name" class="form-control" type="text" id="account-name"
             required maxlength="100">
         </div>
 
-        <div class="mb-3 col-4">
+        <div class="mb-3 col-12 col-lg-4">
           <label for="account-picture">Profile Picture</label>
           <input placeholder="Image url . . ." v-model="accountData.picture" class="form-control" type="url"
             id="account-picture" maxlength="1000">
         </div>
 
-        <div class="mb-3 col-4">
+        <div class="mb-3 col-12 col-lg-4">
           <label for="account-cover-image">Cover Image</label>
           <input placeholder="Image url . . ." v-model="accountData.coverImg" class="form-control" type="url"
             id="account-cover-image" maxlength="1000">

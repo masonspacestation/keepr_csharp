@@ -6,23 +6,37 @@ import { api } from "./AxiosService.js";
 
 const account = computed(()=> AppState.account)
 
+
 class KeepsService{
 
   async destroyKeep(keepId) {
     const keeps = AppState.keeps
-    const keepIndex = keeps.findIndex(keep => keep.id == keepId)
+    const profileKeeps = AppState.profileKeeps
+    const myKeeps = AppState.myKeeps
+    const keepIndex = keeps?.findIndex(keep => keep.id == keepId)
+    const myKeepIndex = myKeeps?.findIndex(keep => keep.id == keepId)
+    // FIXME this is null  and breaking things, track down where you set it to null, and set it to an empty array instead
+    const profileKeepIndex = profileKeeps?.findIndex(keep => keep.id == keepId)
 
-    if(keeps[keepIndex].creatorId != account.value?.id) {
-    console.log('not yours to delete');  
-      return
-    }
+    // if(keeps[keepIndex].creatorId != account.value?.id) {
+    // console.log('not yours to delete');  
+    //   return
+    // }
 
     const response = await api.delete(`api/keeps/${keepId}`)
     console.log('Destroying keep', response.data);
-    if(keepIndex == -1){
-      console.log('Keep not found - check findIndex function on delete');
-    }
-    keeps.splice(keepIndex, 1)
+
+    if(keepIndex != -1)
+      keeps?.splice(keepIndex, 1)
+
+    if(myKeepIndex != -1)
+      myKeeps?.splice(myKeepIndex, 1)
+
+    if(profileKeepIndex != -1)
+      profileKeeps?.splice(profileKeepIndex, 1)
+    //   {
+    //   console.log('Keep not found - check findIndex function on delete');
+    // }
   }
 
   // NOTE this can push to profileKeeps because they're the only ones displaying on the page where keeps can be created.

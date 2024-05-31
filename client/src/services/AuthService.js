@@ -28,14 +28,14 @@ AuthService.on(AUTH_EVENTS.AUTHENTICATED, async function() {
   // NOTE if there is something you want to do once the user is authenticated, place that here
   // async function getMyVaults() {
     try {
-      AppState.myVaults = null
+      AppState.myVaults = []
       await accountService.getMyVaults()
     } catch (error) {
       Pop.toast('Could not get your vaults', 'error')
       logger.error('Error getting your vaults', error)
   }
     try {
-      AppState.myKeeps = null
+      AppState.myKeeps = []
       await accountService.getMyKeeps()
     } catch (error) {
       Pop.toast('Could not get your keeps', 'error')
