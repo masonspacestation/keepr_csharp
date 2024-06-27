@@ -39,6 +39,7 @@ const bgStyle = computed(() => `url(${account.value?.coverImg})`)
         </div>
       </div>
       <!-- FIXME the sizing of the dropdown container gets narrow any time this is directly inside a div. The buttons either get narrow and the text inside them stacks, or the buttons stack on each other. I'd like to change this to a fab if I have time at the end -->
+
       <AddItemFloatingButton />
 
       <div class="row justify-content-end">
