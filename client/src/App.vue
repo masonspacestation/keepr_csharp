@@ -34,9 +34,7 @@ onMounted(() =>
   <main>
     <router-view />
   </main>
-  <!-- <footer class="bg-dark text-light">
-    Made with 💖 by CodeWorks
-  </footer> -->
+
   <ModalWrapper modalId="keep-details-modal">
     <KeepDetailsModal />
   </ModalWrapper>
