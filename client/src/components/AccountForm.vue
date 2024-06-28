@@ -20,9 +20,6 @@ watchEffect(() => {
   accountData.value = { ...AppState.account }
 })
 
-// function closeModal() {
-//   Modal.getOrCreateInstance('#staticBackdrop').hide()
-// }
 
 async function saveAccount() {
   try {
