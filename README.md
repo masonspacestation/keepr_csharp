@@ -13,9 +13,7 @@ Keepr is a social network that allows users to visually share and discover new i
 Keepr was the most complex app I had created to date. I learned to make a plan and document my work as I go in order to make sure I kept things consistent and didn't miss any connections.
 
 ### Create Posts
-![User flow creating a post](https://andrewmason.dev/keepr-img-1.png)
 Add and sort images (keeps) to share with anyone visiting the Keepr site or your profile.
-
 
 ### Keepr Community
 Browse others’ posts and add them to your vaults. Posts retain a count of how many times they’ve been viewed, and how many times they’ve been added to a vault.
