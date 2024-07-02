@@ -31,9 +31,14 @@ onMounted(() =>
   <header>
     <Navbar />
   </header>
-  <main>
+  <main class="pb-4">
     <router-view />
   </main>
+  <footer class="bg-dark">
+    <div class="container justify-content-center">
+      <FooterLinks />
+    </div>
+  </footer>
 
   <ModalWrapper modalId="keep-details-modal">
     <KeepDetailsModal />
@@ -63,8 +68,13 @@ onMounted(() =>
 
 
 footer {
-  display: grid;
-  place-content: center;
+  min-height: 48px;
+}
+
+.icon {
   height: 32px;
+  width: 32px;
+  margin: 0;
+  padding: 0;
 }
 </style>
