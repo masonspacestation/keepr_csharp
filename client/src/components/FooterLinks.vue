@@ -6,7 +6,8 @@
 <template>
   <div class="row justify-content-between my-2 mx-auto">
     <div class="col-12 col-md-8 me-auto">
-      <div class="row justify-content-center justify-content-md-start text-center">
+      <div class="row justify-content-center justify-content-md-start text-center"
+        title="Andrew Mason - Development and Design">
         <span class="text-light w-auto opacity-50 fs-6">Site by</span>
         <a href="https://andrewmason.dev" class="w-auto ps-0 ms-0"><img src="../assets/img/AMDev-favicon-colorbg.png"
             title="Andrew Mason - Development and Design" /><span
