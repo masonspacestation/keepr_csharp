@@ -41,4 +41,4 @@ Browse others’ posts and add them to your vaults. Posts retain a count of how 
 
 - Back end must pass all Postman tests for valid authorization, no authorization, and invalid authorization
 
-- Ul adheres to Web UI, Accessibility, and Professional Standards
+- UI adheres to Web UI, Accessibility, and Professional Standards
