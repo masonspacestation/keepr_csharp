@@ -9,7 +9,7 @@ Full Stack Application: Vue.js, C#, MySQL, API
 
 Keepr is a social network that allows users to visually share and discover new interests by posting images or videos to their own, or others', collections (i.e., a collection of 'vaults,' usually with a common theme) and browsing what other users have kept.
 
-### New Skills
+### Improved Skills
 Keepr was the most complex app I had created to date. I learned to make a plan and document my work as I go in order to make sure I kept things consistent and didn't miss any connections.
 
 ### Create Posts
